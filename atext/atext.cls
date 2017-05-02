@@ -21,7 +21,6 @@
 
 % Load up necessary packages
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
 \usepackage[explicit]{titlesec}
 \usepackage{enumitem}

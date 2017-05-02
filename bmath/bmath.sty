@@ -28,6 +28,8 @@
 
 \newenvironment{korollar}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Korollar.}}{}
 
-\newenvironment{lemma}{\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Lemma.}}{}
+\newenvironment{lemma}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Lemma.}}{}
 
-\newenvironment{lemma*}[1]{\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Lemma {\normalfont(#1)}.}}{}
+\newenvironment{lemma*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Lemma {\normalfont(#1)}.}}{}
+
+\newenvironment{algorithmus}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Algorithmus.}}{}
