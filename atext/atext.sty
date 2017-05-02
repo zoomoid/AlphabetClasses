@@ -1,0 +1,74 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{atext}[2017/01/02 A Text Package]
+
+% atext.sty
+%
+% Use this with the memoir class for best results, otherwise some formatting
+% commands done by this package may cause your document to not compile at all
+%
+%
+% This package provides layout for scientific papers and articles and
+% furthermore flow text fitted to my stylistic needs
+
+% Load up necessary packages
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[linktocpage=true]{hyperref}
+\usepackage{tocloft}
+
+
+
+% PAGE STYLING
+
+\settrimmedsize{297mm}{210mm}{*}
+\setstocksize{297mm}{210mm}
+\setlength{\trimtop}{0pt}
+\setlength{\trimedge}{\stockwidth}
+\addtolength{\trimedge}{-\paperwidth}
+\settypeblocksize{220mm}{150mm}{*}
+\setulmargins{80pt}{*}{0}
+\setlrmargins{*}{*}{1} % Content centered due to onepage
+\setheaderspaces{*}{*}{1}
+\checkandfixthelayout
+
+% Tiefe des Inhaltsverzeichnisses
+\maxtocdepth{subsection}
+% Serifenloser Titel des Inhaltsverzeichnisses
+\addto\captionsngerman{\renewcommand{\contentsname}{\sffamily Inhaltsverzeichnis}}
+
+\pagestyle{plain}
+
+\chapterstyle{default}
+
+%% Sektionen
+\maxsecnumdepth{subsection}
+\setsecheadstyle{\huge\sffamily\bfseries\raggedright}
+\setsubsecheadstyle{\Large\sffamily\bfseries\raggedright}
+
+% Page break after Section
+\let\oldsection\section
+\renewcommand\section{\clearpage\oldsection}
+
+% Kapitel
+\titleformat{\chapter}{\normalfont\sffamily\LARGE\bfseries}{\thesection}{0.5em}{}
+
+%\renewcommand{\thesection{\arabic{section}}}
+
+% Numbering bound to sections rather than chapters
+\counterwithin{figure}{section}
+
+\counterwithout{section}{chapter}
+\counterwithin{chapter}{part}
+
+% paragraph indention
+\setlength{\parindent}{4pt}
+\setlength{\parskip}{0.6em}
+
+\renewcommand{\arraystretch}{1.2}
+
+\endinput

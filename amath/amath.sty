@@ -1,0 +1,71 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{amath}[2016/12/17 A Math Package]
+
+\usepackage{amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{pgf}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{mdframed}
+\usepackage{xcolor}
+
+\pgfplotsset{every axis/.append style={
+  axis lines=middle,
+  axis line style={->},
+  xlabel={},
+  ylabel={},
+  scale only axis = true,
+  samples=300,
+  }}
+
+%% Math Common Set Symbols
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+
+\newcommand{\GL}{\ensuremath{\text{GL}}}
+\newcommand{\id}{\ensuremath{\text{id}}}
+\newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
+\newcommand{\dx}{\:dx}
+
+\newcommand{\Var}{\ensuremath{\text{Var}}}
+\newcommand{\Perm}{\ensuremath{\text{Perm}}}
+\newcommand{\MComb}{\ensuremath{\text{MComb}}}
+\newcommand{\Comb}{\ensuremath{\text{Comb}}}
+
+\renewcommand{\Im}{\ensuremath{\text{Im }}}
+\renewcommand{\modulo}[2]{#1/\!\!#2\:}
+
+\newcommand{\Pot}{\ensuremath{\text{Pot}}}
+
+\newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
+
+\newcommand{\Bin}{\ensuremath{\text{Bin}}}
+%% Math Big Quantors
+\let\oforall\forall
+\let\oexists\exists
+\renewcommand{\forall}{\ensuremath{\hskip 2pt \oforall \hskip 2pt}}
+\renewcommand{\exists}{\ensuremath{\hskip 2pt \oexists \hskip 2pt}}
+\newcommand{\bigforall}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\forall$}}}
+\newcommand{\bigexists}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\exists$}}}
+
+%% Math Functions
+\newcommand\restr[3]{{
+  \left.\kern-\nulldelimiterspace
+  #1
+  \vphantom{\big|}
+  \right|^{#2}_{#3}
+  }}
+\newcommand{\abs}[1]{\ensuremath{\left\vert#1\right\vert}}
+
+\newcommand{\colvec}[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+%% Math Operators
+\newcommand{\rel}[1]{\ensuremath{\mathrel{#1}}}
+\newcommand{\labra}[1]{\ensuremath{\left(#1\right)}}
+
+\newenvironment{einschub}{\begin{mdframed}[backgroundcolor=lightgray!50]\textbf{\sffamily Einschub:}}{\end{mdframed}}
+
+\endinput

@@ -1,0 +1,33 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bmath}[2016/12/17 B Math Package]
+
+\usepackage{amsthm}
+% Provides several environments for mathematical scripts %
+
+\newcounter{punkt}[section]
+
+\newenvironment{definition}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Definition {\normalfont(#1)}.}}{}
+
+\newenvironment{beispiel}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Beispiel.}}{}
+
+\newenvironment{beispiel*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Beispiel {\normalfont(#1)}.}}{}
+
+\newenvironment{bemerkung}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Bemerkung.}}{}
+
+\newenvironment{konvention}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Konvention.}}{}
+
+\newenvironment{proposition}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Proposition.}}{}
+
+\newenvironment{proposition*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Proposition {\normalfont(#1)}.}}{}
+
+\newenvironment{notation}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Notation.}}{}
+
+\newenvironment{satz}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Satz.}}{}
+
+\newenvironment{satz*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Satz {\normalfont(#1)}.}}{}
+
+\newenvironment{korollar}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Korollar.}}{}
+
+\newenvironment{lemma}{\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Lemma.}}{}
+
+\newenvironment{lemma*}[1]{\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Lemma {\normalfont(#1)}.}}{}
