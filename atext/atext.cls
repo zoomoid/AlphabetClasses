@@ -32,6 +32,8 @@
 \usepackage{listings}
 \usepackage{csquotes}
 \usepackage{titling}
+\usepackage{textcomp}
+\usepackage{gensymb}
 
 \newcommand{\atext}{{\ttfamily ATEXT} }
 \newcommand{\bmath}{{\ttfamily BMATH} }
@@ -81,10 +83,6 @@
 
 \let\oldsection\section
 \renewcommand\section{\clearpage\oldsection}
-
-
-
-\lstset{basicstyle=\normalsize\ttfamily,escapeinside={(*@}{@*)},breaklines=true}
 
 \preauthor{\begin{flushleft}%
            \large \lineskip 0.5em%
