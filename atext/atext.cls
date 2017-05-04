@@ -22,7 +22,7 @@
 % Load up necessary packages
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
-\usepackage[explicit]{titlesec}
+\usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage[linktocpage=true]{hyperref}
@@ -30,6 +30,8 @@
 \usepackage{float}
 \usepackage{lmodern}
 \usepackage{listings}
+\usepackage{csquotes}
+\usepackage{titling}
 
 \newcommand{\atext}{{\ttfamily ATEXT} }
 \newcommand{\bmath}{{\ttfamily BMATH} }
@@ -54,7 +56,10 @@
 %% Sektionen
 \maxsecnumdepth{subsection}
 
-\titleformat{\chapter}{\normalfont\sffamily\LARGE\bfseries}{\thesection}{0.5em}{}
+\titleformat{\chapter}{\normalfont\sffamily\LARGE\bfseries}{\thechapter}{0.5em}{}
+\titleformat{\section}{\sffamily\bfseries\Large}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\sffamily\bfseries\large}{\thesubsection}{0.5em}{}
+
 
 % Fancy superscript for BibTex cites
 \let\ocite\cite
@@ -74,14 +79,15 @@
 
 \renewcommand{\arraystretch}{1.2}
 
-\titleformat{\section}{\sffamily\bfseries\Large}{}{0em}{#1\ \thesection}
-\titleformat{\subsection}{\sffamily\bfseries\large}{}{0em}{#1\ \thesubsection}
+
 
 \let\oldsection\section
 \renewcommand\section{\clearpage\oldsection}
 
-\newcommand{\aufgabe}{\section{Aufgabe}}
-\newcommand{\teilaufgabe}{\subsection{Teilaufgabe}}
+\pretitle{\begin{flushleft}\Huge\bfseries\sffamily}
+\posttitle{\par\end{flushleft}}
+\preauthor{\begin{flushleft}}
+\postauthor{\par\end{flushleft}}
 
 \lstset{basicstyle=\normalsize\ttfamily,escapeinside={(*@}{@*)},breaklines=true}
 

@@ -19,15 +19,19 @@
 
 \LoadClass{scrartcl}
 
+
 % Load up necessary packages
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
-%\usepackage{titlesec}
+
 \usepackage{enumitem}
-%\usepackage{graphicx}
-%\usepackage[linktocpage=true]{hyperref}
-%\usepackage{tocloft}
-%\usepackage{float}
+\usepackage{graphicx}
+\usepackage[linktocpage=true]{hyperref}
+\usepackage{tocloft}
+\usepackage{float}
+\usepackage{lmodern}
+\usepackage{listings}
+\usepackage{csquotes}
 
 %\chapterstyle{default}
 
