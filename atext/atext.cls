@@ -22,7 +22,7 @@
 % Load up necessary packages
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
-\usepackage{titlesec}
+\usepackage[explicit]{titlesec}
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage[linktocpage=true]{hyperref}
@@ -56,9 +56,9 @@
 %% Sektionen
 \maxsecnumdepth{subsection}
 
-\titleformat{\chapter}{\normalfont\sffamily\LARGE\bfseries}{\thechapter}{0.5em}{}
-\titleformat{\section}{\sffamily\bfseries\Large}{\thesection}{0.5em}{}
-\titleformat{\subsection}{\sffamily\bfseries\large}{\thesubsection}{0.5em}{}
+\titleformat{\chapter}{\normalfont\sffamily\LARGE\bfseries}{#1\ \thesection}{0.5em}{}
+\titleformat{\section}{\normalfont\sffamily\Large\bfseries}{#1\ \thesection}{0.5em}{}
+\titleformat{\section}{\normalfont\sffamily\large\bfseries}{#1\ \thesubsection}{0.5em}{}
 
 
 % Fancy superscript for BibTex cites
@@ -79,16 +79,26 @@
 
 \renewcommand{\arraystretch}{1.2}
 
-
-
 \let\oldsection\section
 \renewcommand\section{\clearpage\oldsection}
 
-\pretitle{\begin{flushleft}\Huge\bfseries\sffamily}
-\posttitle{\par\end{flushleft}}
-\preauthor{\begin{flushleft}}
-\postauthor{\par\end{flushleft}}
+
 
 \lstset{basicstyle=\normalsize\ttfamily,escapeinside={(*@}{@*)},breaklines=true}
+
+\preauthor{\begin{flushleft}%
+           \large \lineskip 0.5em%
+           \begin{tabular}[t]{@{}l}}
+\postauthor{\end{tabular}\end{flushleft}}
+
+\renewcommand*\and{%
+  \end{tabular}%
+  \hskip 1em \relax
+  \begin{tabular}[t]{l}}
+\renewcommand*{\andnext}{%
+  \end{tabular}\\ \begin{tabular}[t]{@{}l}}
+
+\pretitle{\begin{flushleft}\Huge\sffamily\bfseries}
+\posttitle{\par\end{flushleft}}
 
 \endinput

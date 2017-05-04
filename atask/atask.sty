@@ -1,5 +1,10 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{atask}[2016/12/17 A Task Package]
+\ProvidesPackage{atask}[2017/05/04 A Task Package]
 
-\titleformat{\section}{\sffamily\bfseries\Large}{}{0.5em}{}{#1 \thesection}
-\titleformat{\subsection}{\sffamily\bfseries\large}{}{0.5em}{}{#1 \thesubsection}
+\titleformat{\section}{\sffamily\bfseries\Large}{}{0em}{#1\ \thesection}
+\titleformat{\subsection}{\sffamily\bfseries\large}{}{0em}{#1\ \thesubsection}
+
+\newcommand{\aufgabe}[1]{\section{Aufgabe#1}}
+\newcommand{\teilaufgabe}[1]{\subsection{Teilaufgabe#1}}
+
+\endinput
