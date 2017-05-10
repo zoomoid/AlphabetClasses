@@ -34,6 +34,7 @@
 \usepackage{titling}
 \usepackage{textcomp}
 \usepackage{gensymb}
+\usepackage{fancyhdr}
 
 \newcommand{\atext}{{\ttfamily ATEXT} }
 \newcommand{\bmath}{{\ttfamily BMATH} }
@@ -58,9 +59,17 @@
 %% Sektionen
 \maxsecnumdepth{subsection}
 
-\titleformat{\chapter}{\normalfont\sffamily\LARGE\bfseries}{#1\ \thesection}{0.5em}{}
+\titleformat{\chapter}{\normalfont\sffamily\LARGE\bfseries}{#1\ \thechapter}{0.5em}{}
 \titleformat{\section}{\normalfont\sffamily\Large\bfseries}{#1\ \thesection}{0.5em}{}
-\titleformat{\section}{\normalfont\sffamily\large\bfseries}{#1\ \thesubsection}{0.5em}{}
+\titleformat{\subsection}{\normalfont\sffamily\large\bfseries}{#1\ \thesubsection}{0.5em}{}
+
+% Header
+% \newcommand{\@gruppe}{}
+% \newcommand{\gruppe}[1][]{\renewcommand{\@gruppe}{#1}}
+% \pagestyle{fancy}
+% \fancyhf{}
+% \rhead{}
+% \lhead{Gruppe \@gruppe}
 
 
 % Fancy superscript for BibTex cites
@@ -81,8 +90,8 @@
 
 \renewcommand{\arraystretch}{1.2}
 
-\let\oldsection\section
-\renewcommand\section{\clearpage\oldsection}
+% \let\oldsection\section
+% \renewcommand\section{\clearpage\oldsection}
 
 \preauthor{\begin{flushleft}%
            \large \lineskip 0.5em%
