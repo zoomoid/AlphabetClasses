@@ -61,11 +61,11 @@
 \titleformat{\subsection}{\normalfont\sffamily\large\bfseries}{#1\ \thesubsection}{0.5em}{}
 
 % Header
-\newcommand{\@gruppe}{}
-\newcommand{\gruppe}[1]{\renewcommand{\@gruppe}{#1}}
+\newcommand{\@group}{}
+\newcommand{\group}[1]{\renewcommand{\@group}{#1}}
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{\bfseries\sffamily\small Gruppe \@gruppe}
+\lhead{\bfseries\sffamily\small Gruppe \@group}
 
 
 % Fancy superscript for BibTex cites
