@@ -43,7 +43,7 @@
 
 % PAGE STYLING
 \setlrmarginsandblock{2.5cm}{2.5cm}{*}
-\setulmarginsandblock{2.5cm}{2cm}{*}
+\setulmarginsandblock{2.5cm}{2.5cm}{*}
 \checkandfixthelayout
 
 % Tiefe des Inhaltsverzeichnisses
