@@ -17,7 +17,7 @@
 
 \ProcessOptions \relax
 
-\LoadClass{memoir}
+\LoadClass[a4paper]{memoir}
 
 % Load up necessary packages
 \usepackage[utf8]{inputenc}

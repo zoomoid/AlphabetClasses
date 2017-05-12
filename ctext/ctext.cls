@@ -62,10 +62,10 @@
 
 % Header
 \newcommand{\@group}{}
-\newcommand{\group}[1]{\renewcommand{\@group}{#1}}
+\newcommand{\group}[1]{\renewcommand{\@group}{Gruppe #1}}
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{\bfseries\sffamily\small Gruppe \@group}
+\lhead{\bfseries\sffamily\small \@group}
 
 
 % Fancy superscript for BibTex cites
