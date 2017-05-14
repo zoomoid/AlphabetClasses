@@ -86,6 +86,8 @@
 
 \renewcommand{\arraystretch}{1.2}
 
+\renewcommand{\and}{\par}
+
 % \let\oldsection\section
 % \renewcommand\section{\clearpage\oldsection}
 \makeatletter
@@ -101,9 +103,9 @@
   \vskip 1.5em%
   {\small
    \lineskip .5em%
-    \begin{tabular}[t]{@{}l}%
+    %
       \@author
-    \end{tabular}\par}%
+    \par}%
     \vskip 1.5em%
   {\small \@date \par}%
 \end{flushleft}\par
@@ -126,4 +128,5 @@
 \global\let\and\relax
 }
 \makeatother
+
 \endinput
