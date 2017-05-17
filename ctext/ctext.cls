@@ -61,8 +61,8 @@
 \titleformat{\subsection}{\normalfont\sffamily\large\bfseries}{#1\ \thesubsection}{0.5em}{}
 
 % Header
-\newcommand{\@group}{}
-\newcommand{\group}[1]{\renewcommand{\@group}{Gruppe #1}}
+\newcommand\@group{}
+\newcommand{\group}[1]{\renewcommand\@group{Gruppe #1}}
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{\bfseries\sffamily\small \@group}
@@ -86,11 +86,12 @@
 
 \renewcommand{\arraystretch}{1.2}
 
-\renewcommand{\and}{\par}
+
 
 % \let\oldsection\section
 % \renewcommand\section{\clearpage\oldsection}
 \makeatletter
+\renewcommand{\and}{\end{tabular}\\ \begin{tabular}[t]{@{}l}}
 \renewcommand\maketitle{%\begin{titlepage}%
 \thispagestyle{fancy}
 \let\footnotesize\small
@@ -102,30 +103,19 @@
   {\LARGE\sffamily\bfseries \@title \par}%
   \vskip 1.5em%
   {\small
-   \lineskip .5em%
-    %
+   \lineskip .75em%
+    \begin{tabular}[t]{@{}l}%
       \@author
-    \par}%
+    \end{tabular}\par}%
     \vskip 1.5em%
   {\small \@date \par}%
 \end{flushleft}\par
 \@thanks
 \vfill\null
-\rhead{\@author}
 \pagestyle{plain}
 \renewcommand{\headrulewidth}{0pt} %obere Trennlinie
 % \end{titlepage}%
 \setcounter{footnote}{0}%
-\global\let\thanks\relax
-\global\let\maketitle\relax
-\global\let\@thanks\@empty
-\global\let\@author\@empty
-\global\let\@date\@empty
-\global\let\@title\@empty
-\global\let\title\relax
-\global\let\author\relax
-\global\let\date\relax
-\global\let\and\relax
 }
 \makeatother
 
