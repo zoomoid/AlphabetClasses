@@ -1,10 +1,17 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{atask}[2017/05/04 A Task Package]
 
-\titleformat{\section}{\sffamily\bfseries\Large}{}{0em}{#1\ \thesection}
-\titleformat{\subsection}{\sffamily\bfseries\large}{}{0em}{#1\ \alph{subsection})}
+%\titleformat{\section}{\sffamily\bfseries\Large}{}{0em}{#1\ \thesection}
+%\titleformat{\subsection}{\sffamily\bfseries\large}{}{0em}{#1\ \alph{subsection})}
+% \titleformat{\section*}{\sffamily\bfseries\Large}{}{0em}{#1}
+% \titleformat{\subsection*}{\sffamily\bfseries\large}{}{0em}{#1}
 
-\newcommand{\aufgabe}[1]{\section{Aufgabe#1}}
-\newcommand{\teilaufgabe}[1]{\subsection{Teilaufgabe#1}}
+\newcounter{aufgabe}[section]
+\newcounter{teilaufgabe}[aufgabe]
+
+\newcommand{\aufgabe}[1]{\stepcounter{aufgabe}\par\vspace{2\baselineskip}{\sffamily\bfseries\Large Aufgabe#1\ \theaufgabe}\par\vspace{0.5em}}
+\newcommand{\teilaufgabe}[1]{\stepcounter{teilaufgabe}\par\vspace{\baselineskip}{\sffamily\bfseries\large Teilaufgabe#1\ \alph{teilaufgabe})}\par\vspace{0.5em}}
+%\newcommand{\aufgabe*}[1]{\sffamily\bfseries\Large Aufgabe#1 \stepcounter{aufgabe}}
+%\newcommand{\teilaufgabe*}[1]{\sffamily\bfseries\large Teilaufgabe#1 \stepcounter{teilaufgabe}}
 
 \endinput

@@ -13,17 +13,17 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ctext}[2016/12/07 C Text Package]
 
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 
 \ProcessOptions \relax
 
-\LoadClass{article}
+\LoadClass{memoir}
 
 % Load up necessary packages
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage{geometry}
-\usepackage[explicit]{titlesec}
+\usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage[linktocpage=true]{hyperref}
@@ -56,9 +56,9 @@
 % %% Sektionen
 % \maxsecnumdepth{subsection}
 
-\titleformat{\chapter}{\normalfont\sffamily\LARGE\bfseries}{#1\ \thechapter}{0.5em}{}
-\titleformat{\section}{\normalfont\sffamily\Large\bfseries}{#1\ \thesection}{0.5em}{}
-\titleformat{\subsection}{\normalfont\sffamily\large\bfseries}{#1\ \thesubsection}{0.5em}{}
+\titleformat{\chapter}{\sffamily\LARGE\bfseries}{\ \thechapter}{0.5em}{}
+\titleformat{\section}{\sffamily\Large\bfseries}{\ \thesection}{0.5em}{}
+\titleformat{\subsection}{\sffamily\large\bfseries}{\ \thesubsection}{0.5em}{}
 
 % Header
 \newcommand\@group{}
@@ -92,11 +92,8 @@
 % \renewcommand\section{\clearpage\oldsection}
 \makeatletter
 \renewcommand{\and}{\end{tabular}\\ \begin{tabular}[t]{@{}l}}
-\renewcommand\maketitle{%\begin{titlepage}%
+\renewcommand\maketitle{
 \thispagestyle{fancy}
-\let\footnotesize\small
-\let\footnoterule\relax
-\let \footnote \thanks
 \null
 \vskip 30\p@
 \begin{flushleft}%
@@ -111,11 +108,10 @@
   {\small \@date \par}%
 \end{flushleft}\par
 \@thanks
-\vfill\null
+\vspace{2em}
 \pagestyle{plain}
 \renewcommand{\headrulewidth}{0pt} %obere Trennlinie
-% \end{titlepage}%
-\setcounter{footnote}{0}%
+\setcounter{footnote}{0}
 }
 \makeatother
 
