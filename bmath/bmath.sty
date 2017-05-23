@@ -4,34 +4,46 @@
 \usepackage{amsthm}
 % Provides several environments for mathematical scripts %
 
-\newcounter{punkt}[section]
+\newcounter{punkt}[aufgabe]
 
-\newenvironment{definition}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Definition {\normalfont(#1)}.}}{}
+\newenvironment{definition}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) Definition {\normalfont(#1)}.}}{}
 
-\newenvironment{beispiel}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Beispiel.}}{}
+\newenvironment{beispiel}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) Beispiel.}}{}
 
-\newenvironment{beispiel*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Beispiel {\normalfont(#1)}.}}{}
+\newenvironment{beispiel*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) Beispiel {\normalfont(#1)}.}}{}
 
-\newenvironment{bemerkung}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Bemerkung.}}{}
+\newenvironment{bemerkung}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) Bemerkung.}}{}
 
-\newenvironment{konvention}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Konvention.}}{}
+\newenvironment{konvention}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) Konvention.}}{}
 
-\newenvironment{proposition}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Proposition.}}{}
+\newenvironment{proposition}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) Proposition.}}{}
 
-\newenvironment{proposition*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Proposition {\normalfont(#1)}.}}{}
+\newenvironment{proposition*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) Proposition {\normalfont(#1)}.}}{}
 
-\newenvironment{notation}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Notation.}}{}
+\newenvironment{notation}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) Notation.}}{}
 
-\newenvironment{satz}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Satz.}}{}
+\newenvironment{satz}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) Satz.}}{}
 
-\newenvironment{satz*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Satz {\normalfont(#1)}.}}{}
+\newenvironment{satz*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) Satz {\normalfont(#1)}.}}{}
 
-\newenvironment{korollar}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Korollar.}}{}
+\newenvironment{korollar}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) Korollar.}}{}
 
-\newenvironment{lemma}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Lemma.}}{}
+\newenvironment{lemma}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) Lemma.}}{}
 
-\newenvironment{lemma*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Lemma {\normalfont(#1)}.}}{}
+\newenvironment{lemma*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) Lemma {\normalfont(#1)}.}}{}
 
-\newenvironment{algorithmus}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{section}.\arabic{punkt}) Algorithmus.}}{}
+\newenvironment{algorithmus}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) Algorithmus.}}{}
+
+\newenvironment{algorithmus*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) Algorithmus ({\normalfont#1}).}}{}
+
+\newcommand{\QED}{\hfill\(\square\)}
+
+\newenvironment{induktion}{\refstepcounter{punkt}\par{\sffamily\bfseries Beweis mit vollständiger Induktion}}{\QED}
+
+\newcommand{\anfang}{\par{\bfseries\sffamily Induktionsanfang:} }
+
+\newcommand{\voraussetzung}{\par{\bfseries\sffamily Induktionsvoraussetzung:} }
+
+\newcommand{\schritt}{\par{\bfseries\sffamily Induktionsschritt:} }
 
 \endinput

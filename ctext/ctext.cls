@@ -17,31 +17,29 @@
 
 \ProcessOptions \relax
 
-\LoadClass{memoir}
+\LoadClass[a4paper]{memoir}
 
 % Load up necessary packages
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
-\usepackage{geometry}
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage[linktocpage=true]{hyperref}
 \usepackage{tocloft}
 \usepackage{float}
+
 \usepackage{lmodern}
-\usepackage{listings}
 \usepackage{csquotes}
-\usepackage{titling}
-\usepackage{textcomp}
-\usepackage{gensymb}
 \usepackage{fancyhdr}
 
 \newcommand{\atext}{{\ttfamily ATEXT} }
 \newcommand{\bmath}{{\ttfamily BMATH} }
 \newcommand{\amath}{{\ttfamily AMATH} }
 
-\geometry{a4paper,margin=1in}
+\setlrmarginsandblock{1in}{1in}{*}
+\setulmarginsandblock{1in}{1in}{*}
+\checkandfixthelayout
 
 % Tiefe des Inhaltsverzeichnisses
 % \maxtocdepth{subsection}
