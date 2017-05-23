@@ -29,7 +29,7 @@
 \usepackage{tocloft}
 \usepackage{float}
 
-\usepackage{lmodern}
+% \usepackage{lmodern}
 \usepackage{csquotes}
 \usepackage{fancyhdr}
 
