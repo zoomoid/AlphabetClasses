@@ -92,7 +92,7 @@
 \preauthor{\begin{center}%
            \normalsize \lineskip 0.5em%
            \begin{tabular}[t]{c}}
-\postauthor{\end{tabular}\end{center}}
+\postauthor{\end{tabular}\end{center}\pagebreak}
 
 \renewcommand*\and{%
   \end{tabular}%

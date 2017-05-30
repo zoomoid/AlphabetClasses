@@ -1,10 +1,10 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{atask}[2017/05/04 A Task Package]
 
-\newcounter{aufgabe}[section]
+\newcounter{aufgabe}
 \newcounter{teilaufgabe}[aufgabe]
 
-\newcommand{\aufgabe}[1]{\stepcounter{aufgabe}\par\vspace{2\baselineskip}{\sffamily\bfseries\Large Aufgabe#1\ \theaufgabe}\par\vspace{0.5em}}
-\newcommand{\teilaufgabe}[1]{\stepcounter{teilaufgabe}\par\vspace{1.5\baselineskip}{\sffamily\bfseries\large Teilaufgabe#1\ \alph{teilaufgabe})}\par\vspace{0.5em}}
+\newcommand{\aufgabe}[1]{\stepcounter{aufgabe}\stepcounter{section}\par\vspace{2\baselineskip}{\sffamily\bfseries\Large Aufgabe#1\ \theaufgabe}\par\vspace{0.5em}}
+\newcommand{\teilaufgabe}[1]{\stepcounter{teilaufgabe}\stepcounter{subsection}\par\vspace{1.5\baselineskip}{\sffamily\bfseries\large Teilaufgabe#1\ \alph{teilaufgabe})}\par\vspace{0.5em}}
 
 \endinput

@@ -28,6 +28,7 @@
 \usepackage[linktocpage=true]{hyperref}
 \usepackage{tocloft}
 \usepackage{float}
+\usepackage{amath}
 
 % \usepackage{lmodern}
 \usepackage{csquotes}
@@ -73,10 +74,11 @@
 %\renewcommand{\thesection{\arabic{section}}}
 
 % Numbering bound to sections rather than chapters
-% \counterwithin{figure}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
 %
-% \counterwithout{section}{chapter}
-% \counterwithin{chapter}{part}
+\counterwithout{section}{chapter}
+%\counterwithin{chapter}{part}
 
 % paragraph indention
 \setlength{\parindent}{0pt}
