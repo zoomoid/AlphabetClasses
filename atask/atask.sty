@@ -1,10 +1,95 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{atask}[2017/05/04 A Task Package]
 
-\newcounter{aufgabe}
-\newcounter{teilaufgabe}[aufgabe]
+\RequirePackage{ifthen}
+\RequirePackage{translations}
 
-\newcommand{\aufgabe}[1]{\stepcounter{aufgabe}\stepcounter{section}\par\vspace{2\baselineskip}{\sffamily\bfseries\Large Aufgabe#1\ \theaufgabe}\par\vspace{0.5em}}
-\newcommand{\teilaufgabe}[1]{\stepcounter{teilaufgabe}\stepcounter{subsection}\par\vspace{1.5\baselineskip}{\sffamily\bfseries\large Teilaufgabe#1\ \alph{teilaufgabe})}\par\vspace{0.5em}}
+\newcounter{aufgabe} \setcounter{aufgabe}{0}
+\newcounter{teilaufgabe}[aufgabe] \setcounter{teilaufgabe}{0}
+
+\DeclareTranslation{German}{aufgabe}{Aufgabe}
+\DeclareTranslation{German}{teilaufgabe}{Teilaufgabe}
+
+\makeatletter
+\def\@aufgabespacingbefore{\vskip 4ex\goodbreak}
+\def\@aufgabespacingafter{\vskip 2ex}
+\def\@aufgabestil{\Large\bfseries\sffamily\raggedright}
+\def\aufgabe{\@ifstar\unaufgabe\naufgabe}
+\def\naufgabe{\@ifnextchar[%]
+  \naufgabe@ta\naufgabe@oa}
+\def\unaufgabe{\@ifnextchar[%]
+  \unaufgabe@ta\unaufgabe@oa}
+\def\naufgabe@oa#1{\naufgabe@ta[]{#1}}
+\def\unaufgabe@oa#1{\unaufgabe@ta[]{#1}}
+\def\naufgabe@ta[#1]#2{%
+  \ifhmode\par\fi
+  \removelastskip
+  \@aufgabespacingbefore
+  \refstepcounter{aufgabe}
+  \ifthenelse{\equal{#1}{}}{}{\setcounter{aufgabe}{#1}}
+  \ifthenelse{\equal{#2}{}}{\def\@aufgabenname{}}{\def\@aufgabenname{(#2) }}
+  \def\@aufgabentitel{\GetTranslation{aufgabe} \@aufgabenname }
+  \hbox to \hsize{%
+    \vtop{\parindent=0pt\leavevmode\@aufgabestil\@aufgabentitel\theaufgabe\par}%
+  }
+  \@aufgabespacingafter
+  \addcontentsline{toc}{section}{\GetTranslation{aufgabe} \theaufgabe\  \@aufgabenname}
+}
+\def\unaufgabe@ta[#1]#2{%
+  \ifhmode\par\fi
+  \removelastskip
+  \@aufgabespacingbefore
+  \refstepcounter{aufgabe}
+  \ifthenelse{\equal{#1}{}}{}{\setcounter{aufgabe}{#1}}
+  \ifthenelse{\equal{#2}{}}{\def\@aufgabenname{}}{\def\@aufgabenname{(#2) }}
+  \def\@aufgabentitel{\GetTranslation{aufgabe} \@aufgabenname }
+  \hbox to \hsize{%
+    \vtop{\parindent=0pt
+    \leavevmode\@aufgabestil\@aufgabentitel\par}%
+    }
+  \@aufgabespacingafter
+  \addcontentsline{toc}{section}{\GetTranslation{aufgabe}\ \@aufgabenname}%
+  \ignorespaces}
+
+\def\@teilaufgabespacingbefore{\vskip 3ex\goodbreak}
+\def\@teilaufgabespacingafter{\vskip 1.5ex}
+\def\@teilaufgabestil{\large\bfseries\sffamily\raggedright}
+\def\teilaufgabe{\@ifstar\unteilaufgabe\nteilaufgabe}
+\def\nteilaufgabe{\@ifnextchar[%]
+  \nteilaufgabe@ta\nteilaufgabe@oa}
+\def\unteilaufgabe{\@ifnextchar[%]
+  \unteilaufgabe@ta\unteilaufgabe@oa}
+\def\nteilaufgabe@oa#1{\nteilaufgabe@ta[]{#1}}
+\def\unteilaufgabe@oa#1{\unteilaufgabe@ta[]{#1}}
+\def\nteilaufgabe@ta[#1]#2{%
+  \ifhmode\par\fi
+  \removelastskip
+  \@teilaufgabespacingbefore
+  \refstepcounter{teilaufgabe}
+  \ifthenelse{\equal{#1}{}}{}{\setcounter{teilaufgabe}{#1}}
+  \ifthenelse{\equal{#2}{}}{\def\@teilaufgabenname{}}{\def\@teilaufgabenname{(#2) }}
+  \def\@teilaufgabentitel{\GetTranslation{teilaufgabe} \@teilaufgabenname }
+  \hbox to \hsize{%
+    \vtop{\parindent=0pt\leavevmode\@teilaufgabestil\@teilaufgabentitel\alph{teilaufgabe})\par}%
+  }
+  \@teilaufgabespacingafter
+  \addcontentsline{toc}{subsection}{\GetTranslation{teilaufgabe} \alph{teilaufgabe})\  \@aufgabenname}
+}
+\def\unteilaufgabe@ta[#1]#2{%
+  \ifhmode\par\fi
+  \removelastskip
+  \@teilaufgabespacingbefore
+  \refstepcounter{teilaufgabe}
+  \ifthenelse{\equal{#1}{}}{}{\setcounter{teilaufgabe}{#1}}
+  \ifthenelse{\equal{#2}{}}{\def\@teilaufgabenname{}}{\def\@teilaufgabenname{(#2) }}
+  \def\@teilaufgabentitel{\GetTranslation{teilaufgabe} \@teilaufgabenname }
+  \hbox to \hsize{%
+    \vtop{\parindent=0pt
+    \leavevmode\@teilaufgabestil\@teilaufgabentitel\par}%
+    }
+  \@teilaufgabespacingafter
+  \addcontentsline{toc}{subsection}{\GetTranslation{teilaufgabe}\ \@teilaufgabenname}%
+  \ignorespaces}
+\makeatother
 
 \endinput

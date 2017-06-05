@@ -18,94 +18,84 @@
 \ProcessOptions \relax
 
 \LoadClass[a4paper]{memoir}
+\makeatletter
 
-% Load up necessary packages
-\usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
-\usepackage{titlesec}
-\usepackage{enumitem}
-\usepackage{graphicx}
-\usepackage[linktocpage=true]{hyperref}
-\usepackage{tocloft}
-\usepackage{float}
-\usepackage{amath}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[ngerman]{babel}
+\RequirePackage{titlesec}
+\RequirePackage{enumitem}
+\RequirePackage{graphicx}
+\RequirePackage[linktocpage=true]{hyperref}
+\RequirePackage{tocloft}
+\RequirePackage{float}
+\RequirePackage{ifthen}
+\RequirePackage{translations}
+\RequirePackage{lmodern}
+\RequirePackage{csquotes}
+\RequirePackage{fancyhdr}
 
-% \usepackage{lmodern}
-\usepackage{csquotes}
-\usepackage{fancyhdr}
-
-\newcommand{\atext}{{\ttfamily ATEXT} }
-\newcommand{\bmath}{{\ttfamily BMATH} }
-\newcommand{\amath}{{\ttfamily AMATH} }
+\DeclareTranslationFallback{abgabe}{Abgabe}
+\DeclareTranslation{German}{abgabe}{Abgabe}
+\DeclareTranslation{English}{abgabe}{Due date}
+\DeclareTranslationFallback{gruppe}{Gruppe}
+\DeclareTranslation{German}{gruppe}{Gruppe}
+\DeclareTranslation{English}{gruppe}{Group}
+\DeclareTranslationFallback{toc}{Inhaltsverzeichnis}
+\DeclareTranslation{German}{toc}{Inhaltsverzeichnis}
+\DeclareTranslation{English}{toc}{Table of Contents}
+\DeclareTranslationFallback{tof}{Abbildungsverzeichnis}
+\DeclareTranslation{German}{tof}{Abbildungsverzeichnis}
+\DeclareTranslation{English}{tof}{Table of Figures}
 
 \setlrmarginsandblock{1in}{1in}{*}
 \setulmarginsandblock{1in}{1in}{*}
 \checkandfixthelayout
 
-% Tiefe des Inhaltsverzeichnisses
-% \maxtocdepth{subsection}
-
-% Serifenloser Titel des Inhaltsverzeichnisses
-\addto\captionsngerman{\renewcommand{\contentsname}{\sffamily Inhaltsverzeichnis}}
-\addto\captionsngerman{\renewcommand{\listfigurename}{\sffamily\LARGE\bfseries Abbildungsverzeichnis}}
+\addto\captionsngerman{\renewcommand{\contentsname}{\sffamily\Large\bfseries \GetTranslation{toc}}}
+\addto\captionsngerman{\renewcommand{\listfigurename}{\sffamily\Large\bfseries \GetTranslation{tof}}}
 \pagestyle{plain}
-
-% \chapterstyle{default}
-%
-% %% Sektionen
-% \maxsecnumdepth{subsection}
 
 \titleformat{\chapter}{\sffamily\LARGE\bfseries}{\ \thechapter}{0.5em}{}
 \titleformat{\section}{\sffamily\Large\bfseries}{\ \thesection}{0.5em}{}
 \titleformat{\subsection}{\sffamily\large\bfseries}{\ \thesubsection}{0.5em}{}
-
-% Header
-\newcommand\@group{}
-\newcommand{\group}[1]{\renewcommand\@group{Gruppe #1}}
-\pagestyle{fancy}
-\fancyhf{}
-\lhead{\bfseries\sffamily\small \@group}
-
-
-% Fancy superscript for BibTex cites
 \let\ocite\cite
 \renewcommand{\cite}[1]{\textsuperscript{\ocite{#1}}}
-
-%\renewcommand{\thesection{\arabic{section}}}
-
-% Numbering bound to sections rather than chapters
-\numberwithin{figure}{section}
-\numberwithin{table}{section}
-%
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
 \counterwithout{section}{chapter}
-%\counterwithin{chapter}{part}
-
-% paragraph indention
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.6em}
 
 \renewcommand{\arraystretch}{1.2}
 
+\newcommand\@group{}
+\newcommand{\group}[1]{\renewcommand\@group{\GetTranslation{gruppe} #1}}
+\newcommand{\team}[1]{\renewcommand\@group{Team #1}}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\bfseries\sffamily\small \@group}
 
+\newcommand{\@subtitle}{}
+\newcommand{\subtitle}[1]{\renewcommand\@subtitle{#1}}
 
-% \let\oldsection\section
-% \renewcommand\section{\clearpage\oldsection}
-\makeatletter
+\newcommand{\@datehook}{}
+
+\newcommand{\hasDeadline}{\renewcommand\@datehook{\GetTranslation{abgabe}:\ }}
+
 \renewcommand{\and}{\end{tabular}\\ \begin{tabular}[t]{@{}l}}
+
 \renewcommand\maketitle{
 \thispagestyle{fancy}
 \null
 \vskip 30\p@
 \begin{flushleft}%
-  {\LARGE\sffamily\bfseries \@title \par}%
+  {\LARGE\sffamily\bfseries\@title\par\vspace{0.2em}\normalsize \@subtitle\ifthenelse{\equal{\@subtitle}{}\OR\equal{\@date}{}}{ }{ | }\@datehook\@date\par}%
   \vskip 1.5em%
   {\small
    \lineskip .75em%
     \begin{tabular}[t]{@{}l}%
       \@author
     \end{tabular}\par}%
-    \vskip 1.5em%
-  {\small \@date \par}%
 \end{flushleft}\par
 \@thanks
 \vspace{2em}
