@@ -7,7 +7,7 @@
 %
 %
 % MIT License
-%%
+%
 % Copyright (c) 2017
 %
 % Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -35,23 +35,20 @@
 \ProvidesFile{ctext.dtx}
 %</driver>
 %<class>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<class>\ProvidesClass{ctext}[\filedate\space\fileversion Third Alphabet Classes text class]]
+%<class>\ProvidesClass{ctext}
+%<*class>
+    [2017/06/05 v2.0 Third Alphabet Classes text class]
+%</class>
+%
 %<*driver>
 \documentclass{ltxdoc}
+\usepackage{doc}
 \GetFileInfo{ctext.dtx}
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
-\usepackage[ngerman,english]{babel}
-\usepackage{hyperref}
-
-\title{The \textsf{ctext} class\thanks{This document
-corresponds to \textsf{ctext}~\fileversion}}
-\author{Alexander Bartolomey\\ \texttt{occloxium@gmail.com}}
-\date{\filedate}
 \begin{document}
-  \maketitle
-  \DocInput{ctext.dtx}
+\DocInput{ctext.dtx}
 \end{document}
 %</driver>
 % \fi
@@ -70,17 +67,29 @@ corresponds to \textsf{ctext}~\fileversion}}
 %   Right bracket \] Circumflex \^ Underscore \_ Grave accent \` Left
 % brace \{ Vertical bar \| Right brace \} Tilde \~}
 %
+% \DoNotIndex{\newcommand,\newenvironment}
+%
 % \changes{v1.0}{2017/05/11}{Initial version}
+% \changes{v2.0}{2017/06/05}{Reworked most of the class}
+%
+% \title{The \textsf{ctext} class\thanks{This document%
+%   corresponds to \textsf{ctext} v2.0}}
+% \author{Alexander Bartolomey\\ \texttt{occloxium@gmail.com}}
+% \date{05.06.2017}
+% \maketitle
 % \tableofcontents
 % \begin{abstract}
 % This class provides quite sophisticated adjustments to |memoir|, mainly
 % front matter restyling (see |~/AlphabetClasses/examples/ctext.pdf|), as
-% well as small improvements to section titles and other small adjustments, mostly font-related. Its main purpose is to be used for typesetting most of my
-% homework for University (e.g. title-page-only documents for handwritten papers).
+% well as small improvements to section titles and other small adjustments,
+% mostly font-related. Its main purpose is to be used for typesetting most of my
+% homework for University
+% (e.g. title-page-only documents for handwritten papers).
 % For usage for fictional typesetting, see my |dtext| class.
 % \end{abstract}
 % \section{Introduction}
-% \texttt{ctext} mainly adjusts the |\maketitle| command to look a bit more modern with a boldfaced sans-serif font and general left-adjustment to
+% \texttt{ctext} mainly adjusts the |\maketitle| command to look a bit more
+% modern with a boldfaced sans-serif font and general left-adjustment to
 % document attributes defined in its preamble. It also introduces some new
 % attribute-defining commands, whose values are integrated in the titlepage.
 %
@@ -112,10 +121,29 @@ corresponds to \textsf{ctext}~\fileversion}}
 % \item |fancyhdr|\footnote{Piet van Oostrum, http://www.ctan.org/pkg/fancyhdr}
 % \end{itemize}
 % \section{Options}
-% Since |ctext| inherits most of its optional arguments from |memoir|, you MAY use every argument provided by |memoir|. There
-% are no further defined options in |ctext|. |ctext| passes all options to |memoir|.
+% Since |ctext| inherits most of its optional arguments from |memoir|, you MAY
+% use every argument provided by |memoir|. There
+% are no further defined options in |ctext|. |ctext| passes all options to
+% |memoir|.
 % \section{Definitions}
 % \begin{macrocode}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
+\ProcessOptions \relax
+\LoadClass[a4paper]{memoir}
+\makeatletter
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[ngerman]{babel}
+\RequirePackage{titlesec}
+\RequirePackage{enumitem}
+\RequirePackage{graphicx}
+\RequirePackage[linktocpage=true]{hyperref}
+\RequirePackage{tocloft}
+\RequirePackage{float}
+\RequirePackage{ifthen}
+\RequirePackage{translations}
+\RequirePackage{lmodern}
+\RequirePackage{csquotes}
+\RequirePackage{fancyhdr}
 \DeclareTranslationFallback{abgabe}{Abgabe}
 \DeclareTranslation{German}{abgabe}{Abgabe}
 \DeclareTranslation{English}{abgabe}{Due date}
@@ -129,8 +157,10 @@ corresponds to \textsf{ctext}~\fileversion}}
 \DeclareTranslation{German}{tof}{Abbildungsverzeichnis}
 \DeclareTranslation{English}{tof}{Table of Figures}
 % \end{macrocode}
-% These declarations tell |translation| to insert a given translation for the user-defined language. If |translations| is unable to determine the language, it automatically falls back to german. \\ The inserted translation snippets are
-% used in hooks for the titlepage.
+% These declarations tell |translation| to insert a given translation for
+% the user-defined language. If |translations| is unable to determine the
+% language, it automatically falls back to german. \\ The inserted translation
+% snippets are used in hooks for the titlepage.
 %
 % \begin{macrocode}
 \setlrmarginsandblock{1in}{1in}{*}
@@ -140,36 +170,45 @@ corresponds to \textsf{ctext}~\fileversion}}
 % Defines the general margins of the A4 document for |memoir|.
 %
 % \begin{macrocode}
-\addto\captionsngerman{\renewcommand{\contentsname}{\sffamily\Large\bfseries \GetTranslation{toc}}}
-\addto\captionsngerman{\renewcommand{\listfigurename}{\sffamily\Large\bfseries \GetTranslation{tof}}}
+\addto\captionsngerman{\renewcommand{\contentsname}{%
+  \sffamily\Large\bfseries \GetTranslation{toc}%
+}}
+\addto\captionsngerman{\renewcommand{\listfigurename}{%
+  \sffamily\Large\bfseries \GetTranslation{tof}%
+}}
 \pagestyle{plain}
 % \end{macrocode}
-% Sets a sans-serif font for the title of the table of contents and table of figures and ajusts their title based off of the selected language.
+% Sets a sans-serif font for the title of the table of contents and table of
+% figures and ajusts their title based off of the selected language.
 %
 % \begin{macrocode}
 \pagestyle{plain}
 % \end{macrocode}
-% Defaults the page style to plain, only showing the page number centered on the bottom of each page (with some exceptions to the titlepage).
+% Defaults the page style to plain, only showing the page number centered on
+% the bottom of each page (with some exceptions to the titlepage).
 %
 % \begin{macrocode}
 \titleformat{\chapter}{\sffamily\LARGE\bfseries}{\ \thechapter}{0.5em}{}
 \titleformat{\section}{\sffamily\Large\bfseries}{\ \thesection}{0.5em}{}
 \titleformat{\subsection}{\sffamily\large\bfseries}{\ \thesubsection}{0.5em}{}
 % \end{macrocode}
-% Uses |titlesec| to make section etc. use the sans-serif theme and append the counter rather than prepending it to the title.
+% Uses |titlesec| to make section etc. use the sans-serif theme and append the
+% counter rather than prepending it to the title.
 %
 % \begin{macrocode}
 \let\ocite\cite
 \renewcommand{\cite}[1]{\textsuperscript{\ocite{#1}}}
 % \end{macrocode}
-% Overrrides the definition of |\cite| to instead cite in superscript (e.g. Wikipedia Citing Style)
+% Overrrides the definition of |\cite| to instead cite in superscript
+% (e.g. Wikipedia Citing Style)
 %
 % \begin{macrocode}
 \counterwithin{figure}{section}
 \counterwithin{table}{section}
 \counterwithout{section}{chapter}
 % \end{macrocode}
-% Adjusts counters of figures and tables to be based on the current pointer of the section.
+% Adjusts counters of figures and tables to be based on the current pointer
+% of the section.
 %
 % \begin{macrocode}
 \setlength{\parindent}{0pt}
@@ -185,9 +224,9 @@ corresponds to \textsf{ctext}~\fileversion}}
 % \section{Commands}
 % |ctext| features some fancy additions to the default titlepage attributes.
 % Using |\group{}| or |\team{}|, which are quite identical, with the first
-% command prepending a translation of "`Group"' and the second command prepending
-% a "`Team"' in front of the specified argument and printing it into the header
-% of the titlepage. The full definition looks like this:
+% command prepending a translation of "`Group"' and the second command
+% prepending a "`Team"' in front of the specified argument and printing it
+% into the header of the titlepage. The full definition looks like this:
 % \begin{macrocode}
 \newcommand\@group{}
 \newcommand{\group}[1]{\renewcommand\@group{\GetTranslation{gruppe} #1}}
@@ -197,14 +236,17 @@ corresponds to \textsf{ctext}~\fileversion}}
 \lhead{\bfseries\sffamily\small \@group}
 % \end{macrocode}
 %
-% The |\subtitle{}| command adds, obviously, a subtitle, appended directly under the default title.
+% The |\subtitle{}| command adds, obviously, a subtitle, appended directly
+% under the default title.
 % \begin{macrocode}
 \newcommand{\@subtitle}{}
 \newcommand{\subtitle}[1]{\renewcommand\@subtitle{#1}}
 % \end{macrocode}
 %
 % Because dates, in form of a default timestamp or a due date, as in deadline, a
-% hook to the default |\@date| macro has to specified. Since |\@date| defaults to |\today| if not given in the preamble, there does not have to be any further specification or renewal of the |\date| macro.
+% hook to the default |\@date| macro has to specified. Since |\@date| defaults
+% to |\today| if not given in the preamble, there does not have to be any
+% further specification or renewal of the |\date| macro.
 % \begin{macrocode}
 \newcommand{\@datehook}{}
 \newcommand{\hasDeadline}{\renewcommand\@datehook{\GetTranslation{abgabe}:\ }}
@@ -220,33 +262,17 @@ corresponds to \textsf{ctext}~\fileversion}}
 % \begin{macrocode}
 \renewcommand{\and}{\end{tabular}\\ \begin{tabular}[t]{@{}l}}
 % \end{macrocode}
-% Since the new titlepage is left-aligned, |\and|'s tabular environment usage has
-%  to be adjusted to not be centered anymore.
+% Since the new titlepage is left-aligned, |\and|'s tabular environment
+% usage has to be adjusted to not be centered anymore.
 %
-% The real magic happens in |\maketitle|
+% The real magic happens in |\maketitle|  where most of the stylistic changes
+% are made. Title and subtitle are printed sans-serif, if both a subtitle and
+% a not-empty date are supplied, a separator is printed in between and both are
+% printed inline and the list of authors is appended. The whole titling section
+% gets flushed left and the page style is reset to |plain|.
 % \begin{macrocode}
-\renewcommand\maketitle{
-\thispagestyle{fancy}
-\null
-\vskip 30\p@
-\begin{flushleft}%
-  {\LARGE\sffamily\bfseries\@title\par\vspace{0.2em}\normalsize \@subtitle\ifthenelse{\equal{\@subtitle}{}\OR\equal{\@date}{}}{ }{ | }\@datehook\@date\par}%
-  \vskip 1.5em%
-  {\small
-   \lineskip .75em%
-    \begin{tabular}[t]{@{}l}%
-      \@author
-    \end{tabular}\par}%
-\end{flushleft}\par
-\@thanks
-\vspace{2em}
-\pagestyle{plain}
-\renewcommand{\headrulewidth}{0pt} %obere Trennlinie
-\setcounter{footnote}{0}
-}
-% </class>
+\makeatother
 % \end{macrocode}
-% where most of the stylistic changes are made. Title and subtitle are printed sans-serif, if both a subtitle and a not-empty date are supplied, a separator is printed in between and both are printed inline and the list of authors is appended. The whole titling section gets flushed left and the page style is reset to |plain|.
 % \endinput
 % \Finale
 %
