@@ -1,3 +1,16 @@
+# AlphabetClasses / ctext
+
+## Abstract
+
+This class provides quite sophisticated adjustments to memoir, mainly
+front matter restyling (see ~/AlphabetClasses/examples/ctext.pdf), as
+well as small improvements to section titles and other small adjustments,
+mostly font-related. Its main purpose is to be used for typesetting most of my
+homework for University (e.g. title-page-only documents for handwritten papers).
+For usage for fictional typesetting, see my dtext class.
+
+## License
+
 Copyright (C) 2017 by Alexander Bartolomey
 
 This File may be distributed and/or modified under the condition of the below
@@ -22,11 +35,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-This class provides quite sophisticated adjustments to memoir, mainly
-front matter restyling (see ~/AlphabetClasses/examples/ctext.pdf), as
-well as small improvements to section titles and other small adjustments,
-mostly font-related. Its main purpose is to be used for typesetting most of my
-homework for University (e.g. title-page-only documents for handwritten papers).
-For usage for fictional typesetting, see my dtext class.
-
