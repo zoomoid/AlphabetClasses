@@ -1,15 +1,16 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{atask}[2017/05/04 A Task Package]
-
 \RequirePackage{ifthen}
 \RequirePackage{translations}
-
+\newcommand{\atask}{\textsc{aTask} }
 \newcounter{aufgabe} \setcounter{aufgabe}{0}
 \newcounter{teilaufgabe}[aufgabe] \setcounter{teilaufgabe}{0}
-
+\DeclareTranslation{English}{aufgabe}{Exercise}
+\DeclareTranslation{English}{teilaufgabe}{Subtask}
 \DeclareTranslation{German}{aufgabe}{Aufgabe}
 \DeclareTranslation{German}{teilaufgabe}{Teilaufgabe}
-
+\DeclareTranslationFallback{aufgabe}{Aufgabe}
+\DeclareTranslationFallback{teilaufgabe}{Teilaufgabe}
 \makeatletter
 \def\@aufgabespacingbefore{\vskip 4ex\goodbreak}
 \def\@aufgabespacingafter{\vskip 2ex}
@@ -91,5 +92,4 @@
   \addcontentsline{toc}{subsection}{\GetTranslation{teilaufgabe}\ \@teilaufgabenname}%
   \ignorespaces}
 \makeatother
-
 \endinput

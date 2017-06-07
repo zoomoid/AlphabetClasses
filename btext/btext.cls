@@ -1,69 +1,91 @@
-% btext.cls
-%
-% This class is based off of the koma-script class and performs some stylistic
-% changes to the general document proportions and minor changes to both
-% predefined commands like \tableofcontent and the actual text itself
-%
-% This class DOES NOT include my amath package, with has to be done seperately
-% to enable math support
-%
-% This class provides layout for scientific papers and articles and
-% furthermore flow text fitted to my stylistic needs
-
+%%
+%% This is file `btext.cls',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% btext.dtx  (with options: `class')
+%% ----------------------------------------------------------------
+%% btext --- Second Alphabet Classes text class
+%%
+%% Copyright (C) 2017 by Alexander Bartolomey --- occloxium@gmail.com
+%% This File may be distributed and/or modified under the condition of the below
+%% license.
+%%
+%% MIT License Copyright (c) 2017
+%%
+%% Permission is hereby granted, free of charge, to any person obtaining a copy
+%% of this software and associated documentation files (the "Software"), to deal
+%% in the Software without restriction, including without limitation the rights
+%% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+%% copies of the Software, and to permit persons to whom the Software is
+%% furnished to do so, subject to the following conditions:
+%%
+%% The above copyright notice and this permission notice shall be included in all
+%% copies or substantial portions of the Software.
+%%
+%% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+%% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+%% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+%% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+%% SOFTWARE.
+%% ----------------------------------------------------------------
+%%
+%%
+%% Copyright (C) 2017 by Alexander Bartolomey --- occloxium@gmail.com
+%%
+%% This File may be distributed and/or modified under the condition of the below
+%% license.
+%%
+%% MIT License Copyright (c) 2017
+%%
+%% Permission is hereby granted, free of charge, to any person obtaining a copy
+%% of this software and associated documentation files (the "Software"), to deal
+%% in the Software without restriction, including without limitation the rights
+%% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+%% copies of the Software, and to permit persons to whom the Software is
+%% furnished to do so, subject to the following conditions:
+%%
+%% The above copyright notice and this permission notice shall be included in all
+%% copies or substantial portions of the Software.
+%%
+%% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+%% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+%% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+%% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+%% SOFTWARE.
+%%
+%% This work is "maintained" (as per LPPL maintenance status) by
+%% Alexander Bartolomey.
+%%
+%% This work consists of the file  btext.cls
+%% and the derived files
+%%
+%%
+%%
+%%
+%% End of file `btext.cls'.
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{btext}[2016/12/07 B Text Package]
-
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartcl}}
-
 \ProcessOptions \relax
-
 \LoadClass{scrartcl}
-
-
-% Load up necessary packages
-\usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
-
-\usepackage{enumitem}
-\usepackage{graphicx}
-\usepackage[linktocpage=true]{hyperref}
-\usepackage{tocloft}
-\usepackage{float}
-\usepackage{lmodern}
-\usepackage{listings}
-\usepackage{csquotes}
-
-%\chapterstyle{default}
-
-%% Sektionen
-%\maxsecnumdepth{subsection}
-%\setsecheadstyle{\huge\sffamily\bfseries\raggedright}
-%\setsubsecheadstyle{\Large\sffamily\bfseries\raggedright}
-
-% Kapitel
-% Page break after Section
-%\let\oldsection\section
-%\renewcommand\section{\clearpage\oldsection}
-
-%\titleformat{\chapter}{\normalfont\sffamily\LARGE\bfseries}{\thesection}{0.5em}{}
-
-% Fancy superscript for BibTex cites
-%\let\ocite\cite
-%\renewcommand{\cite}[1]{\textsuperscript{\ocite{#1}}}
-
-%\renewcommand{\thesection{\arabic{section}}}
-
-% Numbering bound to sections rather than chapters
-%\counterwithin{figure}{section}
-
-%\counterwithout{section}{chapter}
-%\counterwithin{chapter}{part}
-
-% paragraph indention
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[ngerman]{babel}
+\RequirePackage{enumitem}
+\RequirePackage{graphicx}
+\RequirePackage[linktocpage=true]{hyperref}
+\RequirePackage{tocloft}
+\RequirePackage{float}
+\RequirePackage{lmodern}
+\RequirePackage{listings}
+\RequirePackage{csquotes}
+\newcommand{\btext}{\textsc{bText} }
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.6em}
-
 \renewcommand{\arraystretch}{1.2}
-
-
 \endinput

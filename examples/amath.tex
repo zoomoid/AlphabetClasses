@@ -1,0 +1,106 @@
+\documentclass{ctext}
+\selectlanguage{english}
+
+\usepackage{amath}
+\title{\texttt{amath} Example}
+\subtitle{Using \texttt{ctext}}
+\author{Alexander Bartolomey}
+\date{06.06.2017}
+
+\begin{document}
+\maketitle
+\tableofcontents*
+\section{Introduction}
+\textsc{aMath} features lots of neat short commands for symbols and mathematical structures. As seen below, most of them are available through \textsc{amsmath}.
+\section{Equation Styling}
+\textsc{aMath} imports \textsc{amsmath} with \verb|[fleqn]| option to flush all equations in \emph{align} environments (or other environments serving the same purpose) to the left.
+\section{Symbols \& Abbreviations}
+For mathematical symbols (those I use most of the time), I added macros like explained in Table \ref{tab:symb}:
+\begin{table}[H]
+  \centering
+  \begin{tabular}{c|c|c}
+    Inline Math & Command & Comment \\
+    \hline
+    \(\N\) & \verb|\N| & To display \(\N_0\), use \verb|\N_0|\\
+    \(\Z\) & \verb|\Z| & \\
+    \(\R\) & \verb|\R| & \\
+    \(\Q\) & \verb|\Q| & \\
+    \(\C\) & \verb|\C| & \\
+    \(\F\) & \verb|\F| & For Prime Fields.\footnotemark[1]\\
+    \hline
+    \(\GL\) & \verb|\GL| & General Linear Group \\
+    \(\id\) & \verb|\id| & Identity \\
+    \(\diff{x}\) & \verb|\diff{x}| & Analysis: Derivate function\\
+    \hline
+    \(\divides\) & \verb|\divides| & Operator \\
+    \(\property\) & \verb|\property| & Separator for Sets\footnotemark[2] \\
+    \hline
+    \(\Var\) & \verb|\Var| & Combinatorics: Variations \\
+    \(\Perm\) & \verb|\Perm| & Combinatorics: Permutation \\
+    \(\MComb\) & \verb|\v| & Combinatorics: Multicombination \\
+    \(\Comb\) & \verb|\Comb| & Combinatorics: Combinations \\
+    \hline
+    \(\dim\) & \verb|\dim| & Dimension function \\
+    \(\Im\) &  \verb|\Im| & Image of certain function \\
+    \hline
+    \(\modulo{X}{m}\) & \verb|\modulo{<>}{<>}| & Modulus (Sets) operator \\
+    \hline
+    \(\Pot(X)\) & \verb|\Pot X| & Power set \\
+    \(\Map(X,Y)\) & \verb|\Map(X,Y)| & Set of Maps from \(X\) to \(Y\) \\
+    \(\Bin\) & \verb|\Bin| & \\
+    \(\falls\) & \verb|\falls| & To be used in case conditions \\
+    \(\charakteristik\) & \verb|\charakteristik| & Characterisic of a field
+  \end{tabular}
+  \caption{Symbols \& Abbreviation Commands from \textsc{aMath}}
+  \label{tab:symb}
+\end{table}
+\footnotetext[1]{GitHub User \href{https://github.com/ACHinrichs}{\texttt{@ACHinrichs}} found this command to be malicious with other classes. When he merged this class into his HomeworkAssignment class, he renamed it to \texttt{\textbackslash Primes}}
+\footnotetext[2]{\texttt{\textbackslash property} and \texttt{\textbackslash divides} share the same definition but are intended to be used differently}
+\section{Operators}
+\subsection{Quantifiers}
+\textsc{aMath} restyles both universal and existential quantifiers to use up more space. It also adds a large version for display mode math, available through \verb|\bigforall| and \verb|\bigexists|. In general, they look like this:
+\[
+  \bigforall x \in \R \bigexists y \in \R : x^2 = y
+\]
+The same formula in inline math mode: \(\bigforall x \in \R \bigexists y \in \R : x^2 = y\)
+
+The adjustment to the default quantifiers looks like this: \[
+  \forall x \in \R \exists y \in \R : x^2 = y
+\]
+\subsection{Restriction}
+A macro to display a restriction to function or a map is provided by using
+\begin{verbatim}
+  \restr{<function>}{<new source>}{<new target>}.
+\end{verbatim}
+In math, it looks like this:
+\[
+  \restr{f}{U}{V}: U \rightarrow V, x \mapsto f(x).
+\]
+\section{Functions}
+\subsection{Absolute value}
+Using \verb|\abs{<>}|, you can display an absolute value.
+\[
+  \abs{x-y} = \text{"Distance of x and y"}.
+\]
+\subsection{Rounding functions}
+For rounding up and down, \textsc{aMath} provides \verb|\ceil{<>}| and \verb|\floor{<>}|.
+\[
+  \floor{3.5} = 3, \quad \ceil{3.5} = 4.
+\]
+\section{Utilities}
+\subsection{Relations}
+You can define your own relation by using \verb|\rel{<>}|. For example, reflexivity of a relation \(m\) looks like this:
+\[
+  x \rel{m} y \Rightarrow x = y.
+\]
+\subsection{Large brackets}
+Wrapping brackets around fractions can be a pain, therefore \textsc{aMath} provides the \verb|\labra{<>}| command, which sets fitting brackets around the given argument.
+\[
+  \labra{\frac{n+2}{n+1}}
+\]
+\subsection{Vectors}
+You can create a vector without using any environments yourself by using \verb|\colvec{<>}| and seperating the rows with a general linebreaking \LaTeX\ operator.
+\[
+  a := \colvec{a_1\\a_2\\a_3}
+\]
+\end{document}

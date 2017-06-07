@@ -1,0 +1,90 @@
+\documentclass{ctext}
+\usepackage{amath}
+\usepackage{bmath}
+
+\title{\texttt{bmath} Example}
+\subtitle{Using \texttt{ctext} \& \texttt{amath}}
+\author{Alexander Bartolomey}
+\date{06.06.2017}
+
+\begin{document}
+\selectlanguage{english}
+\maketitle
+\tableofcontents*
+\section{Introduction}
+\bmath defines some new environments for usage in scripts or subtasks. Environments may be chosen from the following list. Starred versions let you specify a name for the given type of environment.
+\begin{itemize}
+  \item \verb|definition| (available in starred version) lets you define formulas
+  \item \verb|beispiel| (available in starred version) lets you state an example
+  \item \verb|bemerkung| adds a remark
+  \item \verb|konvention| defines a convention
+  \item \verb|proposition| (available in starred version) proposes content
+  \item \verb|notation| adds a notational convention
+  \item \verb|satz| (available in starred version) defines a theorem
+  \item \verb|korollar| defines a corollary
+  \item \verb|lemma| (available in starred version) defines a lemma
+  \item \verb|algorithmus| (available in starred version) marks an algorithm
+  \item \verb|induktion| starts an inductional proof and puts appends a proof end mark at the end.\footnote{\texttt{\textbackslash QED} is a command defined by \bmath putting a right-flushed square in the line}
+\end{itemize}
+\bmath requires the \texttt{amsthm} package, which by default adds some environments, like \verb|\begin{proof}\end{proof}| which MIGHT be useful in combination with \bmath.
+A minimal working example SHALL be given by:
+\section{Examples}
+\setcounter{aufgabe}{2}
+\begin{notation}
+  \bmath SHALL be displayed in small capitals.
+\end{notation}
+\selectlanguage{german}
+\begin{satz*}{Homomorphiesatz für Mengen}
+      Es sei eine Abbildung $f: X \rightarrow Y $ gegeben. Dann haben wir eine induzierte Abbildung $\bar{f}:\modulo{X}{=_f} \rightarrow Y, [x] \mapsto f(x)$, welche $f = \bar{f} \circ \text{quo}$ erfüllt. Es ist $\bar{f}$ injektiv und $\Im \bar{f} = \Im f$. Insbesondere ist
+  \[\restr{\bar{f}}{\Im f}{} : \modulo{X}{=_f} \rightarrow \Im f \]
+  eine Bijektion.
+\end{satz*}
+\selectlanguage{english}
+\begin{korollar}
+  \bmath is quite nice.
+  \begin{proof}
+    This is left for exercise purpose to the reader.
+  \end{proof}
+\end{korollar}
+\selectlanguage{german}
+\begin{notation}
+  \begin{enumerate}[label=(\alph*)]
+    \item Es sei ein Monoid $M$ gegeben. Für jedes $n \in \N_0$ und alle $x \in M^n$ mit $x_ix_j = x_jx_i$ für $i, j \in [1, n]$ notieren wir rekursiv
+    \[\prod\limits_{i\in [1,n]} x_i := \begin{cases}
+    1, & \text{falls } n = 0, \\
+    (\prod_{i \in [1,n-1]} x_i)x_n, & \text{falls } n > 0
+    \end{cases}\]
+    \item Es sei ein abelsches Monoid $A$ gegeben. Für jedes $n \in \N_0$ und alle $x \in A^n$ notieren wir rekursiv
+    \[\sum\limits_{i\in[1,n]}x_i := \begin{cases}
+      0, & \text{falls } n = 0,\\
+      \sum_{i \in [1, n-1]} x_i + x_n, & \text{falls } n > 0
+    \end{cases}\]
+  \end{enumerate}
+\end{notation}
+\subsection{Special case: \texttt{induktion} environment}
+\selectlanguage{english}
+\begin{induktion}
+  \anfang \(n = 1:\) \dots
+  \voraussetzung \dots
+  \schritt \(n \mapsto n+1:\) \dots
+\end{induktion}
+\section{Markers}
+\bmath adds some (pseudo-)subsectioning commands, which are not displayed in any glossary (Basically, they are just fancy-styled text). As seen in table \ref{tab:markers}, they look like this:
+\begin{table}[H]
+  \centering
+\begin{tabular}{l|l|l}
+Marker & Command & Comment \\
+\hline
+\anfang & \verb|\anfang| & Marks the basis of a proof by induction \\
+\voraussetzung & \verb|\voraussetzung| & Marks the inductive hypothesis \\
+\schritt & \verb|\schritt| & Marks the inductive step \\
+\hline
+\behauptung & \verb|\behauptung| & Marks a hypothesis \\
+\beweis & \verb|\beweis| & Marks a proof \\
+\ueberlegung & \verb|\ueberlegung| & Marks an assumption \\
+\gegenbeispiel & \verb|\gegenbeispiel| & Marks a counterexample
+\end{tabular}
+\caption{Marker commands}
+\label{tab:markers}
+\end{table}
+\end{document}

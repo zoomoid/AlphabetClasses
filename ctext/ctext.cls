@@ -1,41 +1,7 @@
-%%
-%% This is file `ctext.cls',
-%% generated with the docstrip utility.
-%%
-%% The original source files were:
-%%
-%% ctext.dtx  (with options: `class')
 %% ----------------------------------------------------------------
 %% ctext --- Third Alphabet Classes text class
 %%
 %% Copyright (C) 2017 by Alexander Bartolomey --- occloxium@gmail.com
-%% This File may be distributed and/or modified under the condition of the below
-%% license.
-%%
-%% MIT License Copyright (c) 2017
-%%
-%% Permission is hereby granted, free of charge, to any person obtaining a copy
-%% of this software and associated documentation files (the "Software"), to deal
-%% in the Software without restriction, including without limitation the rights
-%% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-%% copies of the Software, and to permit persons to whom the Software is
-%% furnished to do so, subject to the following conditions:
-%%
-%% The above copyright notice and this permission notice shall be included in all
-%% copies or substantial portions of the Software.
-%%
-%% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-%% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-%% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-%% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-%% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-%% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-%% SOFTWARE.
-%% ----------------------------------------------------------------
-%%
-%%
-%% Copyright (C) 2017 by Alexander Bartolomey --- occloxium@gmail.com
-%%
 %% This File may be distributed and/or modified under the condition of the below
 %% license.
 %%
@@ -68,7 +34,7 @@
 %%                                 ctext.cls.
 %%
 %%
-%% End of file `ctext.cls'.
+%% ----------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ctext}[2016/12/07 C Text Package]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
@@ -76,18 +42,10 @@
 \LoadClass[a4paper]{memoir}
 \makeatletter
 \RequirePackage[utf8]{inputenc}
-\RequirePackage[ngerman]{babel}
-\RequirePackage{titlesec}
-\RequirePackage{enumitem}
-\RequirePackage{graphicx}
+\RequirePackage[english,german]{babel}
+\RequirePackage{titlesec,enumitem,graphicx,tocloft,float,ifthen,translations,lmodern,csquotes,fancyhdr}
 \RequirePackage[linktocpage=true]{hyperref}
-\RequirePackage{tocloft}
-\RequirePackage{float}
-\RequirePackage{ifthen}
-\RequirePackage{translations}
-\RequirePackage{lmodern}
-\RequirePackage{csquotes}
-\RequirePackage{fancyhdr}
+\newcommand{\ctext}{\textsc{cText} }
 \DeclareTranslationFallback{abgabe}{Abgabe}
 \DeclareTranslation{German}{abgabe}{Abgabe}
 \DeclareTranslation{English}{abgabe}{Due date}
@@ -103,8 +61,10 @@
 \setlrmarginsandblock{1in}{1in}{*}
 \setulmarginsandblock{1in}{1in}{*}
 \checkandfixthelayout
-\addto\captionsngerman{\renewcommand{\contentsname}{\sffamily\Large\bfseries \GetTranslation{toc}}}
-\addto\captionsngerman{\renewcommand{\listfigurename}{\sffamily\Large\bfseries \GetTranslation{tof}}}
+\addto\captionsgerman{\renewcommand{\contentsname}{\sffamily\Large\bfseries \GetTranslation{toc}}}
+\addto\captionsgerman{\renewcommand{\listfigurename}{\sffamily\Large\bfseries \GetTranslation{tof}}}
+\addto\captionsenglish{\renewcommand{\contentsname}{\sffamily\Large\bfseries \GetTranslation{toc}}}
+\addto\captionsenglish{\renewcommand{\listfigurename}{\sffamily\Large\bfseries \GetTranslation{tof}}}
 \pagestyle{plain}
 \titleformat{\chapter}{\sffamily\LARGE\bfseries}{\ \thechapter}{0.5em}{}
 \titleformat{\section}{\sffamily\Large\bfseries}{\ \thesection}{0.5em}{}

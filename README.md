@@ -18,6 +18,10 @@ Currently features
 
 Just clone this repository into your user directory for TeX and use classes and packages as intended.
 
+## Documentation
+
+Most classes and packages are quite intuitive. ctext got a complete documentation (see /ctext/ctext.pdf), all other classes and packages have extensive examples (see /examples/), which will usually explain all commands and options.
+
 ## License
 
 MIT License
