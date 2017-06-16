@@ -93,8 +93,6 @@
 \setulmarginsandblock{2.5cm}{2.5cm}{*}
 \checkandfixthelayout
 \maxtocdepth{subsection}
-\addto\captionsngerman{\renewcommand{\contentsname}{\sffamily Inhaltsverzeichnis}}
-\addto\captionsngerman{\renewcommand{\listfigurename}{\sffamily\LARGE\bfseries Abbildungsverzeichnis}}
 \pagestyle{plain}
 \chapterstyle{default}
 \maxsecnumdepth{subsection}
@@ -106,7 +104,20 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.6em}
 \renewcommand{\arraystretch}{1.2}
-\pretitle{\begin{center}\Huge\sffamily\bfseries}
-\posttitle{\end{center}\vfill}
-\postdate{\pagebreak}
+\makeatletter
+\renewcommand\maketitle{
+\null
+\vskip 30\p@
+\begin{center}%
+  {\Huge\sffamily\bfseries\@title\par}%
+  \vfill%
+  {\small%
+   \lineskip .75em%
+    \begin{tabular}[t]{c}%
+      \@author
+    \end{tabular}\par}%
+\end{center}\par
+\pagebreak
+}
+\makeatother
 \endinput

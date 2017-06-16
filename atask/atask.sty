@@ -27,6 +27,7 @@
   \removelastskip
   \@aufgabespacingbefore
   \refstepcounter{aufgabe}
+  \refstepcounter{section}
   \ifthenelse{\equal{#1}{}}{}{\setcounter{aufgabe}{#1}}
   \ifthenelse{\equal{#2}{}}{\def\@aufgabenname{}}{\def\@aufgabenname{(#2) }}
   \def\@aufgabentitel{\GetTranslation{aufgabe} \@aufgabenname }
@@ -41,6 +42,7 @@
   \removelastskip
   \@aufgabespacingbefore
   \refstepcounter{aufgabe}
+  \refstepcounter{section}
   \ifthenelse{\equal{#1}{}}{}{\setcounter{aufgabe}{#1}}
   \ifthenelse{\equal{#2}{}}{\def\@aufgabenname{}}{\def\@aufgabenname{(#2) }}
   \def\@aufgabentitel{\GetTranslation{aufgabe} \@aufgabenname }
@@ -67,6 +69,7 @@
   \removelastskip
   \@teilaufgabespacingbefore
   \refstepcounter{teilaufgabe}
+  \refstepcounter{subsection}
   \ifthenelse{\equal{#1}{}}{}{\setcounter{teilaufgabe}{#1}}
   \ifthenelse{\equal{#2}{}}{\def\@teilaufgabenname{}}{\def\@teilaufgabenname{(#2) }}
   \def\@teilaufgabentitel{\GetTranslation{teilaufgabe} \@teilaufgabenname }
@@ -81,6 +84,7 @@
   \removelastskip
   \@teilaufgabespacingbefore
   \refstepcounter{teilaufgabe}
+  \refstepcounter{subsection}
   \ifthenelse{\equal{#1}{}}{}{\setcounter{teilaufgabe}{#1}}
   \ifthenelse{\equal{#2}{}}{\def\@teilaufgabenname{}}{\def\@teilaufgabenname{(#2) }}
   \def\@teilaufgabentitel{\GetTranslation{teilaufgabe} \@teilaufgabenname }
