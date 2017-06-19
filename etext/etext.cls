@@ -1,5 +1,7 @@
+%%
+%% This is file `etext.cls'
 %% ----------------------------------------------------------------
-%% ctext --- Third Alphabet Classes text class
+%% etext --- Fifth Alphabet Classes text class
 %%
 %% Copyright (C) 2017 by Alexander Bartolomey --- occloxium@gmail.com
 %% This File may be distributed and/or modified under the condition of the below
@@ -28,15 +30,11 @@
 %% This work is "maintained" (as per LPPL maintenance status) by
 %% Alexander Bartolomey.
 %%
-%% This work consists of the file  ctext.dtx
-%% and the derived files           ctext.ins,
-%%                                 ctext.pdf and
-%%                                 ctext.cls.
-%%
-%%
+%% This work consists of the file  etext.cls
+%% and the derived files
 %% ----------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ctext}[2016/12/07 C Text Package]
+\ProvidesClass{etext}[2016/12/07 E Text Package]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ProcessOptions \relax
 \LoadClass[a4paper]{memoir}
@@ -44,8 +42,9 @@
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[english,german]{babel}
 \RequirePackage{titlesec,enumitem,graphicx,tocloft,float,ifthen,translations,lmodern,csquotes,fancyhdr}
+\RequirePackage{charter}
 \RequirePackage[linktocpage=true]{hyperref}
-\newcommand{\ctext}{\textsc{cText} }
+\newcommand{\etext}{\textsc{eText} }
 \DeclareTranslationFallback{abgabe}{Abgabe}
 \DeclareTranslation{German}{abgabe}{Abgabe}
 \DeclareTranslation{English}{abgabe}{Due date}
@@ -66,7 +65,7 @@
 \addto\captionsenglish{\renewcommand{\contentsname}{\Large\@headingstyling \GetTranslation{toc}}}
 \addto\captionsenglish{\renewcommand{\listfigurename}{\Large\@headingstyling \GetTranslation{tof}}}
 \pagestyle{plain}
-\newcommand{\@headingstyling}{\sffamily\bfseries}
+\newcommand{\@headingstyling}{\bfseries}
 \titleformat{\chapter}{\LARGE\@headingstyling}{\ \thechapter}{0.5em}{}
 \titleformat{\section}{\Large\@headingstyling}{\ \thesection}{0.5em}{}
 \titleformat{\subsection}{\large\@headingstyling}{\ \thesubsection}{0.5em}{}
@@ -94,7 +93,7 @@
 \null
 \vskip 30\p@
 \begin{flushleft}%
-  {\LARGE\@headingstyling\@title\par\vspace{0.2em}\normalsize \@subtitle\ifthenelse{\equal{\@subtitle}{}\OR\equal{\@date}{}}{ }{ | }\@datehook\@date\par}%
+  {\Huge\@headingstyling\@title\par\vspace{0.2em}\normalsize \@subtitle\ifthenelse{\equal{\@subtitle}{}\OR\equal{\@date}{}}{ }{ | }\@datehook\@date\par}%
   \vskip 1.5em%
   {\small
    \lineskip .75em%

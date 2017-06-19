@@ -2,19 +2,21 @@
 \ProvidesPackage{atask}[2017/05/04 A Task Package]
 \RequirePackage{ifthen}
 \RequirePackage{translations}
+\makeatletter
 \newcommand{\atask}{\textsc{aTask} }
 \newcounter{aufgabe} \setcounter{aufgabe}{0}
 \newcounter{teilaufgabe}[aufgabe] \setcounter{teilaufgabe}{0}
+\counterwithin{table}{aufgabe}
+\counterwithin{figure}{aufgabe}
 \DeclareTranslation{English}{aufgabe}{Exercise}
 \DeclareTranslation{English}{teilaufgabe}{Subtask}
 \DeclareTranslation{German}{aufgabe}{Aufgabe}
 \DeclareTranslation{German}{teilaufgabe}{Teilaufgabe}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{teilaufgabe}{Teilaufgabe}
-\makeatletter
 \def\@aufgabespacingbefore{\vskip 4ex\goodbreak}
 \def\@aufgabespacingafter{\vskip 2ex}
-\def\@aufgabestil{\Large\bfseries\sffamily\raggedright}
+\def\@aufgabestil{\Large\@headingstyling\raggedright}
 \def\aufgabe{\@ifstar\unaufgabe\naufgabe}
 \def\naufgabe{\@ifnextchar[%]
   \naufgabe@ta\naufgabe@oa}
@@ -56,7 +58,7 @@
 
 \def\@teilaufgabespacingbefore{\vskip 3ex\goodbreak}
 \def\@teilaufgabespacingafter{\vskip 1.5ex}
-\def\@teilaufgabestil{\large\bfseries\sffamily\raggedright}
+\def\@teilaufgabestil{\large\@headingstyling\raggedright}
 \def\teilaufgabe{\@ifstar\unteilaufgabe\nteilaufgabe}
 \def\nteilaufgabe{\@ifnextchar[%]
   \nteilaufgabe@ta\nteilaufgabe@oa}
@@ -74,7 +76,7 @@
   \ifthenelse{\equal{#2}{}}{\def\@teilaufgabenname{}}{\def\@teilaufgabenname{(#2) }}
   \def\@teilaufgabentitel{\GetTranslation{teilaufgabe} \@teilaufgabenname }
   \hbox to \hsize{%
-    \vtop{\parindent=0pt\leavevmode\@teilaufgabestil\@teilaufgabentitel\alph{teilaufgabe})\par}%
+    \vtop{\parindent=0pt\leavevmode\@teilaufgabestil\@teilaufgabentitel \theaufgabe.\alph{teilaufgabe}\par}%
   }
   \@teilaufgabespacingafter
   \addcontentsline{toc}{subsection}{\GetTranslation{teilaufgabe} \alph{teilaufgabe})\  \@aufgabenname}
