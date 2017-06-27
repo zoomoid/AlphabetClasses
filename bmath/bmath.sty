@@ -13,15 +13,17 @@
 \DeclareTranslation{German}{korollar}{Korollar}
 \DeclareTranslation{German}{lemma}{Lemma}
 \DeclareTranslation{German}{algorithmus}{Algorithmus}
-\DeclareTranslation{German}{induktion}{Beweis mit vollständiger Induktion}
+\DeclareTranslation{German}{induktion}{Induktion}
+\DeclareTranslation{German}{beweisdurch}{Beweis durch}
 \DeclareTranslation{German}{induktionsanfang}{Induktionsanfang}
 \DeclareTranslation{German}{induktionsvr}{Induktionsvoraussetzung}
 \DeclareTranslation{German}{induktionsschritt}{Induktionsschritt}
-\DeclareTranslation{German}{induktionsschluss}{Damit gilt die Behauptung nach dem Prinzip der vollständigen Induktion.}
+\DeclareTranslation{German}{induktionsschluss}{Damit gilt die Behauptung nach dem Prinzip der}
 \DeclareTranslation{German}{behauptung}{Behauptung}
 \DeclareTranslation{German}{beweis}{Beweis}
 \DeclareTranslation{German}{ueberlegung}{Überlegung}
 \DeclareTranslation{German}{gegenbeispiel}{Betrachte folgendes Gegenbeispiel}
+\DeclareTranslation{German}{vollstaendige}{vollständige}
 \DeclareTranslation{English}{beispiel}{Example}
 \DeclareTranslation{English}{definition}{Definition}
 \DeclareTranslation{English}{bemerkung}{Remark}
@@ -32,15 +34,17 @@
 \DeclareTranslation{English}{korollar}{Corollary}
 \DeclareTranslation{English}{lemma}{Lemma}
 \DeclareTranslation{English}{algorithmus}{Algorithm}
-\DeclareTranslation{English}{induktion}{Proof by complete induction}
+\DeclareTranslation{English}{induktion}{induction}
+\DeclareTranslation{English}{beweisdurch}{Proof by }
 \DeclareTranslation{English}{induktionsanfang}{Basis}
 \DeclareTranslation{English}{induktionsvr}{Inductive Hypothesis}
 \DeclareTranslation{English}{induktionsschritt}{Inductive Step}
-\DeclareTranslation{English}{induktionsschluss}{Therefore, the hypothesis was shown by complete induction.}
+\DeclareTranslation{English}{induktionsschluss}{Therefore, the hypothesis was shown by}
 \DeclareTranslation{English}{behauptung}{Hypothesis}
 \DeclareTranslation{English}{beweis}{Proof}
 \DeclareTranslation{English}{ueberlegung}{Assumption}
 \DeclareTranslation{English}{gegenbeispiel}{Consider the following counterexample}
+\DeclareTranslation{English}{vollstaendige}{complete}
 \DeclareTranslationFallback{beispiel}{Beispiel}
 \DeclareTranslationFallback{definition}{Definition}
 \DeclareTranslationFallback{bemerkung}{Bemerkung}
@@ -51,15 +55,17 @@
 \DeclareTranslationFallback{korollar}{Korollar}
 \DeclareTranslationFallback{lemma}{Lemma}
 \DeclareTranslationFallback{algorithmus}{Algorithmus}
-\DeclareTranslationFallback{induktion}{Beweis durch vollständige Induktion}
+\DeclareTranslationFallback{beweisdurch}{Beweis durch}
+\DeclareTranslationFallback{induktion}{Induktion}
 \DeclareTranslationFallback{induktionsanfang}{Induktionsanfang}
 \DeclareTranslationFallback{induktionsvr}{Induktionsvoraussetzung}
 \DeclareTranslationFallback{induktionsschritt}{Induktionsschritt}
-\DeclareTranslationFallback{induktionsschluss}{Damit gilt die Behauptung nach dem Prinzip der vollständigen Induktion.}
+\DeclareTranslationFallback{induktionsschluss}{Damit gilt die Behauptung nach dem Prinzip der}
 \DeclareTranslationFallback{behauptung}{Behauptung}
 \DeclareTranslationFallback{beweis}{Beweis}
 \DeclareTranslationFallback{ueberlegung}{Überlegung}
 \DeclareTranslationFallback{gegenbeispiel}{Betrachte folgendes Gegenbeispiel}
+\DeclareTranslationFallback{vollstaendige}{vollständige}
 \makeatletter
 \newcommand*\ifcounter[1]{%
   \ifcsname c@#1\endcsname
@@ -69,24 +75,27 @@
   \fi
 }
 \ifcounter{aufgabe}{\newcounter{punkt}[aufgabe]}{\newcounter{aufgabe}[section]\newcounter{punkt}[section]}
-\newenvironment{definition}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{definition}.}}{}
-\newenvironment{definition*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{definition} {\normalfont(#1)}.}}{}
-\newenvironment{beispiel}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{beispiel}.}}{}
-\newenvironment{beispiel*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{beispiel} {\normalfont(#1)}.}}{}
-\newenvironment{bemerkung}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{bemerkung}.}}{}
-\newenvironment{konvention}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{konvention}.}}{}
-\newenvironment{proposition}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{proposition}.}}{}
-\newenvironment{proposition*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{proposition} {\normalfont(#1)}.}}{}
-\newenvironment{notation}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{notation}.}}{}
-\newenvironment{satz}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{satz}.}}{}
-\newenvironment{satz*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{satz} {\normalfont(#1)}.}}{}
-\newenvironment{korollar}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{korollar}.}}{}
-\newenvironment{lemma}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{lemma}.}}{}
-\newenvironment{lemma*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{lemma} {\normalfont(#1)}.}}{}
-\newenvironment{algorithmus}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{algorithmus}.}}{}
-\newenvironment{algorithmus*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{algorithmus} ({\normalfont#1}).}}{}
+\newenvironment{definition}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{definition}.}}{\par}
+\newenvironment{definition*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{definition} {\normalfont(#1)}.}}{\par}
+\newenvironment{beispiel}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{beispiel}.}}{\par}
+\newenvironment{beispiel*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{beispiel} {\normalfont(#1)}.}}{\par}
+\newenvironment{bemerkung}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{bemerkung}.}}{\par}
+\newenvironment{konvention}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{konvention}.}}{\par}
+\newenvironment{proposition}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{proposition}.}}{\par}
+\newenvironment{proposition*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{proposition} {\normalfont(#1)}.}}{\par}
+\newenvironment{notation}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{notation}.}}{\par}
+\newenvironment{satz}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{satz}.}}{\par}
+\newenvironment{satz*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{satz} {\normalfont(#1)}.}}{\par}
+\newenvironment{korollar}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{korollar}.}}{\par}
+\newenvironment{lemma}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{lemma}.}}{\par}
+\newenvironment{lemma*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{lemma} {\normalfont(#1)}.}}{\par}
+\newenvironment{algorithmus}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{algorithmus}.}}{\par}
+\newenvironment{algorithmus*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{algorithmus} ({\normalfont#1}).}}{\par}
 \newcommand{\QED}{\hfill\(\square\)}
-\newenvironment{induktion}{\refstepcounter{punkt}\par\emph{\GetTranslation{induktion}}:}{\par\GetTranslation{induktionsschluss}\QED}
+\newcommand\indtype{\GetTranslation{vollstaendige}}
+\newenvironment{induktion}{\refstepcounter{punkt}\par\emph{\GetTranslation{beweisdurch}\ \GetTranslation{vollstaendige}\  \GetTranslation{induktion}:}}{\par\GetTranslation{induktionsschluss}\ \GetTranslation{vollstaendige}n \GetTranslation{induktion}\QED\par}
+\newenvironment{induktion*}[1]{\renewcommand\indtype{#1}\refstepcounter{punkt}\par\emph{\GetTranslation{beweisdurch}\ \indtype\  \GetTranslation{induktion}:}}{\par\GetTranslation{induktionsschluss}\ \indtype n \GetTranslation{induktion}\QED\par\def\indtype\empty}
+
 \newcommand{\anfang}{\par\emph{(\GetTranslation{induktionsanfang})}:\ }
 \newcommand{\voraussetzung}{\par\emph{(\GetTranslation{induktionsvr})}:\ }
 \newcommand{\schritt}{\par\emph{(\GetTranslation{induktionsschritt})}:\ }

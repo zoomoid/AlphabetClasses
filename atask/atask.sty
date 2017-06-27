@@ -40,9 +40,9 @@
 \atask@parseCounterStyle{\atask@aufgabeCounter}{\atask@aufgabe}{aufgabe}
 \atask@parseCounterStyle{\atask@teilaufgabeCounter}{\atask@teilaufgabe}{teilaufgabe}
 
-
 \newcommand{\newaufgabe}[1]{%
   \refstepcounter{aufgabe}%
+  \label{aufgabe:\theaufgabe}%
   \def\@aufgabentitel{\GetTranslation{aufgabe}\ \atask@aufgabe\ifstrempty{#1}{}{\ (#1)}}%
   \@startsection{aufgabe}%
     {1}%
@@ -53,6 +53,7 @@
 }
 \newcommand{\newteilaufgabe}[1]{%
   \refstepcounter{teilaufgabe}%
+  \label{teilaufgabe:\theaufgabe_\theteilaufgabe}%
   \def\@teilaufgabentitel{\GetTranslation{teilaufgabe}\ \atask@aufgabe.\atask@teilaufgabe\ifstrempty{#1}{}{\ (#1)}}%
   \@startsection{teilaufgabe}%
     {2}%
@@ -63,13 +64,13 @@
     *{\@teilaufgabentitel} \addcontentsline{toc}{subsection}{\@teilaufgabentitel}%
 }
 
-\newcommand{\aufgabe}[1][]{\newaufgabe{#1}}
+\newcommand{\aufgabe}[1]{\newaufgabe{#1}}
 
 \WithSuffix\newcommand\aufgabe*[2][]{%
   \ifthenelse{\equal{#1}{}}{ }{\setcounter{aufgabe}{#1}}
   \newaufgabe{#2}
 }
-\newcommand{\teilaufgabe}[1][]{\newteilaufgabe{#1}}
+\newcommand{\teilaufgabe}[1]{\newteilaufgabe{#1}}
 
 \WithSuffix\newcommand\teilaufgabe*[2][]{%
   \ifthenelse{\equal{#1}{}}{ }{\setcounter{teilaufgabe}{#1}}
