@@ -66,6 +66,8 @@
 \addto\captionsgerman{\renewcommand{\listfigurename}{\Large\@headingstyling \GetTranslation{tof}}}
 \addto\captionsenglish{\renewcommand{\contentsname}{\Large\@headingstyling \GetTranslation{toc}}}
 \addto\captionsenglish{\renewcommand{\listfigurename}{\Large\@headingstyling \GetTranslation{tof}}}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
 \newcommand{\headingstyle}[1]{\renewcommand{\@headingstyling}[#1]}
 \newcommand{\@headingstyling}{\sffamily\bfseries}
 \titleformat{\chapter}{\LARGE\@headingstyling}{\ \thechapter}{0.5em}{}
@@ -106,7 +108,6 @@
 \pagestyle{plain}%
 \renewcommand{\headrulewidth}{0pt}%
 \setcounter{footnote}{0}%
-\def\thanks\empty
 }
 \makeatother
 \endinput
