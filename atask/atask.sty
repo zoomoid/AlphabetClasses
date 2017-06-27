@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{atask}[2017/05/04 A Task Package]
-\RequirePackage{ifthen}
+\RequirePackage{xifthen}
 \RequirePackage{translations}
 \makeatletter
 \newcommand{\atask}{\textsc{aTask} }
@@ -35,7 +35,8 @@
   \def\@aufgabentitel{\GetTranslation{aufgabe} \@aufgabenname }
   \hbox to \hsize{%
     \vtop{\parindent=0pt\leavevmode\@aufgabestil\@aufgabentitel\theaufgabe\par}%
-  }
+  }%
+  \label{sec:a\theaufgabe}
   \@aufgabespacingafter
   \addcontentsline{toc}{section}{\GetTranslation{aufgabe} \theaufgabe\  \@aufgabenname}
 }
@@ -49,9 +50,9 @@
   \ifthenelse{\equal{#2}{}}{\def\@aufgabenname{}}{\def\@aufgabenname{(#2) }}
   \def\@aufgabentitel{\GetTranslation{aufgabe} \@aufgabenname }
   \hbox to \hsize{%
-    \vtop{\parindent=0pt
-    \leavevmode\@aufgabestil\@aufgabentitel\par}%
-    }
+    \vtop{\parindent=0pt\leavevmode\@aufgabestil\@aufgabentitel\par}%
+  }%
+  \label{sec:a\theaufgabe}
   \@aufgabespacingafter
   \addcontentsline{toc}{section}{\GetTranslation{aufgabe}\ \@aufgabenname}%
   \ignorespaces}
@@ -76,10 +77,11 @@
   \ifthenelse{\equal{#2}{}}{\def\@teilaufgabenname{}}{\def\@teilaufgabenname{(#2) }}
   \def\@teilaufgabentitel{\GetTranslation{teilaufgabe} \@teilaufgabenname }
   \hbox to \hsize{%
-    \vtop{\parindent=0pt\leavevmode\@teilaufgabestil\@teilaufgabentitel \theaufgabe.\alph{teilaufgabe}\par}%
-  }
+    \vtop{\parindent=0pt\leavevmode\@teilaufgabestil\@teilaufgabentitel \theaufgabe.\theteilaufgabe\par}%
+  }%
+  \label{sub:a\theaufgabe t\theteilaufgabe}%
   \@teilaufgabespacingafter
-  \addcontentsline{toc}{subsection}{\GetTranslation{teilaufgabe} \alph{teilaufgabe})\  \@aufgabenname}
+  \addcontentsline{toc}{subsection}{\GetTranslation{teilaufgabe} \theteilaufgabe)\  \@aufgabenname}
 }
 \def\unteilaufgabe@ta[#1]#2{%
   \ifhmode\par\fi
@@ -91,9 +93,9 @@
   \ifthenelse{\equal{#2}{}}{\def\@teilaufgabenname{}}{\def\@teilaufgabenname{(#2) }}
   \def\@teilaufgabentitel{\GetTranslation{teilaufgabe} \@teilaufgabenname }
   \hbox to \hsize{%
-    \vtop{\parindent=0pt
-    \leavevmode\@teilaufgabestil\@teilaufgabentitel\par}%
-    }
+    \vtop{\parindent=0pt\leavevmode\@teilaufgabestil\@teilaufgabentitel\par}%
+  }%
+  \label{sub:a\theaufgabe t\theteilaufgabe}%
   \@teilaufgabespacingafter
   \addcontentsline{toc}{subsection}{\GetTranslation{teilaufgabe}\ \@teilaufgabenname}%
   \ignorespaces}

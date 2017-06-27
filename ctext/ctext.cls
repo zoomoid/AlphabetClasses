@@ -43,7 +43,7 @@
 \makeatletter
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[english,german]{babel}
-\RequirePackage{titlesec,enumitem,graphicx,tocloft,float,ifthen,translations,lmodern,csquotes,fancyhdr}
+\RequirePackage{titlesec,enumitem,graphicx,tocloft,float,xifthen,translations,lmodern,csquotes,fancyhdr}
 \RequirePackage[linktocpage=true]{hyperref}
 \newcommand{\ctext}{\textsc{cText} }
 \DeclareTranslationFallback{abgabe}{Abgabe}
