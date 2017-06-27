@@ -43,7 +43,7 @@
 \makeatletter
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[english,german]{babel}
-\RequirePackage{titlesec,enumitem,graphicx,tocloft,float,xifthen,translations,lmodern,csquotes,fancyhdr}
+\RequirePackage{titlesec,enumitem,graphicx,tocloft,float,xifthen,translations,lmodern,csquotes,fancyhdr,etoolbox}
 \RequirePackage[linktocpage=true]{hyperref}
 \newcommand{\ctext}{\textsc{cText} }
 \DeclareTranslationFallback{abgabe}{Abgabe}
@@ -65,7 +65,7 @@
 \addto\captionsgerman{\renewcommand{\listfigurename}{\Large\@headingstyling \GetTranslation{tof}}}
 \addto\captionsenglish{\renewcommand{\contentsname}{\Large\@headingstyling \GetTranslation{toc}}}
 \addto\captionsenglish{\renewcommand{\listfigurename}{\Large\@headingstyling \GetTranslation{tof}}}
-\pagestyle{plain}
+\newcommand{\headingstyle}[1]{\renewcommand{\@headingstyling}[#1]}
 \newcommand{\@headingstyling}{\sffamily\bfseries}
 \titleformat{\chapter}{\LARGE\@headingstyling}{\ \thechapter}{0.5em}{}
 \titleformat{\section}{\Large\@headingstyling}{\ \thesection}{0.5em}{}
@@ -94,7 +94,7 @@
 \null
 \vskip 30\p@
 \begin{flushleft}%
-  {\LARGE\@headingstyling\@title\par\vspace{0.2em}\normalsize \@subtitle\ifthenelse{\equal{\@subtitle}{}\OR\equal{\@date}{}}{ }{ | }\@datehook\@date\par}%
+  {\LARGE\@headingstyling\@title\par\vspace{0.2em}\normalsize \@subtitle\ifthenelse{\isempty{\@subtitle}\OR\isempty{\@date}}{ }{ | }\@datehook\@date\par}%
   \vskip 1.5em%
   {\small
    \lineskip .75em%
@@ -102,11 +102,11 @@
       \@author
     \end{tabular}\par}%
 \end{flushleft}\par
-\@thanks
 \vspace{2em}
-\pagestyle{plain}
+\pagestyle{fancy}
 \renewcommand{\headrulewidth}{0pt} %obere Trennlinie
 \setcounter{footnote}{0}
+\def\thanks\empty
 }
 \makeatother
 \endinput
