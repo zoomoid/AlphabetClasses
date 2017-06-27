@@ -5,19 +5,22 @@
 \title{\texttt{atask} Example}
 \subtitle{Using \texttt{ctext}}
 \author{Alexander Bartolomey}
+\team{AlphabetClasses}
 \date{06.06.2017}
 \begin{document}
 \selectlanguage{english}
 \maketitle
 \tableofcontents*
 \section{Introduction}
-\atask introduces two (with options four) new sectioning commands, \verb|\aufgabe{<>}| and \verb|\teilaufgabe{<>}|. Both are available in a starred version to exclude the counters from the title.
-\aufgabe{Lorem Ipsum}
-\lipsum[1-3]
+\atask introduces two (with options four) new sectioning commands, \verb|\aufgabe{<>}| and \\ \verb|\teilaufgabe{<>}|. Both are available in a starred version to exclude the counters from the title.
+\aufgabe{}
+\lipsum[1-2]
 \teilaufgabe{}
 \lipsum[1]
-\teilaufgabe*{Lorem Ipsum}
+\teilaufgabe*[2]{Task}
 \lipsum[1]
-\aufgabe*{Homework}
+\teilaufgabe{}
 \lipsum[1]
+\aufgabe{}
+\lipsum[1-6]
 \end{document}

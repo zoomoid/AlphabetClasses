@@ -43,7 +43,10 @@
 \makeatletter
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[english,german]{babel}
-\RequirePackage{titlesec,enumitem,graphicx,tocloft,float,xifthen,translations,lmodern,csquotes,fancyhdr}
+\setlrmarginsandblock{1in}{1in}{*}
+\setulmarginsandblock{1in}{1in}{*}
+\RequirePackage{titlesec,enumitem,graphicx,tocloft,float,xifthen,translations,lmodern,csquotes,etoolbox}
+\RequirePackage{fancyhdr}
 \RequirePackage[linktocpage=true]{hyperref}
 \newcommand{\ctext}{\textsc{cText} }
 \DeclareTranslationFallback{abgabe}{Abgabe}
@@ -58,14 +61,12 @@
 \DeclareTranslationFallback{tof}{Abbildungsverzeichnis}
 \DeclareTranslation{German}{tof}{Abbildungsverzeichnis}
 \DeclareTranslation{English}{tof}{Table of Figures}
-\setlrmarginsandblock{1in}{1in}{*}
-\setulmarginsandblock{1in}{1in}{*}
 \checkandfixthelayout
 \addto\captionsgerman{\renewcommand{\contentsname}{\Large\@headingstyling \GetTranslation{toc}}}
 \addto\captionsgerman{\renewcommand{\listfigurename}{\Large\@headingstyling \GetTranslation{tof}}}
 \addto\captionsenglish{\renewcommand{\contentsname}{\Large\@headingstyling \GetTranslation{toc}}}
 \addto\captionsenglish{\renewcommand{\listfigurename}{\Large\@headingstyling \GetTranslation{tof}}}
-\pagestyle{plain}
+\newcommand{\headingstyle}[1]{\renewcommand{\@headingstyling}[#1]}
 \newcommand{\@headingstyling}{\sffamily\bfseries}
 \titleformat{\chapter}{\LARGE\@headingstyling}{\ \thechapter}{0.5em}{}
 \titleformat{\section}{\Large\@headingstyling}{\ \thesection}{0.5em}{}
@@ -81,7 +82,6 @@
 \newcommand\@group{}
 \newcommand{\group}[1]{\renewcommand\@group{\GetTranslation{gruppe} #1}}
 \newcommand{\team}[1]{\renewcommand\@group{Team #1}}
-\pagestyle{fancy}
 \fancyhf{}
 \lhead{\small\@headingstyling \@group}
 \newcommand{\@subtitle}{}
@@ -89,24 +89,24 @@
 \newcommand{\@datehook}{}
 \newcommand{\hasDeadline}{\renewcommand\@datehook{\GetTranslation{abgabe}:\ }}
 \renewcommand{\and}{\end{tabular}\\ \begin{tabular}[t]{@{}l}}
-\renewcommand\maketitle{
-\thispagestyle{fancy}
-\null
-\vskip 30\p@
+\renewcommand\maketitle{%
+\thispagestyle{fancy}%
+\null%
+\vskip 30\p@%
 \begin{flushleft}%
-  {\LARGE\@headingstyling\@title\par\vspace{0.2em}\normalsize \@subtitle\ifthenelse{\equal{\@subtitle}{}\OR\equal{\@date}{}}{ }{ | }\@datehook\@date\par}%
+  {\LARGE\@headingstyling\@title\par\vspace{0.2em}\normalsize \@subtitle\ifthenelse{\isempty{\@subtitle}\OR\isempty{\@date}}{ }{ | }\@datehook\@date\par}%
   \vskip 1.5em%
-  {\small
+  {\small%
    \lineskip .75em%
     \begin{tabular}[t]{@{}l}%
-      \@author
+      \@author%
     \end{tabular}\par}%
-\end{flushleft}\par
-\@thanks
-\vspace{2em}
-\pagestyle{plain}
-\renewcommand{\headrulewidth}{0pt} %obere Trennlinie
-\setcounter{footnote}{0}
+\end{flushleft}\par%
+\vspace{2em}%
+\pagestyle{plain}%
+\renewcommand{\headrulewidth}{0pt}%
+\setcounter{footnote}{0}%
+\def\thanks\empty
 }
 \makeatother
 \endinput

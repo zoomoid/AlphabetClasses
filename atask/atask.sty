@@ -1,6 +1,12 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{atask}[2017/05/04 A Task Package]
 \RequirePackage{xifthen}
+\RequirePackage{etoolbox}
+\RequirePackage{kvoptions}
+\RequirePackage{suffix}
+\SetupKeyvalOptions{family=atask,prefix=atask@}
+\DeclareStringOption[arabic]{aufgabeCounter}
+\DeclareStringOption[alph]{teilaufgabeCounter}
 \RequirePackage{translations}
 \makeatletter
 \newcommand{\atask}{\textsc{aTask} }
@@ -14,90 +20,60 @@
 \DeclareTranslation{German}{teilaufgabe}{Teilaufgabe}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{teilaufgabe}{Teilaufgabe}
-\def\@aufgabespacingbefore{\vskip 4ex\goodbreak}
-\def\@aufgabespacingafter{\vskip 2ex}
-\def\@aufgabestil{\Large\@headingstyling\raggedright}
-\def\aufgabe{\@ifstar\unaufgabe\naufgabe}
-\def\naufgabe{\@ifnextchar[%]
-  \naufgabe@ta\naufgabe@oa}
-\def\unaufgabe{\@ifnextchar[%]
-  \unaufgabe@ta\unaufgabe@oa}
-\def\naufgabe@oa#1{\naufgabe@ta[]{#1}}
-\def\unaufgabe@oa#1{\unaufgabe@ta[]{#1}}
-\def\naufgabe@ta[#1]#2{%
-  \ifhmode\par\fi
-  \removelastskip
-  \@aufgabespacingbefore
-  \refstepcounter{aufgabe}
-  \refstepcounter{section}
-  \ifthenelse{\equal{#1}{}}{}{\setcounter{aufgabe}{#1}}
-  \ifthenelse{\equal{#2}{}}{\def\@aufgabenname{}}{\def\@aufgabenname{(#2) }}
-  \def\@aufgabentitel{\GetTranslation{aufgabe} \@aufgabenname }
-  \hbox to \hsize{%
-    \vtop{\parindent=0pt\leavevmode\@aufgabestil\@aufgabentitel\theaufgabe\par}%
-  }%
-  \label{sec:a\theaufgabe}
-  \@aufgabespacingafter
-  \addcontentsline{toc}{section}{\GetTranslation{aufgabe} \theaufgabe\  \@aufgabenname}
-}
-\def\unaufgabe@ta[#1]#2{%
-  \ifhmode\par\fi
-  \removelastskip
-  \@aufgabespacingbefore
-  \refstepcounter{aufgabe}
-  \refstepcounter{section}
-  \ifthenelse{\equal{#1}{}}{}{\setcounter{aufgabe}{#1}}
-  \ifthenelse{\equal{#2}{}}{\def\@aufgabenname{}}{\def\@aufgabenname{(#2) }}
-  \def\@aufgabentitel{\GetTranslation{aufgabe} \@aufgabenname }
-  \hbox to \hsize{%
-    \vtop{\parindent=0pt\leavevmode\@aufgabestil\@aufgabentitel\par}%
-  }%
-  \label{sec:a\theaufgabe}
-  \@aufgabespacingafter
-  \addcontentsline{toc}{section}{\GetTranslation{aufgabe}\ \@aufgabenname}%
-  \ignorespaces}
+\newcommand{\@aufgabestil}{\Large\@headingstyling\raggedright}
+\newcommand{\aufgabenstil}[1]{\renewcommand{\@aufgabenstil}{#1}}
+\newcommand{\@teilaufgabestil}{\large\@headingstyling\raggedright}
+\newcommand{\teilaufgabestil}[1]{\renewcommand{\@teilaufgabestil}{#1}}
 
-\def\@teilaufgabespacingbefore{\vskip 3ex\goodbreak}
-\def\@teilaufgabespacingafter{\vskip 1.5ex}
-\def\@teilaufgabestil{\large\@headingstyling\raggedright}
-\def\teilaufgabe{\@ifstar\unteilaufgabe\nteilaufgabe}
-\def\nteilaufgabe{\@ifnextchar[%]
-  \nteilaufgabe@ta\nteilaufgabe@oa}
-\def\unteilaufgabe{\@ifnextchar[%]
-  \unteilaufgabe@ta\unteilaufgabe@oa}
-\def\nteilaufgabe@oa#1{\nteilaufgabe@ta[]{#1}}
-\def\unteilaufgabe@oa#1{\unteilaufgabe@ta[]{#1}}
-\def\nteilaufgabe@ta[#1]#2{%
-  \ifhmode\par\fi
-  \removelastskip
-  \@teilaufgabespacingbefore
-  \refstepcounter{teilaufgabe}
-  \refstepcounter{subsection}
-  \ifthenelse{\equal{#1}{}}{}{\setcounter{teilaufgabe}{#1}}
-  \ifthenelse{\equal{#2}{}}{\def\@teilaufgabenname{}}{\def\@teilaufgabenname{(#2) }}
-  \def\@teilaufgabentitel{\GetTranslation{teilaufgabe} \@teilaufgabenname }
-  \hbox to \hsize{%
-    \vtop{\parindent=0pt\leavevmode\@teilaufgabestil\@teilaufgabentitel \theaufgabe.\theteilaufgabe\par}%
-  }%
-  \label{sub:a\theaufgabe t\theteilaufgabe}%
-  \@teilaufgabespacingafter
-  \addcontentsline{toc}{subsection}{\GetTranslation{teilaufgabe} \theteilaufgabe)\  \@aufgabenname}
+\newcommand{\atask@aufgabe}{\arabic{aufgabe}}
+\newcommand{\atask@teilaufgabe}{\alph{teilaufgabe}}
+\newcommand{\atask@parseCounterStyle}[3]{
+  \ifthenelse{\equal{#1}{arabic}}{ \renewcommand{#2}{\arabic{#3}} }{
+    \ifthenelse{\equal{#1}{roman}}{ \renewcommand{#2}{\roman{#3}} }{
+      \ifthenelse{\equal{#1}{alph}}{ \renewcommand{#2}{\alph{#3}} }{
+        \ifthenelse{\equal{#1}{Alph}}{ \renewcommand{#2}{\Alph{#3}} }{
+          \ifthenelse{\equal{#1}{Roman}}{
+            \renewcommand{#2}{\Roman{#3}} }{
+            \ClassError{atask}{Invalid Value #1 for
+              option Counter-Styling}{Possible Values are alph,
+              arabic, Arabic, roman or Roman.}  } } } } } }
+\atask@parseCounterStyle{\atask@aufgabeCounter}{\atask@aufgabe}{aufgabe}
+\atask@parseCounterStyle{\atask@teilaufgabeCounter}{\atask@teilaufgabe}{teilaufgabe}
+
+
+\newcommand{\newaufgabe}[1]{%
+  \refstepcounter{aufgabe}%
+  \def\@aufgabentitel{\GetTranslation{aufgabe}\ \atask@aufgabe\ifstrempty{#1}{}{\ (#1)}}%
+  \@startsection{aufgabe}%
+    {1}%
+    {\z@}%
+    {-2em \@plus -1em \@minus -1em}{1ex \@plus .5ex}%
+    {\@aufgabestil}%
+    *{\@aufgabentitel} \addcontentsline{toc}{section}{\@aufgabentitel}%
 }
-\def\unteilaufgabe@ta[#1]#2{%
-  \ifhmode\par\fi
-  \removelastskip
-  \@teilaufgabespacingbefore
-  \refstepcounter{teilaufgabe}
-  \refstepcounter{subsection}
-  \ifthenelse{\equal{#1}{}}{}{\setcounter{teilaufgabe}{#1}}
-  \ifthenelse{\equal{#2}{}}{\def\@teilaufgabenname{}}{\def\@teilaufgabenname{(#2) }}
-  \def\@teilaufgabentitel{\GetTranslation{teilaufgabe} \@teilaufgabenname }
-  \hbox to \hsize{%
-    \vtop{\parindent=0pt\leavevmode\@teilaufgabestil\@teilaufgabentitel\par}%
-  }%
-  \label{sub:a\theaufgabe t\theteilaufgabe}%
-  \@teilaufgabespacingafter
-  \addcontentsline{toc}{subsection}{\GetTranslation{teilaufgabe}\ \@teilaufgabenname}%
-  \ignorespaces}
+\newcommand{\newteilaufgabe}[1]{%
+  \refstepcounter{teilaufgabe}%
+  \def\@teilaufgabentitel{\GetTranslation{teilaufgabe}\ \atask@aufgabe.\atask@teilaufgabe\ifstrempty{#1}{}{\ (#1)}}%
+  \@startsection{teilaufgabe}%
+    {2}%
+    {\z@}%
+    {-1em \@plus -.5em \@minus -.5em}%
+    {.5ex \@plus .5ex}%
+    {\@teilaufgabestil}%
+    *{\@teilaufgabentitel} \addcontentsline{toc}{subsection}{\@teilaufgabentitel}%
+}
+
+\newcommand{\aufgabe}[1][]{\newaufgabe{#1}}
+
+\WithSuffix\newcommand\aufgabe*[2][]{%
+  \ifthenelse{\equal{#1}{}}{ }{\setcounter{aufgabe}{#1}}
+  \newaufgabe{#2}
+}
+\newcommand{\teilaufgabe}[1][]{\newteilaufgabe{#1}}
+
+\WithSuffix\newcommand\teilaufgabe*[2][]{%
+  \ifthenelse{\equal{#1}{}}{ }{\setcounter{teilaufgabe}{#1}}
+  \newteilaufgabe{#2}
+}
 \makeatother
 \endinput
