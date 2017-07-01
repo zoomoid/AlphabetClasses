@@ -91,10 +91,13 @@
 \newcommand{\@datehook}{}
 \newcommand{\hasDeadline}{\renewcommand\@datehook{\GetTranslation{abgabe}:\ }}
 \renewcommand{\and}{\end{tabular}\\ \begin{tabular}[t]{@{}l}}
+\newcommand{\@thankshook}{}
+\renewcommand{\thanks}[1]{\renewcommand{\@thanks}{#1}\renewcommand{\@thankshook}{\begingroup\renewcommand\thefootnote{*}\footnote{\@thanks}\endgroup}}
 \renewcommand\maketitle{%
 \thispagestyle{fancy}%
 \null%
 \vskip 30\p@%
+\pagestyle{plain}%
 \begin{flushleft}%
   {\LARGE\@headingstyling\@title\par\vspace{0.2em}\normalsize \@subtitle\ifthenelse{\isempty{\@subtitle}\OR\isempty{\@date}}{ }{ | }\@datehook\@date\par}%
   \vskip 1.5em%
@@ -102,10 +105,11 @@
    \lineskip .75em%
     \begin{tabular}[t]{@{}l}%
       \@author%
-    \end{tabular}\par}%
-\end{flushleft}\par%
+    \end{tabular}\!\!\!\@thankshook\par}%
+\end{flushleft}\par%%
 \vspace{2em}%
-\pagestyle{plain}%
+
+
 \renewcommand{\headrulewidth}{0pt}%
 \setcounter{footnote}{0}%
 }
