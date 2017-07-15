@@ -43,10 +43,7 @@
 \makeatletter
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[english,german]{babel}
-\setlrmarginsandblock{1in}{1in}{*}
-\setulmarginsandblock{1in}{1in}{*}
-\RequirePackage{titlesec,enumitem,graphicx,tocloft,float,xifthen,translations,lmodern,csquotes,etoolbox}
-\RequirePackage{fancyhdr}
+\RequirePackage{titlesec,enumitem,graphicx,tocloft,float,xifthen,translations,lmodern,csquotes,etoolbox,fancyhdr}
 \RequirePackage[linktocpage=true]{hyperref}
 \newcommand{\ctext}{\textsc{cText} }
 \DeclareTranslationFallback{abgabe}{Abgabe}
@@ -61,6 +58,8 @@
 \DeclareTranslationFallback{tof}{Abbildungsverzeichnis}
 \DeclareTranslation{German}{tof}{Abbildungsverzeichnis}
 \DeclareTranslation{English}{tof}{Table of Figures}
+\setlrmarginsandblock{1in}{1in}{*}
+\setulmarginsandblock{1in}{1in}{*}
 \checkandfixthelayout
 \addto\captionsgerman{\renewcommand{\contentsname}{\Large\@headingstyling \GetTranslation{toc}}}
 \addto\captionsgerman{\renewcommand{\listfigurename}{\Large\@headingstyling \GetTranslation{tof}}}
@@ -108,8 +107,6 @@
     \end{tabular}\!\!\!\@thankshook\par}%
 \end{flushleft}\par%%
 \vspace{2em}%
-
-
 \renewcommand{\headrulewidth}{0pt}%
 \setcounter{footnote}{0}%
 }

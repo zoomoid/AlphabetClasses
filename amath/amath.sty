@@ -6,6 +6,7 @@
 \RequirePackage{tikz}
 \RequirePackage{mdframed}
 \RequirePackage{xcolor}
+\usetikzlibrary{positioning,automata}
 \newcommand{\amath}{\textsc{aMath} }
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
@@ -15,7 +16,7 @@
 \newcommand{\F}{\ensuremath{\mathbb{F}}}
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\id}{id}
-\newcommand{\diff}[1][x]{\ensuremath{\frac{d}{d#1}}}
+\newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
 \newcommand{\divides}{\ensuremath{\ |\ }}
 \newcommand{\property}{\ensuremath{\ |\ }}
 \DeclareMathOperator{\Perm}{Perm}
