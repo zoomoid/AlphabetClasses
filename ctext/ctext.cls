@@ -41,6 +41,7 @@
 \ProcessOptions \relax
 \LoadClass[a4paper]{memoir}
 \makeatletter
+\let\footruleskip\undefined
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[english,german]{babel}
 \RequirePackage{titlesec,enumitem,graphicx,tocloft,float,xifthen,translations,lmodern,csquotes,etoolbox,fancyhdr}

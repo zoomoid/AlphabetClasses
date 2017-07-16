@@ -20,20 +20,7 @@
 \DeclareTranslation{German}{teilaufgabe}{Teilaufgabe}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{teilaufgabe}{Teilaufgabe}
-\newcommand{\@aufgabestil}{\Large\ifstrempty{\@headingstyling}{\bfseries\sffamily}{\@headingstyling}\raggedright}
-\newcommand{\aufgabenstil}[1]{\renewcommand{\@aufgabenstil}{#1}}
-\newcommand{\@teilaufgabestil}{\large\ifstrempty{\@headingstyling}{\bfseries\sffamily}{\@headingstyling}\raggedright}
-\newcommand{\teilaufgabestil}[1]{\renewcommand{\@teilaufgabestil}{#1}}
-
-\newcommand{\@marginBeforeAufgabe}{-2em \@plus -1em \@minus -1em}
-\newcommand{\@marginAfterAufgabe}{1ex \@plus .5ex}
-\newcommand{\@marginBeforeTeilaufgabe}{-1em \@plus -.5em \@minus -.5em}
-\newcommand{\@marginAfterTeilaufgabe}{.5ex \@plus .5ex}
-\newcommand{\marginBeforeAufgabe}[1]{\renewcommand{\@marginBeforeAufgabe}{#1}}
-\newcommand{\marginAfterAufgabe}[1]{\renewcommand{\@marginAfterAufgabe}{#1}}
-\newcommand{\marginBeforeTeilaufgabe}[1]{\renewcommand{\@marginBeforeTeilaufgabe}{#1}}
-\newcommand{\marginAfterTeilaufgabe}[1]{\renewcommand{\@marginAfterTeilaufgabe}{#1}}
-
+% Counter style option processing
 \newcommand{\atask@aufgabe}{\arabic{aufgabe}}
 \newcommand{\atask@teilaufgabe}{\alph{teilaufgabe}}
 \newcommand{\atask@parseCounterStyle}[3]{
@@ -48,32 +35,64 @@
               arabic, Arabic, roman or Roman.}  } } } } } }
 \atask@parseCounterStyle{\atask@aufgabeCounter}{\atask@aufgabe}{aufgabe}
 \atask@parseCounterStyle{\atask@teilaufgabeCounter}{\atask@teilaufgabe}{teilaufgabe}
+% Hooks for task and subtask styling
 
+\newcommand{\@aufgabestil}{\Large\bfseries\sffamily\raggedright}
+\newcommand{\aufgabenstil}[1]{\renewcommand{\@aufgabenstil}{#1}}
+\newcommand{\@teilaufgabestil}{\large\bfseries\sffamily\raggedright}
+\newcommand{\teilaufgabestil}[1]{\renewcommand{\@teilaufgabestil}{#1}}
+% Hooks for margins
+\newcommand{\@marginBeforeAufgabe}{-2em \@plus -1em \@minus -1em}
+\newcommand{\@marginAfterAufgabe}{1ex \@plus .5ex}
+\newcommand{\@marginBeforeTeilaufgabe}{-1em \@plus -.5em \@minus -.5em}
+\newcommand{\@marginAfterTeilaufgabe}{.5ex \@plus .5ex}
+\newcommand{\marginBeforeAufgabe}[1]{\renewcommand{\@marginBeforeAufgabe}{#1}}
+\newcommand{\marginAfterAufgabe}[1]{\renewcommand{\@marginAfterAufgabe}{#1}}
+\newcommand{\marginBeforeTeilaufgabe}[1]{\renewcommand{\@marginBeforeTeilaufgabe}{#1}}
+\newcommand{\marginAfterTeilaufgabe}[1]{\renewcommand{\@marginAfterTeilaufgabe}{#1}}
+% Hooks for task and subtask title
+\newcommand{\@aufgabenprefix}{\GetTranslation{aufgabe}}
+\newcommand{\@aufgabencounter}{\atask@aufgabe}
+\newcommand{\@aufgabensuffix}{}
+\newcommand{\aufgabenprefix}[1]{\renewcommand{\@aufgabenprefix}{#1}}
+\newcommand{\aufgabensuffix}[1]{\renewcommand{\@aufgabensuffix}{#1}}
+\newcommand{\aufgabencounter}[1]{\renewcommand{\@aufgabencounter}{#1}}
+\newcommand{\@teilaufgabenprefix}{\GetTranslation{teilaufgabe}}
+\newcommand{\@teilaufgabencounter}{\atask@aufgabe.\atask@teilaufgabe}
+\newcommand{\@teilaufgabensuffix}{}
+\newcommand{\teilaufgabenprefix}[1]{\renewcommand{\@teilaufgabenprefix}{#1}}
+\newcommand{\teilaufgabensuffix}[1]{\renewcommand{\@teilaufgabensuffix}{#1}}
+\newcommand{\teilaufgabencounter}[1]{\renewcommand{\@teilaufgabencounter}{#1}}
+% Hooks for task and subtask comments
+\newcommand{\@teilaufgabencomment}{}
+\newcommand{\@aufgabencomment}{}
+% Task and subtask definition
 \newcommand{\newaufgabe}[1]{%
   \refstepcounter{section}
   \refstepcounter{aufgabe}%
   \label{aufgabe:\theaufgabe}%
-  \def\@aufgabentitel{\GetTranslation{aufgabe}\ \atask@aufgabe\ifstrempty{#1}{}{\ (#1)}}%
+  \renewcommand{\@aufgabencomment}{\ifstrempty{#1}{}{\ (#1)}}%
   \@startsection{aufgabe}%
     {1}%
     {\z@}%
     {\@marginBeforeAufgabe}%
     {\@marginAfterAufgabe}%
     {\@aufgabestil}%
-    *{\@aufgabentitel} \addcontentsline{toc}{section}{\@aufgabentitel}%
+    *{\@aufgabenprefix\ \@aufgabencounter\ \@aufgabencomment\ \@aufgabensuffix}\addcontentsline{toc}{section}{\@aufgabenprefix \@aufgabencomment}%
+
 }
 \newcommand{\newteilaufgabe}[1]{%
   \refstepcounter{subsection}
   \refstepcounter{teilaufgabe}%
   \label{teilaufgabe:\theaufgabe_\theteilaufgabe}%
-  \def\@teilaufgabentitel{\GetTranslation{teilaufgabe}\ \atask@aufgabe.\atask@teilaufgabe\ifstrempty{#1}{}{\ (#1)}}%
+  \renewcommand{\@teilaufgabencomment}{\ifstrempty{#1}{}{\ (#1)}}%
   \@startsection{teilaufgabe}%
     {2}%
     {\z@}%
     {\@marginBeforeTeilaufgabe}%
     {\@marginAfterTeilaufgabe}%
     {\@teilaufgabestil}%
-    *{\@teilaufgabentitel} \addcontentsline{toc}{subsection}{\@teilaufgabentitel}%
+    *{\@teilaufgabenprefix\ \@teilaufgabencounter\ \@teilaufgabencomment\  \@teilaufgabensuffix}\addcontentsline{toc}{subsection}{\@teilaufgabenprefix \@teilaufgabencomment}%
 }
 
 \newcommand{\aufgabe}[1]{\newaufgabe{#1}}

@@ -13,16 +13,86 @@
 \tableofcontents*
 
 \section{Introduction}
-\atask introduces two (with options four) new sectioning commands, \verb|\aufgabe{<>}| and \\ \verb|\teilaufgabe{<>}|. Both are available in a starred version to exclude the counters from the title.
-\subsection{Subsection}
+\atask introduces two (with options four) new sectioning commands, \verb|\aufgabe{<>}| and \\ \verb|\teilaufgabe{<>}|. Using the starred version of the commands lets you manually increment the counters to a given state. Keep in mind that counters start from 0, so setting the counter with a starred version requires you to subtract 1 from the desired counter value as it is displayed.
+\vfill
+\section{Commands}
+\begin{verbatim}
+  \aufgabenprefix{} | \teilaufgabenprefix{}
+\end{verbatim}
+Defines the actual name of the created section abbreviation.
+Defaults to a translation of "`Task"' or "`Subtask"' in German or English, but can be used as a completely different type of section command.
+\begin{verbatim}
+  \aufgabensuffix{} | \teilaufgabensuffix{}
+\end{verbatim}
+Behaves like \verb|\aufgabenprefix{}| (\verb|\teilaufgabenprefix{}|) except defaulting to an emtpy string and \textbf{appending} its value to the section title
+\begin{verbatim}
+  \marginBeforeAufgabe{} | \marginBeforeTeilaufgabe{}
+  \marginAfterAufgabe{}  | \marginAfterTeilaufgabe{}
+\end{verbatim}
+Determines the spacing before and after tasks and subtasks.
+\begin{verbatim}
+  \aufgabencounter{} | \teilaufgabencounter{}
+\end{verbatim}
+Whenever you want to replace the default counter for tasks and subtasks, use these commands. These will replace the counters with static values, otherwise use a counter included by the specific command (\verb|\thesection|,\verb|\theaufgabe| for \verb|\aufgabe|, \verb|\thesubsection|, \verb|\theteilaufgabe| for subtasks) or the default values (\verb|\atask@aufgabe|, \verb|\atask@teilaufgabe|) for dynamic counting.
+\section{Examples}
+\subsection{Example I}
+For only displaying the small letter for each subtask, use
+\begin{verbatim}
+  \usepackage[teilaufgabeCounter=alph]{atask}
+  ...
+  \teilaufgabenprefix{}
+  \teilaufgabensuffix{}
+  \teilaufgabencounter{\alph{teilaufgabe})}
+  \teilaufgabe{}
+  ...
+\end{verbatim}
+This will be compiled as seen below.
+\teilaufgabenprefix{}
+\teilaufgabensuffix{}
+\teilaufgabencounter{\alph{teilaufgabe})}
 \aufgabe{}
-\lipsum[1-2]
 \teilaufgabe{}
+\lipsum[1]
+
+
+\teilaufgabenprefix{\GetTranslation{teilaufgabe}}
+\teilaufgabencounter{\theaufgabe.\alph{\teilaufgabe}}
+
+\subsection{Example II}
+Another wild example may be given by
+\begin{verbatim}
+  \aufgabenprefix{Aufgabe}
+  \teilaufgabenprefix{Quatsch}
+  \teilaufgabencounter{\(e^{-i\pi}\)}
+  \marginBeforeAufgabe{2cm}
+  \marginAfterAufgabe{1cm}
+  \marginBeforeTeilaufgabe{1cm}
+  \marginAfterTeilaufgabe{0.5cm}
+  \aufgabe{}
+  ...
+  \teilaufgabe*[2]{Task}
+  ...
+  \teilaufgabe{}
+  ...
+  \aufgabe{}
+  \teilaufgabe{}
+  ...
+\end{verbatim}
+This looks like this:
+\aufgabenprefix{Aufgabe}
+\teilaufgabenprefix{Quatsch}
+\teilaufgabencounter{\(e^{-i\pi}\)}
+\marginBeforeAufgabe{2cm}
+\marginAfterAufgabe{1cm}
+\marginBeforeTeilaufgabe{1cm}
+\marginAfterTeilaufgabe{0.5cm}
+\aufgabe{}
 \lipsum[1]
 \teilaufgabe*[2]{Task}
 \lipsum[1]
 \teilaufgabe{}
 \lipsum[1]
 \aufgabe{}
+\teilaufgabe{}
 \lipsum[1-6]
 \end{document}
