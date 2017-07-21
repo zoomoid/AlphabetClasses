@@ -1,7 +1,8 @@
 \documentclass{ctext}
-\usepackage{atask}
+\usepackage{amath}
+\usepackage[hideInTOC,untieFromSection]{atask}
 \usepackage{lipsum}
-
+\newenvironment{example}{\begin{figure}[H]\centering\begin{minipage}{.95\textwidth}}{\end{minipage}\end{figure}\vfill\pagebreak}
 \title{\texttt{atask} Example}
 \subtitle{Using \texttt{ctext}}
 \author{Alexander Bartolomey}
@@ -14,85 +15,167 @@
 
 \section{Introduction}
 \atask introduces two (with options four) new sectioning commands, \verb|\aufgabe{<>}| and \\ \verb|\teilaufgabe{<>}|. Using the starred version of the commands lets you manually increment the counters to a given state. Keep in mind that counters start from 0, so setting the counter with a starred version requires you to subtract 1 from the desired counter value as it is displayed.
-\vfill
+\section{Options}
+\atask provides several options for loading the package.
+\subsection{Counter Styles}
+When using the default counters instead of custom ones, you can specify the style of those right at the start by calling
+\begin{verbatim}
+  \usepackage[aufgabenCounter=X,teilaufgabenCounter=X]{atask}
+\end{verbatim}
+with X being a counter style like \texttt{arabic,alph,Alph,roman,Roman...}. This property may vary for \texttt{aufgabenCounter} and \texttt{teilaufgabenCounter}.
+\subsection{Table of Contents}
+To not include tasks and subtasks in the table of contents, use the boolean flag \texttt{hideInToc}.
+\begin{verbatim}
+  \usepackage[hideInTOC]{atask}
+\end{verbatim}
+\subsection{Unlinking tasks from sections}
+By default, tasks are tied to sections, meaning that with an increase of the task counter (or any custom counter you passed earlier), the section counter increments as well. As this may produce some unwanted side effects, by using
+\begin{verbatim}
+  \usepackage[untieFromSection]{atask}
+\end{verbatim}
+you unlink tasks and sections. This as well means that with an incrementation of the subtask counter, subsections will no longer get incremented as well.
 \section{Commands}
 \begin{verbatim}
   \aufgabenprefix{} | \teilaufgabenprefix{}
 \end{verbatim}
 Defines the actual name of the created section abbreviation.
 Defaults to a translation of "`Task"' or "`Subtask"' in German or English, but can be used as a completely different type of section command.
+
 \begin{verbatim}
   \aufgabensuffix{} | \teilaufgabensuffix{}
 \end{verbatim}
 Behaves like \verb|\aufgabenprefix{}| (\verb|\teilaufgabenprefix{}|) except defaulting to an emtpy string and \textbf{appending} its value to the section title
+
 \begin{verbatim}
   \marginBeforeAufgabe{} | \marginBeforeTeilaufgabe{}
   \marginAfterAufgabe{}  | \marginAfterTeilaufgabe{}
 \end{verbatim}
 Determines the spacing before and after tasks and subtasks.
+
 \begin{verbatim}
-  \aufgabencounter{} | \teilaufgabencounter{}
+  \PassDynamicAufgabenCounter{} | \PassDynamicTeilaufgabenCounter{}
 \end{verbatim}
-Whenever you want to replace the default counter for tasks and subtasks, use these commands. These will replace the counters with static values, otherwise use a counter included by the specific command (\verb|\thesection|,\verb|\theaufgabe| for \verb|\aufgabe|, \verb|\thesubsection|, \verb|\theteilaufgabe| for subtasks) or the default values (\verb|\atask@aufgabe|, \verb|\atask@teilaufgabe|) for dynamic counting.
+Use these commands to pass the name of a custom counter, which then will get incremented automatically.
+
+\begin{verbatim}
+  \customAufgabenCounter{} | \customTeilaufgabenCounter{}
+\end{verbatim}
+Whenever you want to replace the default counter for tasks and subtasks with another counter or a static string as well, use these commands.
+
+\begin{verbatim}
+  \beforeAufgabe{} | \beforeTeilaufgabe{}
+  \afterAufgabe{}  | \afterTeilaufgabe{}
+\end{verbatim}
+These will let you put whatever you want right in front of or behind the task / subtask. E.g. use \verb|\beforeAufgabe{\vfill\pagebreak}| to place every new task on a new page. See examples for more use cases.
+\subsection{Resetting to Defaults}
+\begin{verbatim}
+  \ResetCountersToDefault      | \ResetAll
+  \ResetTranslationsToDefault  |
+  \ResetMarginsToDefault       |
+  \ClearBeforeAndAfterSpaces   |
+\end{verbatim}
+Either individually reset any custom property of tasks and subtasks or globally reset all their properties to their default values by calling \verb|\ResetAll|.
 \section{Examples}
 \subsection{Example I}
-For only displaying the small letter for each subtask, use
 \begin{verbatim}
-  \usepackage[teilaufgabeCounter=alph]{atask}
-  ...
-  \teilaufgabenprefix{}
-  \teilaufgabensuffix{}
-  \teilaufgabencounter{\alph{teilaufgabe})}
-  \teilaufgabe{}
-  ...
+% Setup
+\teilaufgabenPrefix{}
+\teilaufgabenSuffix{}
+\customTeilaufgabenCounter{\alph{teilaufgabe})}
 \end{verbatim}
-This will be compiled as seen below.
-\teilaufgabenprefix{}
-\teilaufgabensuffix{}
-\teilaufgabencounter{\alph{teilaufgabe})}
-\aufgabe{}
-\teilaufgabe{}
-\lipsum[1]
-
-
-\teilaufgabenprefix{\GetTranslation{teilaufgabe}}
-\teilaufgabencounter{\theaufgabe.\alph{\teilaufgabe}}
-
+\teilaufgabenPrefix{}
+\teilaufgabenSuffix{}
+\customTeilaufgabenCounter{\alph{teilaufgabe})}
+\begin{example}
+  \aufgabe{}
+  \teilaufgabe{}
+  \lipsum[1]
+\end{example}
+\ResetAll
 \subsection{Example II}
-Another wild example may be given by
 \begin{verbatim}
-  \aufgabenprefix{Aufgabe}
-  \teilaufgabenprefix{Quatsch}
-  \teilaufgabencounter{\(e^{-i\pi}\)}
-  \marginBeforeAufgabe{2cm}
-  \marginAfterAufgabe{1cm}
-  \marginBeforeTeilaufgabe{1cm}
-  \marginAfterTeilaufgabe{0.5cm}
-  \aufgabe{}
-  ...
-  \teilaufgabe*[2]{Task}
-  ...
-  \teilaufgabe{}
-  ...
-  \aufgabe{}
-  \teilaufgabe{}
-  ...
-\end{verbatim}
-This looks like this:
-\aufgabenprefix{Aufgabe}
-\teilaufgabenprefix{Quatsch}
-\teilaufgabencounter{\(e^{-i\pi}\)}
+% Setup
+\aufgabenPrefix{Aufgabe}
+\teilaufgabenPrefix{Quatsch}
+\customTeilaufgabenCounter{\(e^{-i\pi}\)}
 \marginBeforeAufgabe{2cm}
 \marginAfterAufgabe{1cm}
 \marginBeforeTeilaufgabe{1cm}
 \marginAfterTeilaufgabe{0.5cm}
-\aufgabe{}
-\lipsum[1]
-\teilaufgabe*[2]{Task}
-\lipsum[1]
-\teilaufgabe{}
-\lipsum[1]
-\aufgabe{}
-\teilaufgabe{}
-\lipsum[1-6]
+\end{verbatim}
+\aufgabenPrefix{Aufgabe}
+\teilaufgabenPrefix{Quatsch}
+\customTeilaufgabenCounter{\(e^{-i\pi}\)}
+\marginBeforeAufgabe{1cm}
+\marginAfterAufgabe{1em}
+\marginBeforeTeilaufgabe{0.5cm}
+\marginAfterTeilaufgabe{0.5em}
+\begin{example}
+  \aufgabe{}
+  \teilaufgabe*[2]{Task}
+  \lipsum[1]
+  \teilaufgabe{}
+  \lipsum[2]
+  \teilaufgabe{}
+  \lipsum[3-4]
+  \teilaufgabe{}
+  \lipsum[5]
+\end{example}
+\ResetAll
+\subsection{Example III}
+\begin{verbatim}
+% Setup
+\newcounter{example}[subsection]
+\PassDynamicAufgabenCounter{example}
+\customAufgabenCounter{\Roman{example}}
+\aufgabenPrefix{Example}
+\aufgabenSuffix{\textendash\ Difficulty}
+\marginBeforeAufgabe{0.2em}
+\beforeAufgabe{\vskip 2em{\small\today}}
+\afterAufgabe{\hfill {\small Team AlphabetClasses}\vskip 0.5em}
+\end{verbatim}
+\newcounter{example}[subsection]
+\PassDynamicAufgabenCounter{example}
+\customAufgabenCounter{\Roman{example}}
+\aufgabenPrefix{Example}
+\aufgabenSuffix{\textendash\ Difficulty}
+\marginBeforeAufgabe{0.2em}
+\beforeAufgabe{\vskip 2em{\small\today}}
+\afterAufgabe{\hfill {\small Team AlphabetClasses}\vskip 0.5em}
+\begin{example}
+  \aufgabe{Easy}
+  \lipsum[1]
+  \aufgabe{Medium}
+  \lipsum[2]
+  \aufgabe{Hard}
+  \lipsum[3]
+\end{example}
+\ResetAll
+\subsection{Example IV}
+\begin{verbatim}
+% Setup
+\aufgabenstil{\LARGE\rmfamily}
+\teilaufgabenstil{\Large\rmfamily}
+\aufgabenPrefix{\(\mathbb{R}\)}
+\teilaufgabenPrefix{\(\mathbb{Q}\)}
+\customAufgabenCounter{\!\textsuperscript{\theaufgabe}}
+\customTeilaufgabenCounter{\!\textsuperscript{\theteilaufgabe}}
+\end{verbatim}
+\aufgabenstil{\LARGE\rmfamily}
+\teilaufgabenstil{\Large\rmfamily}
+\aufgabenPrefix{\(\mathbb{R}\)}
+\teilaufgabenPrefix{\(\mathbb{Q}\)}
+\customAufgabenCounter{\!\textsuperscript{\theaufgabe}}
+\customTeilaufgabenCounter{\!\textsuperscript{\theteilaufgabe}}
+
+\begin{example}
+  \aufgabe{}
+  \teilaufgabe{}
+  \teilaufgabe{}
+  \teilaufgabe{}
+  \aufgabe{}
+  These are actual tasks and subtasks even though they seem to be vector fields. Be creative when configuring you atask version!
+\end{example}
+
+\ResetAll
 \end{document}
