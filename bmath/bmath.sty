@@ -76,21 +76,27 @@
 }
 \ifcounter{aufgabe}{\newcounter{punkt}[aufgabe]}{\newcounter{aufgabe}[section]\newcounter{punkt}[section]}
 \newenvironment{definition}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{definition}.}}{\par}
-\newenvironment{definition*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{definition} {\normalfont(#1)}.}}{\par}
+\newenvironment{definition*}{\refstepcounter{punkt}\par{\sffamily\bfseries\GetTranslation{definition}.}}{\par}
+\newenvironment{ndefinition}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{definition} {\normalfont(#1)}.}}{\par}
 \newenvironment{beispiel}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{beispiel}.}}{\par}
-\newenvironment{beispiel*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{beispiel} {\normalfont(#1)}.}}{\par}
+\newenvironment{beispiel*}{\refstepcounter{punkt}\par{\sffamily\bfseries\GetTranslation{beispiel}.}}{\par}
+\newenvironment{nbeispiel}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{beispiel} {\normalfont(#1)}.}}{\par}
 \newenvironment{bemerkung}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{bemerkung}.}}{\par}
 \newenvironment{konvention}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{konvention}.}}{\par}
 \newenvironment{proposition}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{proposition}.}}{\par}
-\newenvironment{proposition*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{proposition} {\normalfont(#1)}.}}{\par}
+\newenvironment{proposition*}{\refstepcounter{punkt}\par{\sffamily\bfseries\GetTranslation{proposition}.}}{\par}
+\newenvironment{nproposition}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{proposition} {\normalfont(#1)}.}}{\par}
 \newenvironment{notation}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{notation}.}}{\par}
 \newenvironment{satz}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{satz}.}}{\par}
-\newenvironment{satz*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{satz} {\normalfont(#1)}.}}{\par}
+\newenvironment{satz*}{\refstepcounter{punkt}\par{\sffamily\bfseries\GetTranslation{satz}.}}{\par}
+\newenvironment{natz}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{satz} {\normalfont(#1)}.}}{\par}
 \newenvironment{korollar}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{korollar}.}}{\par}
 \newenvironment{lemma}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{lemma}.}}{\par}
-\newenvironment{lemma*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{lemma} {\normalfont(#1)}.}}{\par}
+\newenvironment{lemma*}{\refstepcounter{punkt}\par{\sffamily\bfseries\GetTranslation{lemma}.}}{\par}
+\newenvironment{nlemma}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{lemma} {\normalfont(#1)}.}}{\par}
 \newenvironment{algorithmus}{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{algorithmus}.}}{\par}
-\newenvironment{algorithmus*}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{algorithmus} ({\normalfont#1}).}}{\par}
+\newenvironment{algorithmus*}{\refstepcounter{punkt}\par{\sffamily\bfseries\GetTranslation{algorithmus}.}}{\par}
+\newenvironment{nalgorithmus}[1]{\refstepcounter{punkt}\par{\sffamily\bfseries(\arabic{aufgabe}.\arabic{punkt}) \GetTranslation{algorithmus} ({\normalfont#1}).}}{\par}
 \newcommand{\QED}{\hfill\(\square\)}
 \newcommand\indtype{\GetTranslation{vollstaendige}}
 \newenvironment{induktion}{\refstepcounter{punkt}\par\emph{\GetTranslation{beweisdurch}\ \GetTranslation{vollstaendige}\  \GetTranslation{induktion}:}}{\par\GetTranslation{induktionsschluss}\ \GetTranslation{vollstaendige}n \GetTranslation{induktion}\QED\par}

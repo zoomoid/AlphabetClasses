@@ -44,8 +44,17 @@
 \let\footruleskip\undefined
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[english,german]{babel}
-\RequirePackage{titlesec,enumitem,graphicx,tocloft,float,xifthen,translations,lmodern,csquotes,etoolbox,fancyhdr}
+\newcommand{\headingstyle}[1]{\renewcommand{\@headingstyling}[#1]}
+\newcommand{\@headingstyling}{\sffamily\bfseries} %
+
+\RequirePackage{titlesec,enumitem,graphicx,float,xifthen,translations,lmodern,csquotes,etoolbox,fancyhdr,kvoptions}
 \RequirePackage[linktocpage=true]{hyperref}
+\SetupKeyvalOptions{
+  family=ctext,
+  prefix=ctext@
+}
+\DeclareBoolOption[false]{highestLayerChapter}
+\ProcessKeyvalOptions*
 \newcommand{\ctext}{\textsc{cText} }
 \DeclareTranslationFallback{abgabe}{Abgabe}
 \DeclareTranslation{German}{abgabe}{Abgabe}
@@ -58,26 +67,32 @@
 \DeclareTranslation{English}{toc}{Table of Contents}
 \DeclareTranslationFallback{tof}{Abbildungsverzeichnis}
 \DeclareTranslation{German}{tof}{Abbildungsverzeichnis}
-\DeclareTranslation{English}{tof}{Table of Figures}
+\DeclareTranslation{English}{tof}{List of Figures}
+\DeclareTranslationFallback{tot}{Tabellenverzeichnis}
+\DeclareTranslation{German}{tot}{Tabellenverzeichnis}
+\DeclareTranslation{English}{tot}{List of Tables}
 \setlrmarginsandblock{1in}{1in}{*}
 \setulmarginsandblock{1in}{1in}{*}
 \checkandfixthelayout
 \addto\captionsgerman{\renewcommand{\contentsname}{\Large\@headingstyling \GetTranslation{toc}}}
 \addto\captionsgerman{\renewcommand{\listfigurename}{\Large\@headingstyling \GetTranslation{tof}}}
+\addto\captionsgerman{\renewcommand{\listtablename}{\Large\@headingstyling \GetTranslation{tot}}}
 \addto\captionsenglish{\renewcommand{\contentsname}{\Large\@headingstyling \GetTranslation{toc}}}
 \addto\captionsenglish{\renewcommand{\listfigurename}{\Large\@headingstyling \GetTranslation{tof}}}
+\addto\captionsenglish{\renewcommand{\listtablename}{\Large\@headingstyling \GetTranslation{tot}}}
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4}
-\newcommand{\headingstyle}[1]{\renewcommand{\@headingstyling}[#1]}
-\newcommand{\@headingstyling}{\sffamily\bfseries}
-\titleformat{\chapter}{\LARGE\@headingstyling}{\ \thechapter}{0.5em}{}
-\titleformat{\section}{\Large\@headingstyling}{\ \thesection}{0.5em}{}
-\titleformat{\subsection}{\large\@headingstyling}{\ \thesubsection}{0.5em}{}
+\titleformat{\chapter}{\vspace*{6cm}\Huge\@headingstyling}{\thechapter}{0.5em}{}
+\titleformat{\section}{\LARGE\@headingstyling}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\Large\@headingstyling}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\large\@headingstyling}{}{0em}{}
+\titleformat{\paragraph}{\@headingstyling}{}{0em}{}
 \let\ocite\cite
 \renewcommand{\cite}[1]{\textsuperscript{\ocite{#1}}}
+\renewcommand*{\thefootnote}{(\arabic{footnote})}
 \counterwithin{figure}{section}
 \counterwithin{table}{section}
-\counterwithout{section}{chapter}
+\ifthenelse{\ctext@highestLayerChapter}{\relax}{\counterwithout{section}{chapter}}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.6em}
 \renewcommand{\arraystretch}{1.2}
@@ -99,9 +114,9 @@
 \vskip 30\p@%
 \pagestyle{plain}%
 \begin{flushleft}%
-  {\LARGE\@headingstyling\@title\par\vspace{0.2em}\normalsize \@subtitle\ifthenelse{\isempty{\@subtitle}\OR\isempty{\@date}}{ }{ | }\@datehook\@date\par}%
+  {\LARGE\@headingstyling\@title\par\vspace{0.2em}\large \@subtitle\ifthenelse{\isempty{\@subtitle}\OR\isempty{\@date}}{ }{ | }\@datehook\@date\par}%
   \vskip 1.5em%
-  {\small%
+  {\normalsize%
    \lineskip .75em%
     \begin{tabular}[t]{@{}l}%
       \@author%
@@ -110,6 +125,12 @@
 \vspace{2em}%
 \renewcommand{\headrulewidth}{0pt}%
 \setcounter{footnote}{0}%
+}
+\let\oappendix\appendix
+\renewcommand{\appendix}{%
+\renewcommand{\thesection}{\Alph{section}}%
+\renewcommand{\thechapter}{\Alph{chapter}}%
+\oappendix%
 }
 \makeatother
 \endinput
