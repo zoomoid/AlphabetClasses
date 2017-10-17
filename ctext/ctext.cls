@@ -42,18 +42,17 @@
 \LoadClass[a4paper]{memoir}
 \makeatletter
 \let\footruleskip\undefined
-\RequirePackage[utf8]{inputenc}
-\RequirePackage[english,german]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[english,german]{babel}
 \newcommand{\headingstyle}[1]{\renewcommand{\@headingstyling}[#1]}
 \newcommand{\@headingstyling}{\sffamily\bfseries} %
 
-\RequirePackage{titlesec,enumitem,graphicx,float,xifthen,translations,lmodern,csquotes,etoolbox,fancyhdr,kvoptions}
-\RequirePackage[linktocpage=true]{hyperref}
+\usepackage{titlesec,enumitem,graphicx,float,xifthen,translations,lmodern,csquotes,etoolbox,fancyhdr,kvoptions}
+\usepackage[linktocpage=true]{hyperref}
 \SetupKeyvalOptions{
   family=ctext,
   prefix=ctext@
 }
-\DeclareBoolOption[false]{highestLayerChapter}
 \ProcessKeyvalOptions*
 \newcommand{\ctext}{\textsc{cText} }
 \DeclareTranslationFallback{abgabe}{Abgabe}
@@ -85,14 +84,14 @@
 \titleformat{\chapter}{\vspace*{6cm}\Huge\@headingstyling}{\thechapter}{0.5em}{}
 \titleformat{\section}{\LARGE\@headingstyling}{\thesection}{0.5em}{}
 \titleformat{\subsection}{\Large\@headingstyling}{\thesubsection}{0.5em}{}
-\titleformat{\subsubsection}{\large\@headingstyling}{}{0em}{}
-\titleformat{\paragraph}{\@headingstyling}{}{0em}{}
+\titleformat{\subsubsection}{\large\@headingstyling}{\thesubsubsection}{0.5em}{}
+\titleformat{\paragraph}{\@headingstyling}{\theparagraph}{0.5em}{}
 \let\ocite\cite
 \renewcommand{\cite}[1]{\textsuperscript{\ocite{#1}}}
 \renewcommand*{\thefootnote}{(\arabic{footnote})}
 \counterwithin{figure}{section}
 \counterwithin{table}{section}
-\ifthenelse{\ctext@highestLayerChapter}{\relax}{\counterwithout{section}{chapter}}
+\counterwithout{section}{chapter}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.6em}
 \renewcommand{\arraystretch}{1.2}
@@ -113,15 +112,16 @@
 \null%
 \vskip 30\p@%
 \pagestyle{plain}%
-\begin{flushleft}%
-  {\LARGE\@headingstyling\@title\par\vspace{0.2em}\large \@subtitle\ifthenelse{\isempty{\@subtitle}\OR\isempty{\@date}}{ }{ | }\@datehook\@date\par}%
-  \vskip 1.5em%
-  {\normalsize%
-   \lineskip .75em%
-    \begin{tabular}[t]{@{}l}%
-      \@author%
-    \end{tabular}\!\!\!\@thankshook\par}%
-\end{flushleft}\par%%
+\begin{center}
+{\LARGE\@headingstyling\@title\par\normalsize\textnormal{\@subtitle\ifthenelse{\isempty{\@subtitle}\OR\isempty{\@date}}{ }{ | }\@datehook\@date}\par}%
+\end{center}%
+\vspace{1.5em}%
+{\normalsize%
+ %\lineskip .75em%
+  \begin{tabular}[t]{@{}l}%
+    \@author%
+  \end{tabular}\!\!\!\@thankshook\par}%
+\par%
 \vspace{2em}%
 \renewcommand{\headrulewidth}{0pt}%
 \setcounter{footnote}{0}%

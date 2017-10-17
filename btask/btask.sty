@@ -1,0 +1,80 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{btask}[2017/10/16 B Task Package]
+\RequirePackage{translations}
+\makeatletter
+\newcommand{\atask}{\textsc{aTask}\ }
+% Original Task and Subtask counter
+\newcounter{task}
+\setcounter{task}{0}
+\newcounter{subtask}[task]
+\setcounter{subtask}{0}
+% \counterwithin{table}{aufgabe}
+% \counterwithin{figure}{aufgabe}
+% Translations for English and German support
+\DeclareTranslation{English}{aufgabe}{Exercise}
+\DeclareTranslation{English}{teilaufgabe}{Subtask}
+\DeclareTranslation{German}{aufgabe}{Task}
+\DeclareTranslation{German}{teilaufgabe}{Subtask}
+\DeclareTranslationFallback{aufgabe}{Task}
+\DeclareTranslationFallback{teilaufgabe}{Subtask}
+% Counter style option processing
+
+% Counter Variables
+
+% Pass dynamic counter
+
+% Hooks for task and subtask styling
+\newcommand{\@taskstyle}{\bfseries\sffamily\raggedright}
+\newcommand{\taskstyle}[1]{\renewcommand{\@taskstyle}{#1}}
+\newcommand{\@subtaskstyle}{\bfseries\rmfamily\raggedright}
+\newcommand{\subtaskstyle}[1]{\renewcommand{\@subtaskstyle}{#1}}
+% Hooks for margins
+\newcommand{\@defaultMarginBeforeTask}{-2em \@plus -1em \@minus -1em}
+\newcommand{\@defaultMarginAfterTask}{1ex \@plus .5ex}
+
+\newcommand{\@defaultMarginBeforeSubtask}{-1em \@plus -.5em \@minus -.5em}
+\newcommand{\@defaultMarginAfterSubtask}{.5ex \@plus .5ex}
+
+\newcommand{\@marginBeforeTask}{-2em \@plus -1em \@minus -1em}
+\newcommand{\@marginAfterTask}{1ex \@plus .5ex}
+
+\newcommand{\@marginBeforeSubtask}{-1em \@plus -.5em \@minus -.5em}
+\newcommand{\@marginAfterSubtask}{.5ex \@plus .5ex}
+
+\newcommand{\marginBeforeTask}[1]{\renewcommand{\@marginBeforeTask}{#1}}
+\newcommand{\marginAfterTask}[1]{\renewcommand{\@marginAfterTask}{#1}}
+
+\newcommand{\marginBeforeSubtask}[1]{\renewcommand{\@marginBeforeSubtask}{#1}}
+\newcommand{\marginAfterSubtask}[1]{\renewcommand{\@marginAfterSubtask}{#1}}
+
+\newcommand{\ResetMarginsToDefault}{%
+  \renewcommand{\@marginBeforeTask}{\@defaultMarginBeforeTask}%
+  \renewcommand{\@marginAfterTask}{\@defaultMarginAfterTask}%
+  \renewcommand{\@marginBeforeSubtask}{\@defaultMarginBeforeSubtask}%
+  \renewcommand{\@marginAfterSubtask}{\@defaultMarginAfterSubtask}%
+}
+
+\newcommand{\task}[1]{%
+    \refstepcounter{task}%
+    \@startsection{aufgabe}%
+        {1}%
+        {\z@}%
+        {\@marginBeforeTask}%
+        {\@marginAfterTask}%
+        {\@taskstyle}%
+        *{Aufgabe \thetask\: \ifstrempty{#1}{}{\ \textrm{\textnormal{(#1)}}}}%
+    \addcontentsline{toc}{section}{Aufgabe \thetask: #1}%
+}
+\newcommand{\subtask}[1]{%
+    \refstepcounter{subtask}%
+    \@startsection{aufgabe}%
+        {2}%
+        {\z@}%
+        {\@marginBeforeSubtask}%
+        {\@marginAfterSubtask}%
+        {\@subtaskstyle}%
+        *{Teilaufgabe \arabic{subtask}: \ifstrempty{#1}{}{\ \textrm{(#1)}}}%
+    \addcontentsline{toc}{subsection}{Teilaufgabe \arabic{subtask}: #1}%
+}
+\makeatother
+\endinput
