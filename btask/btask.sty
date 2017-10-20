@@ -26,7 +26,7 @@
 % Hooks for task and subtask styling
 \newcommand{\@taskstyle}{\bfseries\sffamily\raggedright}
 \newcommand{\taskstyle}[1]{\renewcommand{\@taskstyle}{#1}}
-\newcommand{\@subtaskstyle}{\bfseries\rmfamily\raggedright}
+\newcommand{\@subtaskstyle}{\sffamily\raggedright}
 \newcommand{\subtaskstyle}[1]{\renewcommand{\@subtaskstyle}{#1}}
 % Hooks for margins
 \newcommand{\@defaultMarginBeforeTask}{-2em \@plus -1em \@minus -1em}
@@ -62,7 +62,7 @@
         {\@marginBeforeTask}%
         {\@marginAfterTask}%
         {\@taskstyle}%
-        *{Aufgabe \thetask\: \ifstrempty{#1}{}{\ \textrm{\textnormal{(#1)}}}}%
+        *{Aufgabe \thetask\: \ifstrempty{#1}{}{\textrm{\textnormal{(#1)}}}}%
     \addcontentsline{toc}{section}{Aufgabe \thetask: #1}%
 }
 \newcommand{\subtask}[1]{%
@@ -73,7 +73,7 @@
         {\@marginBeforeSubtask}%
         {\@marginAfterSubtask}%
         {\@subtaskstyle}%
-        *{Teilaufgabe \arabic{subtask}: \ifstrempty{#1}{}{\ \textrm{(#1)}}}%
+        *{Teilaufgabe \arabic{subtask}: \ifstrempty{#1}{}{\textrm{(#1)}}}%
     \addcontentsline{toc}{subsection}{Teilaufgabe \arabic{subtask}: #1}%
 }
 \makeatother
