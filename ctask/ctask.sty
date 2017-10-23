@@ -1,8 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{btask}[2017/10/16 B Task Package]
+\ProvidesPackage{btask}[2017/10/16 C Task Package]
 \RequirePackage{translations}
 \makeatletter
-\newcommand{\atask}{\textsc{bTask}\ }
+\newcommand{\atask}{\textsc{cTask}\ }
 % Original Task and Subtask counter
 \newcounter{task}
 \setcounter{task}{0}
@@ -24,9 +24,9 @@
 % Pass dynamic counter
 
 % Hooks for task and subtask styling
-\newcommand{\@taskstyle}{\bfseries\sffamily\raggedright}
+\newcommand{\@taskstyle}{\Large\bfseries\rmfamily\raggedright}
 \newcommand{\taskstyle}[1]{\renewcommand{\@taskstyle}{#1}}
-\newcommand{\@subtaskstyle}{\sffamily\raggedright}
+\newcommand{\@subtaskstyle}{\large\rmfamily\raggedright}
 \newcommand{\subtaskstyle}[1]{\renewcommand{\@subtaskstyle}{#1}}
 % Hooks for margins
 \newcommand{\@defaultMarginBeforeTask}{-2em \@plus -1em \@minus -1em}
@@ -62,7 +62,7 @@
         {\@marginBeforeTask}%
         {\@marginAfterTask}%
         {\@taskstyle}%
-        *{Aufgabe \thetask\: \ifstrempty{#1}{}{\textrm{\textnormal{(#1)}}}}%
+        *{\underline{\underline{Aufgabe \thetask:}}}%
     \addcontentsline{toc}{section}{Aufgabe \thetask: #1}%
 }
 \newcommand{\subtask}[1]{%
@@ -73,7 +73,7 @@
         {\@marginBeforeSubtask}%
         {\@marginAfterSubtask}%
         {\@subtaskstyle}%
-        *{Teilaufgabe \arabic{subtask}: \ifstrempty{#1}{}{\textrm{(#1)}}}%
+        *{\underline{Teilaufgabe \arabic{subtask}:}}%
     \addcontentsline{toc}{subsection}{Teilaufgabe \arabic{subtask}: #1}%
 }
 \makeatother
