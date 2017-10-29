@@ -6,6 +6,7 @@
 \RequirePackage{tikz}
 \RequirePackage{mdframed}
 \RequirePackage{xcolor}
+\RequirePackage{mathtools}
 \usetikzlibrary{positioning,automata}
 \newcommand{\amath}{\textsc{aMath} }
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
@@ -44,6 +45,14 @@
 \newcommand{\sonst}{\mathrm{sonst}\ }
 \DeclareMathOperator{\Bin}{Bin}
 \DeclareMathOperator{\charakteristik}{char}
+\DeclareMathOperator{\eps}{\text{eps}}
+\DeclareMathOperator{\fl}{\text{fl}}
+\newcommand{\matadd}[3]{\ensuremath{\xmapsto{\mathrm{add}_{#1,
+#2,#3}}}}
+\newcommand{\matmul}[2]{\ensuremath{\xmapsto{\mathrm{mul}_{#1,
+#2}}}}
+\newcommand{\matswap}[2]{\ensuremath{\xmapsto{\mathrm{sw}_{#1,
+#2}}}}
 \let\oforall\forall
 \let\oexists\exists
 \renewcommand{\forall}{\ensuremath{\hskip 2pt \oforall \hskip 2pt}}

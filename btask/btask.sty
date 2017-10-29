@@ -1,6 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{btask}[2017/10/16 B Task Package]
 \RequirePackage{translations}
+\RequirePackage{xifthen}
 \makeatletter
 \newcommand{\atask}{\textsc{bTask}\ }
 % Original Task and Subtask counter
@@ -56,17 +57,19 @@
 
 \newcommand{\task}[1]{%
     \refstepcounter{task}%
+    \refstepcounter{section}%
     \@startsection{aufgabe}%
         {1}%
         {\z@}%
         {\@marginBeforeTask}%
         {\@marginAfterTask}%
         {\@taskstyle}%
-        *{Aufgabe \thetask\: \ifstrempty{#1}{}{\textrm{\textnormal{(#1)}}}}%
+        *{Aufgabe \thetask: \ifstrempty{#1}{}{\textrm{\textnormal{(#1)}}}}%
     \addcontentsline{toc}{section}{Aufgabe \thetask: #1}%
 }
 \newcommand{\subtask}[1]{%
     \refstepcounter{subtask}%
+    \refstepcounter{subsection}%
     \@startsection{aufgabe}%
         {2}%
         {\z@}%

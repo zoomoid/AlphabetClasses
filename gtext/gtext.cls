@@ -42,7 +42,7 @@
 \ProvidesClass{gtext}[2016/12/07 G Text Package]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ProcessOptions \relax
-\LoadClass[a4paper]{memoir}
+\LoadClass[a4paper,twocolumn]{memoir}
 \makeatletter
 \let\footruleskip\undefined
 \usepackage[utf8]{inputenc}
