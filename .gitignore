@@ -51,4 +51,6 @@ Temporary Items
 # custom excludes
 urw
 antiqua
-tikz-uml
+tikz-uml/doc
+tikz-uml/examples
+tikz-uml/.gitignore
