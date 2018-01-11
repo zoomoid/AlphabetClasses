@@ -110,9 +110,9 @@
 \renewcommand\maketitle{%
 \thispagestyle{fancy}%
 \null%
-\vskip 30\p@%
+\vskip 15\p@%
 \pagestyle{plain}%
-\begin{center}
+\begin{center}%
 {\LARGE\@headingstyling\@title\par\normalsize\textnormal{\@subtitle\ifthenelse{\isempty{\@subtitle}\OR\isempty{\@date}}{ }{ | }\@datehook\@date}\par}%
 \end{center}%
 \vspace{1.5em}%

@@ -4,16 +4,17 @@
 \RequirePackage[fleqn]{amsmath}
 \RequirePackage{pgf}
 \RequirePackage{tikz}
-\RequirePackage{mdframed}
 \RequirePackage{xcolor}
+\RequirePackage{mdframed}
 \RequirePackage{mathtools}
+\RequirePackage[basic]{complexity}
 \usetikzlibrary{positioning,automata}
 \newcommand{\amath}{\textsc{aMath} }
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
-\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\renewcommand{\R}{\ensuremath{\mathbb{R}}}
 \newcommand{\Q}{\ensuremath{\mathbb{Q}}}
-\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\renewcommand{\C}{\ensuremath{\mathbb{C}}}
 \newcommand{\F}{\ensuremath{\mathbb{F}}}
 \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
 \DeclareMathOperator{\GL}{GL}
@@ -66,4 +67,12 @@
 \newcommand{\labra}[1]{\ensuremath{\left(#1\right)}}
 \newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right \rceil}}
 \newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right \rfloor}}
+\mdfdefinestyle{amath}{%
+  skipabove=0.6em,%
+  skipbelow=0.6em%
+}
+\mdfsetup{%
+  backgroundcolor=yellow!20,%
+  style=amath%
+}
 \endinput

@@ -24,6 +24,7 @@
 \DeclareTranslation{German}{ueberlegung}{Überlegung}
 \DeclareTranslation{German}{gegenbeispiel}{Betrachte folgendes Gegenbeispiel}
 \DeclareTranslation{German}{vollstaendige}{vollständige}
+\DeclareTranslation{German}{widerspruch}{Beweis durch Widerspruch}
 \DeclareTranslation{English}{beispiel}{Example}
 \DeclareTranslation{English}{definition}{Definition}
 \DeclareTranslation{English}{bemerkung}{Remark}
@@ -45,6 +46,7 @@
 \DeclareTranslation{English}{ueberlegung}{Assumption}
 \DeclareTranslation{English}{gegenbeispiel}{Consider the following counterexample}
 \DeclareTranslation{English}{vollstaendige}{complete}
+\DeclareTranslation{English}{widerspruch}{Proof by contradiction}
 \DeclareTranslationFallback{beispiel}{Beispiel}
 \DeclareTranslationFallback{definition}{Definition}
 \DeclareTranslationFallback{bemerkung}{Bemerkung}
@@ -66,6 +68,7 @@
 \DeclareTranslationFallback{ueberlegung}{Überlegung}
 \DeclareTranslationFallback{gegenbeispiel}{Betrachte folgendes Gegenbeispiel}
 \DeclareTranslationFallback{vollstaendige}{vollständige}
+\DeclareTranslationFallback{widerspruch}{Beweis durch Widerspruch}
 \makeatletter
 \newcommand*\ifcounter[1]{%
   \ifcsname c@#1\endcsname
@@ -109,5 +112,6 @@
 \newcommand{\beweis}{\emph{\GetTranslation{beweis}: }}
 \newcommand{\ueberlegung}{\emph{\GetTranslation{ueberlegung}: }}
 \newcommand{\gegenbeispiel}{\emph{\GetTranslation{gegenbeispiel}: }}
+\newcommand{\widerspruch}{\emph{\GetTranslation{widerspruch}: }}
 \makeatother
 \endinput
