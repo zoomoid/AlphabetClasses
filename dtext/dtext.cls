@@ -37,37 +37,15 @@
 %% End of file `dtext.cls'.
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{dtext}[2016/12/07 D Text Package]
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions \relax
-\LoadClass[a4paper]{memoir}
-\RequirePackage{charter}
-\RequirePackage[T1]{fontenc}
-\RequirePackage[utf8]{inputenc}
-\RequirePackage[ngerman]{babel}
-\RequirePackage[explicit]{titlesec}
-\RequirePackage{enumitem}
-\RequirePackage{graphicx}
-\RequirePackage[linktocpage=true]{hyperref}
-\RequirePackage{tocloft}
-\RequirePackage{float}
-\RequirePackage{listings}
-\RequirePackage{csquotes}
-\RequirePackage{titling}
-\RequirePackage{textcomp}
-\RequirePackage{gensymb}
-\RequirePackage{fancyhdr}
-\setlrmarginsandblock{2.5cm}{2.5cm}{*}
-\setulmarginsandblock{2.5cm}{2.5cm}{*}
-\checkandfixthelayout
-\maxtocdepth{subsection}
-\pagestyle{plain}
-\chapterstyle{default}
-\maxsecnumdepth{subsection}
-\let\ocite\cite
-\renewcommand{\cite}[1]{\textsuperscript{\ocite{#1}}}
-\counterwithin{figure}{section}
-\counterwithout{section}{chapter}
-\counterwithin{chapter}{part}
+\LoadClass[a4paper]{article}
+\usepackage{antiqua}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\pagestyle{empty}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.6em}
 \renewcommand{\arraystretch}{1.2}
@@ -76,7 +54,7 @@
 \null
 \vskip 30\p@
 \begin{center}%
-  {\Huge\bfseries\@title\par}%
+  {\Huge\@title\par}%
   \vfill%
   {\small%
    \lineskip .75em%

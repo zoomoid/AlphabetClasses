@@ -79,5 +79,7 @@
         *{Teilaufgabe \arabic{subtask}: \ifstrempty{#1}{}{\textrm{(#1)}}}%
     \addcontentsline{toc}{subsection}{Teilaufgabe \arabic{subtask}: #1}%
 }
+
+\newenvironment{sidenote}[1]{\begin{mdframed}\textbf{\textsf{#1:}}\\}{\end{mdframed}}
 \makeatother
 \endinput
