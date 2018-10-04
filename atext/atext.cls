@@ -37,16 +37,17 @@
 %% End of file `atext.cls'.
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{atext}[2016/12/07 A Text Package]
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions \relax
-\LoadClass[a4paper]{memoir}
+\LoadClass[a4paper]{article}
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includeheadfoot]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage[explicit]{titlesec}
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage[linktocpage=true]{hyperref}
-\usepackage{tocloft}
+% \usepackage{tocloft}
 \usepackage{float}
 \usepackage{lmodern}
 \usepackage{listings}
@@ -55,42 +56,36 @@
 \usepackage{textcomp}
 \usepackage{gensymb}
 \usepackage{fancyhdr}
+\makeatletter
 \newcommand{\atext}{\textsc{aText} }
-\setlrmarginsandblock{2.5cm}{2.5cm}{*}
-\setulmarginsandblock{2.5cm}{2.5cm}{*}
-\checkandfixthelayout
-\maxtocdepth{subsection}
-\addto\captionsngerman{\renewcommand{\contentsname}{\LARGE\@headingstyling Inhaltsverzeichnis}}
-\addto\captionsngerman{\renewcommand{\listfigurename}{\LARGE\@headingstyling Abbildungsverzeichnis}}
+% \setlrmarginsandblock{2.5cm}{2.5cm}{*}
+% \setulmarginsandblock{2.5cm}{2.5cm}{*}
+% \checkandfixthelayout
+% \maxtocdepth{subsection}
+% \addto\captionsngerman{\renewcommand{\contentsname}{\LARGE\@headingstyling Inhaltsverzeichnis}}
+% \addto\captionsngerman{\renewcommand{\listfigurename}{\LARGE\@headingstyling Abbildungsverzeichnis}}
 \pagestyle{plain}
 \newcommand{\@headingstyling}{\sffamily\bfseries}
-\chapterstyle{default}
-\maxsecnumdepth{subsection}
+% \chapterstyle{default}
+% \maxsecnumdepth{subsection}
 \titleformat{\chapter}{\LARGE\@headingstyling}{#1\ \thechapter}{0.5em}{}
 \titleformat{\section}{\Large\@headingstyling}{#1\ \thesection}{0.5em}{}
 \titleformat{\subsection}{\large\@headingstyling}{#1\ \thesubsection}{0.5em}{}
 \let\ocite\cite
 \renewcommand{\cite}[1]{\textsuperscript{\ocite{#1}}}
-\counterwithin{figure}{section}
-\counterwithout{section}{chapter}
-\counterwithin{chapter}{part}
+% \counterwithin{figure}{section}
+% \counterwithout{section}{chapter}
+% \counterwithin{chapter}{part}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.6em}
 \renewcommand{\arraystretch}{1.2}
-\preauthor{\begin{flushleft}%
-           \large \lineskip 0.5em%
-           \begin{tabular}[t]{@{}l}}
+\preauthor{\begin{flushleft}\lineskip 0.5em\begin{tabular}[t]{@{}l}}
 \postauthor{\end{tabular}\end{flushleft}}
-
-\renewcommand*\and{%
-  \end{tabular}%
-  \hskip 1em \relax
-  \begin{tabular}[t]{l}}
-\renewcommand*{\andnext}{%
-  \end{tabular}\\ \begin{tabular}[t]{@{}l}}
+\renewcommand\and{\end{tabular}\par\begin{tabular}[t]{l}}
+\newcommand*{\andnext}{\end{tabular}\begin{tabular}[t]{l}}
 \predate{\begin{flushleft}}
 \postdate{\end{flushleft}}
-\pretitle{\begin{flushleft}\Huge\@headingstyling }
-\posttitle{\par\end{flushleft}}
-
+\pretitle{\begin{flushleft}\Huge\@headingstyling}
+\posttitle{\end{flushleft}}
+\makeatother
 \endinput

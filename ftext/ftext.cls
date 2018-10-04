@@ -35,24 +35,22 @@
 %% ----------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ftext}[2017/09/30 F Text Package]
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions \relax
-\LoadClass[a4paper]{memoir}
+\LoadClass[a4paper]{article}
 \makeatletter
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includeheadfoot]{geometry}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[ngerman]{babel}
 \RequirePackage{titlesec,enumitem,float,xifthen,translations,lmodern,csquotes,fancyhdr}
 \RequirePackage[linktocpage=true]{hyperref}
 \newcommand{\etext}{\textsc{eText} }
-\setlrmarginsandblock{1in}{1in}{*}
-\setulmarginsandblock{1in}{1in}{*}
-\checkandfixthelayout
 \pagestyle{plain}
 \let\ocite\cite
 \renewcommand{\cite}[1]{\textsuperscript{\ocite{#1}}}
 \counterwithin{figure}{section}
 \counterwithin{table}{section}
-\counterwithout{section}{chapter}
+% \counterwithout{section}{chapter}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.6em}
 \renewcommand{\arraystretch}{1.2}

@@ -37,10 +37,11 @@
 %% ----------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ctext}[2016/12/07 C Text Package]
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions \relax
-\LoadClass[a4paper]{memoir}
+\LoadClass[a4paper]{article}
 \makeatletter
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includeheadfoot]{geometry}
 \let\footruleskip\undefined
 \usepackage[utf8]{inputenc}
 \usepackage[english,german]{babel}
@@ -70,9 +71,6 @@
 \DeclareTranslationFallback{tot}{Tabellenverzeichnis}
 \DeclareTranslation{German}{tot}{Tabellenverzeichnis}
 \DeclareTranslation{English}{tot}{List of Tables}
-\setlrmarginsandblock{1in}{1in}{*}
-\setulmarginsandblock{1in}{1in}{*}
-\checkandfixthelayout
 \addto\captionsgerman{\renewcommand{\contentsname}{\Large\@headingstyling \GetTranslation{toc}}}
 \addto\captionsgerman{\renewcommand{\listfigurename}{\Large\@headingstyling \GetTranslation{tof}}}
 \addto\captionsgerman{\renewcommand{\listtablename}{\Large\@headingstyling \GetTranslation{tot}}}
@@ -81,7 +79,7 @@
 \addto\captionsenglish{\renewcommand{\listtablename}{\Large\@headingstyling \GetTranslation{tot}}}
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4}
-\titleformat{\chapter}{\vspace*{6cm}\Huge\@headingstyling}{\thechapter}{0.5em}{}
+% \titleformat{\chapter}{\vspace*{6cm}\Huge\@headingstyling}{\thechapter}{0.5em}{}
 \titleformat{\section}{\LARGE\@headingstyling}{\thesection}{0.5em}{}
 \titleformat{\subsection}{\Large\@headingstyling}{\thesubsection}{0.5em}{}
 \titleformat{\subsubsection}{\large\@headingstyling}{\thesubsubsection}{0.5em}{}
@@ -91,7 +89,7 @@
 \renewcommand*{\thefootnote}{(\arabic{footnote})}
 \counterwithin{figure}{section}
 \counterwithin{table}{section}
-\counterwithout{section}{chapter}
+% \counterwithout{section}{chapter}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.6em}
 \renewcommand{\arraystretch}{1.2}
@@ -129,7 +127,7 @@
 \let\oappendix\appendix
 \renewcommand{\appendix}{%
 \renewcommand{\thesection}{\Alph{section}}%
-\renewcommand{\thechapter}{\Alph{chapter}}%
+% \renewcommand{\thechapter}{\Alph{chapter}}
 \oappendix%
 }
 \makeatother

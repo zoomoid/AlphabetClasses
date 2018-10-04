@@ -40,10 +40,11 @@
 %% twice
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gtext}[2016/12/07 G Text Package]
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions \relax
-\LoadClass[a4paper,twocolumn]{memoir}
+\LoadClass[a4paper,twocolumn]{article}
 \makeatletter
+\usepackage[left=1.25cm,right=1.25cm,top=1.25cm,bottom=1.25cm,includeheadfoot]{geometry}
 \let\footruleskip\undefined
 \usepackage[utf8]{inputenc}
 \usepackage[english,german]{babel}
@@ -73,9 +74,9 @@
 \DeclareTranslationFallback{tot}{Tabellenverzeichnis}
 \DeclareTranslation{German}{tot}{Tabellenverzeichnis}
 \DeclareTranslation{English}{tot}{List of Tables}
-\setlrmarginsandblock{0.5in}{0.5in}{*}
-\setulmarginsandblock{0.5in}{0.5in}{*}
-\checkandfixthelayout
+% \setlrmarginsandblock{0.5in}{0.5in}{*}
+% \setulmarginsandblock{0.5in}{0.5in}{*}
+% \checkandfixthelayout
 \addto\captionsgerman{\renewcommand{\contentsname}{\Large\@headingstyling \GetTranslation{toc}}}
 \addto\captionsgerman{\renewcommand{\listfigurename}{\Large\@headingstyling \GetTranslation{tof}}}
 \addto\captionsgerman{\renewcommand{\listtablename}{\Large\@headingstyling \GetTranslation{tot}}}

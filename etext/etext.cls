@@ -35,10 +35,11 @@
 %% ----------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{etext}[2016/12/07 E Text Package]
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions \relax
-\LoadClass[a4paper]{memoir}
+\LoadClass[a4paper]{article}
 \makeatletter
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includeheadfoot]{geometry}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[english,german]{babel}
 \RequirePackage{titlesec,enumitem,graphicx,tocloft,float,ifthen,translations,lmodern,csquotes,fancyhdr}
@@ -57,23 +58,23 @@
 \DeclareTranslationFallback{tof}{Abbildungsverzeichnis}
 \DeclareTranslation{German}{tof}{Abbildungsverzeichnis}
 \DeclareTranslation{English}{tof}{Table of Figures}
-\setlrmarginsandblock{1in}{1in}{*}
-\setulmarginsandblock{1in}{1in}{*}
-\checkandfixthelayout
+% \setlrmarginsandblock{1.2cm}{1.2cm}{*}
+% \setulmarginsandblock{1.2cm}{1.2cm}{*}
+% \checkandfixthelayout
 \addto\captionsgerman{\renewcommand{\contentsname}{\Large\@headingstyling \GetTranslation{toc}}}
 \addto\captionsgerman{\renewcommand{\listfigurename}{\Large\@headingstyling \GetTranslation{tof}}}
 \addto\captionsenglish{\renewcommand{\contentsname}{\Large\@headingstyling \GetTranslation{toc}}}
 \addto\captionsenglish{\renewcommand{\listfigurename}{\Large\@headingstyling \GetTranslation{tof}}}
 \pagestyle{plain}
 \newcommand{\@headingstyling}{\bfseries}
-\titleformat{\chapter}{\LARGE\@headingstyling}{\ \thechapter}{0.5em}{}
+% \titleformat{\chapter}{\LARGE\@headingstyling}{\ \thechapter}{0.5em}{}
 \titleformat{\section}{\Large\@headingstyling}{\ \thesection}{0.5em}{}
 \titleformat{\subsection}{\large\@headingstyling}{\ \thesubsection}{0.5em}{}
 \let\ocite\cite
 \renewcommand{\cite}[1]{\textsuperscript{\ocite{#1}}}
 \counterwithin{figure}{section}
 \counterwithin{table}{section}
-\counterwithout{section}{chapter}
+% \counterwithout{section}{chapter}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.6em}
 \renewcommand{\arraystretch}{1.2}
@@ -91,8 +92,8 @@
 \renewcommand\maketitle{
 \thispagestyle{fancy}
 \null
-\vskip 30\p@
-\begin{flushleft}%
+\vskip 30\p@%
+\begin{center}%
   {\Huge\@headingstyling\@title\par\vspace{0.2em}\normalsize \@subtitle\ifthenelse{\equal{\@subtitle}{}\OR\equal{\@date}{}}{ }{ | }\@datehook\@date\par}%
   \vskip 1.5em%
   {\small
@@ -100,7 +101,7 @@
     \begin{tabular}[t]{@{}l}%
       \@author
     \end{tabular}\par}%
-\end{flushleft}\par
+\end{center}\par
 \@thanks
 \vspace{2em}
 \pagestyle{plain}
