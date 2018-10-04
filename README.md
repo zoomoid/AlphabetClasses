@@ -5,10 +5,10 @@ This repository features most of my custom LaTex classes in use for all sorts
 of documents during my studys in computer science at RWTH Aachen.
 
 Currently features
-*   ctext, a top-notch text class based on memoir
-*   atext, ctext's predeccessor and a more basic approach to memoir's default look
+*   ctext, a top-notch text class based on article
+*   atext, ctext's predeccessor and a more basic approach to article's default look
 *   btext, a seperate text class based on KOMA's scrartcl
-*   dtext, a more fictional text oriented memoir child
+*   dtext, a more fictional text oriented article child
 *   amath, a math package using ams, defining all sorts of mathematical shorthand commands
 *   bmath, another math package defining environments corresponding to (a,b,c)text's (even dtext, but not supported on purpose) design style
 *   atask, a package introducing new sectioning options for homework
@@ -20,7 +20,7 @@ Just clone this repository into your user directory for TeX and use classes and 
 
 ## Documentation
 
-Most classes and packages are quite intuitive. ctext got a complete documentation (see /ctext/ctext.pdf), all other classes and packages have extensive examples (see /examples/), which will usually explain all commands and options.
+Most classes and packages are quite intuitive. ~~ctext got a complete documentation (see /ctext/ctext.pdf), all other classes and packages have extensive examples (see /examples/), which will usually explain all commands and options.~~
 
 ## License
 

@@ -2,7 +2,7 @@
 
 ## Abstract
 
-This class provides quite sophisticated adjustments to memoir, mainly
+This class provides quite sophisticated adjustments to article, mainly
 front matter restyling (see ~/AlphabetClasses/examples/ctext.pdf), as
 well as small improvements to section titles and other small adjustments,
 mostly font-related. Its main purpose is to be used for typesetting most of my
