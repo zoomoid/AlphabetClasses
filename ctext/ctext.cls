@@ -35,19 +35,17 @@
 %%
 %%
 %% ----------------------------------------------------------------
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ctext}[2016/12/07 C Text Package]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions \relax
 \LoadClass[a4paper]{article}
 \makeatletter
-\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includeheadfoot]{geometry}
+\usepackage[left=2.5cm,right=2.5cm,top=1.5cm,bottom=1.5cm]{geometry}
 \let\footruleskip\undefined
 \usepackage[utf8]{inputenc}
 \usepackage[english,german]{babel}
-\newcommand{\headingstyle}[1]{\renewcommand{\@headingstyling}[#1]}
-\newcommand{\@headingstyling}{\sffamily\bfseries} %
-
 \usepackage{titlesec,enumitem,graphicx,float,xifthen,translations,lmodern,csquotes,etoolbox,fancyhdr,kvoptions}
 \usepackage[linktocpage=true]{hyperref}
 \SetupKeyvalOptions{
@@ -55,7 +53,9 @@
   prefix=ctext@
 }
 \ProcessKeyvalOptions*
+
 \newcommand{\ctext}{\textsc{cText} }
+
 \DeclareTranslationFallback{abgabe}{Abgabe}
 \DeclareTranslation{German}{abgabe}{Abgabe}
 \DeclareTranslation{English}{abgabe}{Due date}
@@ -71,64 +71,175 @@
 \DeclareTranslationFallback{tot}{Tabellenverzeichnis}
 \DeclareTranslation{German}{tot}{Tabellenverzeichnis}
 \DeclareTranslation{English}{tot}{List of Tables}
-\addto\captionsgerman{\renewcommand{\contentsname}{\Large\@headingstyling \GetTranslation{toc}}}
-\addto\captionsgerman{\renewcommand{\listfigurename}{\Large\@headingstyling \GetTranslation{tof}}}
-\addto\captionsgerman{\renewcommand{\listtablename}{\Large\@headingstyling \GetTranslation{tot}}}
-\addto\captionsenglish{\renewcommand{\contentsname}{\Large\@headingstyling \GetTranslation{toc}}}
-\addto\captionsenglish{\renewcommand{\listfigurename}{\Large\@headingstyling \GetTranslation{tof}}}
-\addto\captionsenglish{\renewcommand{\listtablename}{\Large\@headingstyling \GetTranslation{tot}}}
+
+\newcommand{\headingstyle}[1]{%
+  \renewcommand{\@headingstyling}[#1]%
+}
+
+\newcommand{\@headingstyling}{%
+  \sffamily\bfseries%
+}
+
+\addto\captionsgerman{%
+  \renewcommand{\contentsname}{%
+    \Large\@headingstyling \GetTranslation{toc}%
+  }%
+}
+
+\addto\captionsgerman{%
+  \renewcommand{\listfigurename}{%
+    \Large\@headingstyling \GetTranslation{tof}%
+  }%
+}
+
+\addto\captionsgerman{%
+  \renewcommand{\listtablename}{%
+    \Large\@headingstyling \GetTranslation{tot}%
+  }%
+}
+
+\addto\captionsenglish{%
+  \renewcommand{\contentsname}{%
+    \Large\@headingstyling \GetTranslation{toc}%
+  }%
+}
+
+\addto\captionsenglish{%
+  \renewcommand{\listfigurename}{%
+    \Large\@headingstyling \GetTranslation{tof}%
+  }%
+}
+
+\addto\captionsenglish{%
+  \renewcommand{\listtablename}{%
+    \Large\@headingstyling \GetTranslation{tot}%
+  }%
+}
+
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4}
-% \titleformat{\chapter}{\vspace*{6cm}\Huge\@headingstyling}{\thechapter}{0.5em}{}
-\titleformat{\section}{\LARGE\@headingstyling}{\thesection}{0.5em}{}
-\titleformat{\subsection}{\Large\@headingstyling}{\thesubsection}{0.5em}{}
-\titleformat{\subsubsection}{\large\@headingstyling}{\thesubsubsection}{0.5em}{}
-\titleformat{\paragraph}{\@headingstyling}{\theparagraph}{0.5em}{}
+
+\titleformat{\section}%
+  {\LARGE\@headingstyling}%
+  {\thesection}%
+  {0.5em}%
+  {}%
+
+\titleformat{\subsection}
+  {\Large\@headingstyling}%
+  {\thesubsection}%
+  {0.5em}%
+  {}%
+
+\titleformat{\subsubsection}%
+  {\large\@headingstyling}%
+  {\thesubsubsection}%
+  {0.5em}%
+  {}%
+
+\titleformat{\paragraph}
+  {\@headingstyling}%
+  {\theparagraph}%
+  {0.5em}%
+  {}%
+
 \let\ocite\cite
-\renewcommand{\cite}[1]{\textsuperscript{\ocite{#1}}}
-\renewcommand*{\thefootnote}{(\arabic{footnote})}
+\renewcommand{\cite}[1]{%
+  \textsuperscript{\ocite{#1}}%
+}
+\renewcommand*{\thefootnote}{%
+  (\arabic{footnote})%
+}
 \counterwithin{figure}{section}
 \counterwithin{table}{section}
-% \counterwithout{section}{chapter}
+
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.6em}
 \renewcommand{\arraystretch}{1.2}
-\newcommand\@group{}
-\newcommand{\group}[1]{\renewcommand\@group{\GetTranslation{gruppe} #1}}
-\newcommand{\team}[1]{\renewcommand\@group{Team #1}}
+
+\newcommand\@group{%
+  %
+}
+\newcommand{\group}[1]{%
+  \renewcommand{\@group}{%
+    \GetTranslation{gruppe} #1%
+  }%
+}
+\newcommand{\team}[1]{%
+  \renewcommand\@group{Team #1}%
+}
+
 \fancyhf{}
 \lhead{\small\@headingstyling \@group}
-\newcommand{\@subtitle}{}
-\newcommand{\subtitle}[1]{\renewcommand\@subtitle{#1}}
-\newcommand{\@datehook}{}
-\newcommand{\hasDeadline}{\renewcommand\@datehook{\GetTranslation{abgabe}:\ }}
-\renewcommand{\and}{\end{tabular}\\ \begin{tabular}[t]{@{}l}}
-\newcommand{\@thankshook}{}
-\renewcommand{\thanks}[1]{\renewcommand{\@thanks}{#1}\renewcommand{\@thankshook}{\begingroup\renewcommand\thefootnote{*}\footnote{\@thanks}\endgroup}}
-\renewcommand\maketitle{%
-\thispagestyle{fancy}%
-\null%
-\vskip 15\p@%
-\pagestyle{plain}%
-\begin{center}%
-{\LARGE\@headingstyling\@title\par\normalsize\textnormal{\@subtitle\ifthenelse{\isempty{\@subtitle}\OR\isempty{\@date}}{ }{ | }\@datehook\@date}\par}%
-\end{center}%
-\vspace{1.5em}%
-{\normalsize%
- %\lineskip .75em%
+
+\newcommand{\@subtitle}{%
+  %
+}
+
+\newcommand{\subtitle}[1]{%
+  \renewcommand\@subtitle{#1}%
+}
+
+\newcommand{\@datehook}{%
+  %
+}
+\newcommand{\hasDeadline}{%
+  \renewcommand\@datehook{%
+    \GetTranslation{abgabe}:\ %
+  }%
+}
+\renewcommand{\and}{%
+  \end{tabular}\\%
   \begin{tabular}[t]{@{}l}%
-    \@author%
-  \end{tabular}\!\!\!\@thankshook\par}%
-\par%
-\vspace{2em}%
-\renewcommand{\headrulewidth}{0pt}%
-\setcounter{footnote}{0}%
+}
+\newcommand{\@thankshook}{%
+  %
+}
+
+\renewcommand{\thanks}[1]{%
+  \renewcommand{\@thanks}{#1}%
+}
+
+\renewcommand{\@thankshook}{%
+  \renewcommand{\thefootnote}{*}%
+  \footnote{\@thanks}%
+}
+
+\renewcommand\maketitle{%
+  \thispagestyle{fancy}%
+  \begin{center}%
+  {%
+    \LARGE\@headingstyling\@title\par\normalsize%
+    \textnormal{%
+      \@subtitle\ifthenelse{%
+        \equal{\@subtitle}{}\OR\equal{\@date}{}
+      }{}{ | }%
+      \@datehook\@date%
+    }\par%
+  }%
+  \end{center}%
+  \vskip 1.5em%
+  {%
+    \normalsize%
+    \begin{tabular}[t]{@{}l}%
+      \@author%
+    \end{tabular}%
+    % \ifthenelse{%
+    %   \equal{\@thankshook}{}%
+    % }{%
+    %   %
+    % }{%
+    %   \@thankshook%
+    % }%
+    % \par%
+  }%
+  \par%
+  \vskip 2em%
+  \renewcommand{\headrulewidth}{0pt}%
+  \setcounter{footnote}{0}%
+  \pagestyle{plain}%
 }
 \let\oappendix\appendix
-\renewcommand{\appendix}{%
-\renewcommand{\thesection}{\Alph{section}}%
-% \renewcommand{\thechapter}{\Alph{chapter}}
-\oappendix%
-}
+\renewcommand{\appendix}{\renewcommand{\thesection}{\Alph{section}}\oappendix}
 \makeatother
 \endinput
