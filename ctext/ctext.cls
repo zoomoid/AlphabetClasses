@@ -42,7 +42,7 @@
 \ProcessOptions \relax
 \LoadClass[a4paper]{article}
 \makeatletter
-\usepackage[left=2.5cm,right=2.5cm,top=1.5cm,bottom=1.5cm]{geometry}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,includeheadfoot]{geometry}
 \let\footruleskip\undefined
 \usepackage[utf8]{inputenc}
 \usepackage[english,german]{babel}
@@ -206,7 +206,7 @@
 }
 
 \renewcommand\maketitle{%
-  \thispagestyle{fancy}%
+  % \thispagestyle{fancy}%
   \begin{center}%
   {%
     \LARGE\@headingstyling\@title\par\normalsize%
@@ -224,14 +224,6 @@
     \begin{tabular}[t]{@{}l}%
       \@author%
     \end{tabular}%
-    % \ifthenelse{%
-    %   \equal{\@thankshook}{}%
-    % }{%
-    %   %
-    % }{%
-    %   \@thankshook%
-    % }%
-    % \par%
   }%
   \par%
   \vskip 2em%
