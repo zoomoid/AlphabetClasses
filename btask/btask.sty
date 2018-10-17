@@ -25,28 +25,70 @@
 % Pass dynamic counter
 
 % Hooks for task and subtask styling
-\newcommand{\@taskstyle}{\bfseries\sffamily\raggedright}
-\newcommand{\taskstyle}[1]{\renewcommand{\@taskstyle}{#1}}
-\newcommand{\@subtaskstyle}{\sffamily\raggedright}
-\newcommand{\subtaskstyle}[1]{\renewcommand{\@subtaskstyle}{#1}}
+\newcommand{\@taskstyle}{%
+  \bfseries\sffamily\raggedright%
+}
+
+\newcommand{\taskstyle}[1]{%
+  \renewcommand{\@taskstyle}{#1}%
+}
+
+\newcommand{\@subtaskstyle}{%
+  \sffamily\raggedright%
+}
+
+\newcommand{\subtaskstyle}[1]{%
+  \renewcommand{\@subtaskstyle}{#1}%
+}
+
 % Hooks for margins
-\newcommand{\@defaultMarginBeforeTask}{-2em \@plus -1em \@minus -1em}
-\newcommand{\@defaultMarginAfterTask}{1ex \@plus .5ex}
+\newcommand{\@defaultMarginBeforeTask}{%
+  -2em \@plus -1em \@minus -1em%
+}
 
-\newcommand{\@defaultMarginBeforeSubtask}{-1em \@plus -.5em \@minus -.5em}
-\newcommand{\@defaultMarginAfterSubtask}{.5ex \@plus .5ex}
+\newcommand{\@defaultMarginAfterTask}{%
+  1ex \@plus .5ex%
+}
 
-\newcommand{\@marginBeforeTask}{-2em \@plus -1em \@minus -1em}
-\newcommand{\@marginAfterTask}{1ex \@plus .5ex}
+\newcommand{\@defaultMarginBeforeSubtask}{%
+  -1em \@plus -.5em \@minus -.5em%
+}
 
-\newcommand{\@marginBeforeSubtask}{-1em \@plus -.5em \@minus -.5em}
-\newcommand{\@marginAfterSubtask}{.5ex \@plus .5ex}
+\newcommand{\@defaultMarginAfterSubtask}{%
+  .5ex \@plus .5ex%
+}
 
-\newcommand{\marginBeforeTask}[1]{\renewcommand{\@marginBeforeTask}{#1}}
-\newcommand{\marginAfterTask}[1]{\renewcommand{\@marginAfterTask}{#1}}
+\newcommand{\@marginBeforeTask}{%
+  -2em \@plus -1em \@minus -1em%
+}
 
-\newcommand{\marginBeforeSubtask}[1]{\renewcommand{\@marginBeforeSubtask}{#1}}
-\newcommand{\marginAfterSubtask}[1]{\renewcommand{\@marginAfterSubtask}{#1}}
+\newcommand{\@marginAfterTask}{%
+  1ex \@plus .5ex%
+}
+
+\newcommand{\@marginBeforeSubtask}{%
+  -1em \@plus -.5em \@minus -.5em%
+}
+
+\newcommand{\@marginAfterSubtask}{%
+  .5ex \@plus .5ex%
+}
+
+\newcommand{\marginBeforeTask}[1]{%
+  \renewcommand{\@marginBeforeTask}{#1}%
+}
+
+\newcommand{\marginAfterTask}[1]{%
+  \renewcommand{\@marginAfterTask}{#1}%
+}
+
+\newcommand{\marginBeforeSubtask}[1]{%
+  \renewcommand{\@marginBeforeSubtask}{#1}%
+}
+
+\newcommand{\marginAfterSubtask}[1]{%
+  \renewcommand{\@marginAfterSubtask}{#1}%
+}
 
 \newcommand{\ResetMarginsToDefault}{%
   \renewcommand{\@marginBeforeTask}{\@defaultMarginBeforeTask}%
@@ -54,6 +96,32 @@
   \renewcommand{\@marginBeforeSubtask}{\@defaultMarginBeforeSubtask}%
   \renewcommand{\@marginAfterSubtask}{\@defaultMarginAfterSubtask}%
 }
+
+% Task Counter separator
+\newcommand{\@taskseparator}{: }
+\newcommand{\taskseparator}[1]{%
+  \renewcommand{\@taskseparator}{#1}%
+}
+
+\newcommand{\@subtaskseparator}{: }
+\newcommand{\subtaskseparator}[1]{%
+  \renewcommand{\@subtaskseparator}{#1}%
+}
+% Task Pre & Post Hook
+
+% \newcommand{\@tasksstyleprehook}{%
+%   \begingroup
+% }
+% \newcommand{\@taskstyleposthook}{%
+%   \endgroup
+% }
+% \newcommand{\tasksstyleprehook}[1]{%
+%   \renewcommand{\@taskstyleprehook}{#1}
+% }
+% \newcommand{\taskstyleposthook}[1]{%
+%   \renewcommand{\@taskstyleposthook}{#1}
+% }
+
 
 \newcommand{\task}[1]{%
     \refstepcounter{task}%
@@ -64,22 +132,29 @@
         {\@marginBeforeTask}%
         {\@marginAfterTask}%
         {\@taskstyle}%
-        *{Aufgabe \thetask: \ifstrempty{#1}{}{\textrm{\textnormal{(#1)}}}}%
+        *{Aufgabe \thetask\@taskseparator\ \ifstrempty{#1}{}{\textrm{\textnormal{(#1)}}}}%
     \addcontentsline{toc}{section}{Aufgabe \thetask: #1}%
 }
 \newcommand{\subtask}[1]{%
     \refstepcounter{subtask}%
     \refstepcounter{subsection}%
     \@startsection{aufgabe}%
-        {2}%
-        {\z@}%
-        {\@marginBeforeSubtask}%
-        {\@marginAfterSubtask}%
-        {\@subtaskstyle}%
-        *{Teilaufgabe \arabic{subtask}: \ifstrempty{#1}{}{\textrm{(#1)}}}%
+      {2}%
+      {\z@}%
+      {\@marginBeforeSubtask}%
+      {\@marginAfterSubtask}%
+      {\@subtaskstyle}%
+      *{Teilaufgabe \arabic{subtask}\@subtaskseparator\ \ifstrempty{#1}{}{\textrm{(#1)}}}%
     \addcontentsline{toc}{subsection}{Teilaufgabe \arabic{subtask}: #1}%
 }
 
-\newenvironment{sidenote}[1]{\begin{mdframed}\textbf{\textsf{#1:}}\\}{\end{mdframed}}
+\newenvironment{sidenote}[1]%
+  {% 
+    \begin{mdframed}%
+    \textbf{\textsf{#1:}}\\%
+  }%
+  {%
+    \end{mdframed}%
+  }%
 \makeatother
 \endinput

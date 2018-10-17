@@ -40,7 +40,8 @@
 \let\footruleskip\undefined
 \usepackage[utf8]{inputenc}
 \usepackage[english,german]{babel}
-\usepackage{titlesec,enumitem,graphicx,float,xifthen,translations,lmodern,csquotes,etoolbox,fancyhdr,kvoptions,helvet}
+\usepackage{titlesec,enumitem,graphicx,float,xifthen,translations,lmodern,csquotes,etoolbox,fancyhdr,kvoptions,helvet,xcolor}
+\usepackage{avant}
 \usepackage[linktocpage=true]{hyperref}
 \SetupKeyvalOptions{
   family=webtech,
@@ -66,12 +67,75 @@
 \DeclareTranslation{German}{tot}{Tabellenverzeichnis}
 \DeclareTranslation{English}{tot}{List of Tables}
 
+\newcommand{\@titlefont}{%
+  \fontfamily{pag}\selectfont%
+}
+
+\newcommand{\titlefont}[1]{%
+  \renewcommand{\@titlefont}{\fontfamily{#1}\selectfont}%
+}
+
+\newcommand{\@subtitlefont}{%
+  \fontfamily{pag}\selectfont%
+}
+
+\newcommand{\subtitlefont}[1]{%
+  \renewcommand{\@subtitlefont}{\fontfamily{#1}\selectfont}%
+}
+
+\newcommand{\@authorfont}{%
+  \fontfamily{pag}\selectfont%
+}
+
+\newcommand{\authorfont}[1]{%
+  \renewcommand{\@authorfont}{\fontfamily{#1}\selectfont}%
+}
+
+\newcommand{\@headingfont}{%
+  \fontfamily{pag}\selectfont%
+}
+
+\newcommand{\headingfont}[1]{%
+  \renewcommand{\@headingfont}{\fontfamily{#1}\selectfont}%
+}
+
 \newcommand{\headingstyle}[1]{%
-  \renewcommand{\@headingstyling}[#1]%
+  \renewcommand{\@headingstyling}{#1}%
 }
 
 \newcommand{\@headingstyling}{%
-  \sffamily\bfseries%
+  \color{blue--dark}%
+  \sffamily%
+  \bfseries%
+}
+
+\newcommand{\titlestyle}[1]{%
+  \renewcommand{\@titlestyling}{#1}%
+}
+
+\newcommand{\@titlestyling}{%
+  \color{blue}%
+  \sffamily%
+  \bfseries%
+  \huge%
+}
+
+\newcommand{\subtitlestyle}[1]{%
+  \renewcommand{\@subtitlestyling}{#1}%
+}
+
+\newcommand{\@subtitlestyling}{%
+  \color{blue--dark}%
+  \sffamily%
+}
+
+\newcommand{\authorstyle}[1]{%
+  \renewcommand{\@authorstyling}{#1}%
+}
+
+\newcommand{\@authorstyling}{%
+  \color{blue--dark}%
+  \sffamily%
 }
 
 \addto\captionsgerman{%
@@ -168,7 +232,12 @@
 }
 
 \fancyhf{}
-\lhead{\small\@headingstyling \@group}
+\lhead{%
+  \small%
+  \@headingfont%
+  \@headingstyling%
+  \@group%
+}
 
 \newcommand{\@subtitle}{%
   %
@@ -207,17 +276,34 @@
   \thispagestyle{fancy}%
   %\begin{center}%
   {%
-    \LARGE\@headingstyling\@title\par\normalsize%
+    % title start ---
+    \@titlefont%
+    \@titlestyling%
+    \@title%
+    % title end ---
+    \par%
+    % subtitle start ---
+    \normalsize%
     \textnormal{%
-      \@subtitle\ifthenelse{%
-        \equal{\@subtitle}{}\OR\equal{\@date}{}
-      }{}{ | }%
-      \@datehook\@date%
-    }\par%
+      {%
+        \@subtitlefont%
+        \@subtitlestyling%
+        \@subtitle%
+        \ifthenelse{%
+          \equal{\@subtitle}{}\OR\equal{\@date}{}%
+        }{}{ | }%
+      \@datehook%
+      \@date%
+      }%
+    }%
+    \par%
+    % subtitle end ---
   }%
   %\end{center}%
   \vskip 1.5em%
   {%
+    \@authorfont
+    \@authorstyling
     \normalsize%
     \begin{tabular}[t]{@{}l}%
       \@author%
@@ -228,8 +314,19 @@
   \renewcommand{\headrulewidth}{0pt}%
   \setcounter{footnote}{0}%
   \pagestyle{plain}%
+  % Select helvetica for all other text
+  \fontfamily{phv}\selectfont
 }
 \let\oappendix\appendix
-\renewcommand{\appendix}{\renewcommand{\thesection}{\Alph{section}}\oappendix}
+\renewcommand{\appendix}{%
+  \renewcommand{\thesection}{%
+    \Alph{section}%
+  }%
+  \oappendix%
+}
+
+\definecolor{blue}{RGB}{41 98 255}
+\definecolor{blue--light}{RGB}{101 142 255}
+\definecolor{blue--dark}{RGB}{24 57 148}
 \makeatother
 \endinput
