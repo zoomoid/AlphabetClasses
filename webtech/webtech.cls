@@ -40,8 +40,9 @@
 \let\footruleskip\undefined
 \usepackage[utf8]{inputenc}
 \usepackage[english,german]{babel}
-\usepackage{titlesec,enumitem,graphicx,float,xifthen,translations,lmodern,csquotes,etoolbox,fancyhdr,kvoptions,helvet,xcolor}
+\usepackage{titlesec,enumitem,graphicx,float,xifthen,translations,lmodern,csquotes,etoolbox,fancyhdr,kvoptions,xcolor}
 \usepackage{avant}
+\usepackage{helvet}
 \usepackage[linktocpage=true]{hyperref}
 \SetupKeyvalOptions{
   family=webtech,
