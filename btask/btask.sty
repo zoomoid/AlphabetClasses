@@ -132,8 +132,8 @@
         {\@marginBeforeTask}%
         {\@marginAfterTask}%
         {\@taskstyle}%
-        *{Aufgabe \thetask\@taskseparator\ \ifstrempty{#1}{}{\textrm{\textnormal{(#1)}}}}%
-    \addcontentsline{toc}{section}{Aufgabe \thetask: #1}%
+        *{\GetTranslation{aufgabe} \thetask\@taskseparator\ \ifstrempty{#1}{}{\textrm{\textnormal{(#1)}}}}%
+    \addcontentsline{toc}{section}{\GetTranslation{aufgabe} \thetask: #1}%
 }
 \newcommand{\subtask}[1]{%
     \refstepcounter{subtask}%
@@ -144,8 +144,8 @@
       {\@marginBeforeSubtask}%
       {\@marginAfterSubtask}%
       {\@subtaskstyle}%
-      *{Teilaufgabe \arabic{subtask}\@subtaskseparator\ \ifstrempty{#1}{}{\textrm{(#1)}}}%
-    \addcontentsline{toc}{subsection}{Teilaufgabe \arabic{subtask}: #1}%
+      *{\GetTranslation{teilaufgabe} \arabic{subtask}\@subtaskseparator\ \ifstrempty{#1}{}{\textrm{(#1)}}}%
+    \addcontentsline{toc}{subsection}{\GetTranslation{teilaufgabe} \arabic{subtask}: #1}%
 }
 
 \newenvironment{sidenote}[1]%
