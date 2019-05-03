@@ -1,14 +1,24 @@
 \documentclass{etext}
-\usepackage{atask}
 \usepackage{lipsum}
+\usepackage{amath}
 \title{\etext Example}
 \subtitle{Subtitle support}
-\team{AlphabetClasses}
 \author{Alexander Bartolomey}
-\date{06.06.2017}
+\date{\today}
 \begin{document}
+\selectlanguage{english}
 \maketitle
-\etext inherits most of the features from \textsc{cText} but instead of Computer Moderns sans-serif typeface, used for headings and titles, generally uses the Charter typeface (serif) for all text.
-\section{Lorem Ipsum}
-\lipsum[1-13]
+\etext inherits most of the features from \textsc{cText} but instead of Laton
+Moderns sans-serif typeface, 
+used for headings and titles, uses the Helvetica clone in \texttt{helvet}.
+Normal text uses the Palatino clone in \texttt{mathpazo}.
+\section{Section}
+\lipsum[1]
+\subsection{Subsection}
+\lipsum[2]
+\subsubsection{Subsubsection}
+\[
+  f: \R \rightarrow \R, x \mapsto \int\limits_{0}^{x} e^{\frac{1}{2}z^2}\:\text{d}z
+\]
+This is what math looks like with Palatino! It's modern!
 \end{document}
