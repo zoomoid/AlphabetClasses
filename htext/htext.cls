@@ -1,11 +1,11 @@
 %% ----------------------------------------------------------------
-%% ctext --- Third Alphabet Classes text class
+%% htext --- eigth Alphabet Classes text class
 %%
-%% Copyright (C) 2017 by Alexander Bartolomey --- occloxium@gmail.com
+%% Copyright (C) 2018 by Alexander Bartolomey --- occloxium@gmail.com
 %% This File may be distributed and/or modified under the condition of the below
 %% license.
 %%
-%% MIT License Copyright (c) 2017
+%% MIT License Copyright (c) 2018
 %%
 %% Permission is hereby granted, free of charge, to any person obtaining a copy
 %% of this software and associated documentation files (the "Software"), to deal
@@ -28,33 +28,34 @@
 %% This work is "maintained" (as per LPPL maintenance status) by
 %% Alexander Bartolomey.
 %%
-%% This work consists of the file  ctext.dtx
-%% and the derived files           ctext.ins,
-%%                                 ctext.pdf and
-%%                                 ctext.cls.
+%% This work consists of the file  htext.dtx
+%% and the derived files           htext.ins,
+%%                                 htext.pdf and
+%%                                 htext.cls.
 %%
 %%
 %% ----------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{htext}[2016/12/07 H Text Package]
+\ProvidesClass{htext}[2019/05/10 H Text Package]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions \relax
-\LoadClass[a4paper]{article}
+\LoadClass[a4paper,12pt]{article}
 \makeatletter
-\usepackage[left=2cm,right=2cm,top=1.5cm,bottom=1.5cm]{geometry}
+\RequirePackage[left=2cm,right=2cm,top=2cm,bottom=2cm,includeheadfoot]{geometry}
 \let\footruleskip\undefined
-\usepackage[utf8]{inputenc}
-\usepackage[english,german]{babel}
-\usepackage{titlesec,enumitem,graphicx,float,xifthen,translations,lmodern,csquotes,etoolbox,fancyhdr,kvoptions}
-\usepackage[linktocpage=true]{hyperref}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[english,german]{babel}
+\RequirePackage{}{titlesec,enumitem,graphicx,float,xifthen,translations,csquotes,etoolbox,fancyhdr,kvoptions}
+\RequirePackage[linktocpage=true]{hyperref}
+\RequirePackage{}{mathpazo,helvet}
 \SetupKeyvalOptions{
   family=htext,
   prefix=htext@
 }
 \ProcessKeyvalOptions*
 
-\newcommand{\ctext}{\textsc{hText} }
+\newcommand{\htext}{\textsc{hText} }
 
 \DeclareTranslationFallback{abgabe}{Abgabe}
 \DeclareTranslation{German}{abgabe}{Abgabe}
@@ -218,7 +219,7 @@
     }\par%
   }%
   \end{center}%
-  %\vskip 1.5em%
+  \vskip 1.5em%
   {%
     \normalsize%
     \begin{tabular}[t]{@{}l}%
@@ -226,12 +227,13 @@
     \end{tabular}%
   }%
   \par%
-  %\vskip 2em%
+  \vskip 2em%
   \renewcommand{\headrulewidth}{0pt}%
   \setcounter{footnote}{0}%
-  \pagestyle{fancy}%
+  \pagestyle{plain}%
 }
 \let\oappendix\appendix
 \renewcommand{\appendix}{\renewcommand{\thesection}{\Alph{section}}\oappendix}
 \makeatother
 \endinput
+
