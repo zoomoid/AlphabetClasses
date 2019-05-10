@@ -40,11 +40,12 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions \relax
 \LoadClass[a4paper]{article}
-\usepackage{antiqua}
+\usepackage{mathptmx}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage[margin=2.5cm]{geometry}
+\newcommand{\dtext}{\textsc{dText} }
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.6em}

@@ -37,13 +37,14 @@
 \ProvidesClass{etext}[2016/12/07 E Text Package]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions \relax
-\LoadClass[a4paper]{article}
+\LoadClass[a4paper,11pt]{article}
 \makeatletter
-\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includeheadfoot]{geometry}
+\usepackage[left=2.5cm,right=2.5cm,top=2cm,bottom=2cm]{geometry}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[english,german]{babel}
-\RequirePackage{titlesec,enumitem,graphicx,tocloft,float,ifthen,translations,lmodern,csquotes,fancyhdr}
-\RequirePackage{charter}
+\RequirePackage{titlesec,enumitem,graphicx,tocloft,float,ifthen,translations,csquotes,fancyhdr}
+\RequirePackage{mathpazo}
+\RequirePackage{helvet}
 \RequirePackage[linktocpage=true]{hyperref}
 \newcommand{\etext}{\textsc{eText} }
 \DeclareTranslationFallback{abgabe}{Abgabe}
@@ -72,8 +73,8 @@
 \titleformat{\subsection}{\large\@headingstyling}{\ \thesubsection}{0.5em}{}
 \let\ocite\cite
 \renewcommand{\cite}[1]{\textsuperscript{\ocite{#1}}}
-\counterwithin{figure}{section}
-\counterwithin{table}{section}
+% \counterwithin{figure}{section}
+% \counterwithin{table}{section}
 % \counterwithout{section}{chapter}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.6em}
@@ -93,7 +94,6 @@
 \thispagestyle{fancy}
 \null
 \vskip 30\p@%
-\begin{center}%
   {\Huge\@headingstyling\@title\par\vspace{0.2em}\normalsize \@subtitle\ifthenelse{\equal{\@subtitle}{}\OR\equal{\@date}{}}{ }{ | }\@datehook\@date\par}%
   \vskip 1.5em%
   {\small
@@ -101,7 +101,7 @@
     \begin{tabular}[t]{@{}l}%
       \@author
     \end{tabular}\par}%
-\end{center}\par
+\par
 \@thanks
 \vspace{2em}
 \pagestyle{plain}
