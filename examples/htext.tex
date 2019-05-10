@@ -1,13 +1,31 @@
-\documentclass{htext}
+\documentclass[alex,hendrik,johannes]{htext}
 \usepackage{lipsum}
-\title{\texttt{ctext} Example}
+\title{\texttt{htext} Example}
 \subtitle{Subtitle support}
 \team{AlphabetClasses}
 \author{Alexander Bartolomey}
 \date{06.06.2017}
 \begin{document}
 \maketitle
-This is \textsc{cText}.
+This is \textsc{hText}. \hText goes bigger, better and more modern than
+\textsc{cText} (on which it's originally based upon).
 \section{Lorem Ipsum}
-\lipsum[1-14]
+\subsection{Testing Text}
+\subsubsection{Testing...}
+\lipsum[1-3]
+\section{Math}
+\[
+  \sum\limits_{k=1}^{\infty} \frac{1}{k} \rightarrow \infty
+\]
+This is how the harmonic series and math looks like in \hText. It's set in the
+TeX clone of Adobe's Palatino. Generally, \(\lambda = X_1 \wedge X_2 \wedge X_3
+\) is a boolean formula with a model. For \((1,1,1)\) the formula is true.
+\section{Neat Gimmicks}
+Using the class options \texttt{alex}, \texttt{hendrik} or \texttt{johannes}
+will yield any of us as icons in the top right corner.
+
+You can use the macro \texttt{\team} in the preamble to display a team in the
+top left header. Note that the ``Team'' is automatically prepended. The header
+however can be redefined to do anything you want using the syntax of fancyhdr,
+which is required in the backend.
 \end{document}

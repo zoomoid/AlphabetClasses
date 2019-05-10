@@ -46,16 +46,21 @@
 \let\footruleskip\undefined
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[english,german]{babel}
-\RequirePackage{}{titlesec,enumitem,graphicx,float,xifthen,translations,csquotes,etoolbox,fancyhdr,kvoptions}
+\RequirePackage{xcolor,titlesec,enumitem,graphicx,float,xifthen,translations,csquotes,etoolbox,fancyhdr,kvoptions}
 \RequirePackage[linktocpage=true]{hyperref}
-\RequirePackage{}{mathpazo,helvet}
+\RequirePackage{mathpazo,helvet}
+
+\DeclareBoolOption[false]{alex}
+\DeclareBoolOption[false]{hendrik}
+\DeclareBoolOption[false]{johannes}
+
 \SetupKeyvalOptions{
   family=htext,
   prefix=htext@
 }
 \ProcessKeyvalOptions*
 
-\newcommand{\htext}{\textsc{hText} }
+\newcommand{\hText}{\textsc{hText} }
 
 \DeclareTranslationFallback{abgabe}{Abgabe}
 \DeclareTranslation{German}{abgabe}{Abgabe}
@@ -172,9 +177,34 @@
 
 \fancyhf{}
 \lhead{\small\@headingstyling \@group}
+\setlength\headheight{1cm}
 
+\newcommand{\alex}{\relax}
+\newcommand{\hendrik}{\relax}
+\newcommand{\johannes}{\relax}
+
+\ifhtext@alex
+  \renewcommand{\alex}{\includegraphics[height=1cm]{alex.png}}
+\fi
+\ifhtext@hendrik
+\renewcommand{\hendrik}{\includegraphics[height=1cm]{hendrik.png}}
+\fi
+\ifhtext@johannes
+  \renewcommand{\johannes}{\includegraphics[height=1cm]{johannes.png}}
+\fi
+\rhead{{\johannes}{\alex}{\hendrik}}
 \newcommand{\@subtitle}{%
   %
+}
+
+\setlength{\unitlength}{15mm}
+\newcommand{\blob}{\rule{2\unitlength}{.4\unitlength}}
+\rfoot{
+  \vskip 0.5cm
+  \begin{picture}(0,0)
+    \put(0,0){\blob}
+    \put(0.2,0.1){\color{white}{\textsf{\textbf{\thepage}}}}
+  \end{picture}
 }
 
 \newcommand{\subtitle}[1]{%
@@ -210,7 +240,7 @@
   % \thispagestyle{fancy}%
   \begin{center}%
   {%
-    \LARGE\@headingstyling\@title\par\normalsize%
+    \Huge\@headingstyling\@title\par\normalsize%
     \textnormal{%
       \@subtitle\ifthenelse{%
         \equal{\@subtitle}{}\OR\equal{\@date}{}
@@ -228,9 +258,9 @@
   }%
   \par%
   \vskip 2em%
-  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\headrulewidth}{0.4pt}%
   \setcounter{footnote}{0}%
-  \pagestyle{plain}%
+  \pagestyle{fancy}%
 }
 \let\oappendix\appendix
 \renewcommand{\appendix}{\renewcommand{\thesection}{\Alph{section}}\oappendix}
