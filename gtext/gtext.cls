@@ -47,7 +47,7 @@
 \usepackage[left=1.25cm,right=1.25cm,top=1.25cm,bottom=1.25cm,includeheadfoot]{geometry}
 \let\footruleskip\undefined
 \usepackage[utf8]{inputenc}
-\usepackage[english,german]{babel}
+\usepackage[english,ngerman]{babel}
 \newcommand{\headingstyle}[1]{\renewcommand{\@headingstyling}[#1]}
 \newcommand{\@headingstyling}{\rmfamily} %
 

@@ -45,7 +45,7 @@
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,includeheadfoot]{geometry}
 \let\footruleskip\undefined
 \usepackage[utf8]{inputenc}
-\usepackage[english,german]{babel}
+\usepackage[english,ngerman]{babel}
 \usepackage{titlesec,enumitem,graphicx,float,xifthen,translations,lmodern,csquotes,etoolbox,fancyhdr,kvoptions}
 \usepackage[linktocpage=true]{hyperref}
 \SetupKeyvalOptions{
