@@ -41,7 +41,7 @@
 \makeatletter
 \usepackage[left=2.5cm,right=2.5cm,top=2cm,bottom=2cm]{geometry}
 \RequirePackage[utf8]{inputenc}
-\RequirePackage[english,german]{babel}
+\RequirePackage[english,ngerman]{babel}
 \RequirePackage{titlesec,enumitem,graphicx,tocloft,float,ifthen,translations,csquotes,fancyhdr}
 \RequirePackage{mathpazo}
 \RequirePackage{helvet}

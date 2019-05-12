@@ -45,7 +45,7 @@
 \RequirePackage[left=2cm,right=2cm,top=2cm,bottom=2cm,includeheadfoot]{geometry}
 \let\footruleskip\undefined
 \RequirePackage[utf8]{inputenc}
-\RequirePackage[english,german]{babel}
+\RequirePackage[english,ngerman]{babel}
 \RequirePackage{xcolor,titlesec,enumitem,graphicx,float,xifthen,translations,csquotes,etoolbox,fancyhdr,kvoptions}
 \RequirePackage[linktocpage=true]{hyperref}
 \RequirePackage{mathpazo,helvet}
