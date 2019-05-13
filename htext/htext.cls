@@ -156,8 +156,8 @@
 \renewcommand*{\thefootnote}{%
   (\arabic{footnote})%
 }
-\counterwithin{figure}{section}
-\counterwithin{table}{section}
+% \counterwithin{figure}{section}
+% \counterwithin{table}{section}
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.6em}
