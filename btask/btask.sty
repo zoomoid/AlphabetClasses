@@ -2,6 +2,11 @@
 \ProvidesPackage{btask}[2017/10/16 B Task Package]
 \RequirePackage{translations}
 \RequirePackage{xifthen}
+\RequirePackage{totcount}
+\RequirePackage{changepage}
+\RequirePackage{etoolbox}
+\RequirePackage{environ}
+\RequirePackage{multicol}
 \makeatletter
 \newcommand{\atask}{\textsc{bTask}\ }
 % Original Task and Subtask counter
@@ -13,11 +18,15 @@
 % \counterwithin{figure}{aufgabe}
 % Translations for English and German support
 \DeclareTranslation{English}{aufgabe}{Exercise}
-\DeclareTranslation{English}{teilaufgabe}{Subtask}
-\DeclareTranslation{German}{aufgabe}{Task}
-\DeclareTranslation{German}{teilaufgabe}{Subtask}
-\DeclareTranslationFallback{aufgabe}{Task}
-\DeclareTranslationFallback{teilaufgabe}{Subtask}
+\DeclareTranslation{English}{teilaufgabe}{Subexercise}
+\DeclareTranslation{German}{aufgabe}{Aufgabe}
+\DeclareTranslation{German}{teilaufgabe}{Teilaufgabe}
+\DeclareTranslationFallback{aufgabe}{Exercise}
+\DeclareTranslationFallback{teilaufgabe}{Subexercise}
+\DeclareTranslation{English}{punkte}{Points}
+\DeclareTranslation{German}{punkte}{Punkte}
+\DeclareTranslationFallback{punkte}{Points}
+
 % Counter style option processing
 
 % Counter Variables
@@ -122,30 +131,71 @@
 %   \renewcommand{\@taskstyleposthook}{#1}
 % }
 
+% Aufgaben-Commands
+% \aufgabe{Punktzahl}
+\newtotcounter{exercisenumber}
+\newtotcounter{subexercisenumber}
+\newtotcounter{totalpoints}
 
-\newcommand{\task}[1]{%
-    \refstepcounter{task}%
-    \refstepcounter{section}%
-    \@startsection{aufgabe}%
-        {1}%
-        {\z@}%
-        {\@marginBeforeTask}%
-        {\@marginAfterTask}%
-        {\@taskstyle}%
-        *{\GetTranslation{aufgabe} \thetask\@taskseparator\ \ifstrempty{#1}{}{\textrm{\textnormal{(#1)}}}}%
-    \addcontentsline{toc}{section}{\GetTranslation{aufgabe} \thetask: #1}%
+\newcommand{\addPT}[2]
+{
+	    \edef\tempA{A#1 &}
+	    \edef\tempB{\qquad/#2 &}
+	
+	\expandafter\gappto\expandafter\PTableA\expandafter{\tempA}
+	\expandafter\gappto\expandafter\PTableB\expandafter{\tempB}
+	\expandafter\gappto\expandafter\PTHead\expandafter{c | }
 }
-\newcommand{\subtask}[1]{%
+
+\newcommand{\pointtable}{
+    \begin{table}[h!]
+        \centering
+        \ifcsname PTableASaved\endcsname
+        \begin{tabular}{\PTHeadSaved c}
+            \PTableASaved $\Sigma$ \\ \hline
+        	\PTableBSaved \qquad / \totalpointsSaved
+    	\end{tabular}
+        \else
+        Compile again\ClassWarning{Compile again}
+        \fi
+    \end{table}
+}
+
+\newcommand{\exercise}[2][]{%
+    % \refstepcounter{task}%
+    % \refstepcounter{section}%
+    \ifstrempty{#1}{\def\points{0}}{\def\points{#1}}
+    \stepcounter{exercisenumber}
+    \setcounter{subexercisenumber}{0}
+    \@startsection{aufgabe}%
+      {1}%
+      {\z@}%
+      {\@marginBeforeTask}%
+      {\@marginAfterTask}%
+      {\@taskstyle}%
+      *{\GetTranslation{aufgabe} \arabic{exercisenumber}\@taskseparator\ \ifstrempty{#2}{}{\textrm{\textnormal{(#2)}}}\hfill\ifstrempty{#1}{}{/#1~\GetTranslation{punkte}}}
+    \addtocounter{totalpoints}{\points}
+    \addPT{\arabic{exercisenumber}}{\points}
+    % \@startsection{aufgabe}%
+    %     {1}%
+    %     {\z@}%
+    %     {\@marginBeforeTask}%
+    %     {\@marginAfterTask}%
+    %     {\@taskstyle}%
+    %     *{\GetTranslation{aufgabe} \thetask\@taskseparator\ \ifstrempty{#1}{}{\textrm{\textnormal{(#1)}}}}%
+    % \addcontentsline{toc}{section}{\GetTranslation{aufgabe} \thetask: #1}%
+}
+\newcommand{\subexercise}[2][]{%
     \refstepcounter{subtask}%
     \refstepcounter{subsection}%
-    \@startsection{aufgabe}%
+    \@startsection{teilaufgabe}%
       {2}%
       {\z@}%
       {\@marginBeforeSubtask}%
-      {\@marginAfterSubtask}%
+      {\@marginAfterTask}%
       {\@subtaskstyle}%
-      *{\GetTranslation{teilaufgabe} \arabic{subtask}\@subtaskseparator\ \ifstrempty{#1}{}{\textrm{(#1)}}}%
-    \addcontentsline{toc}{subsection}{\GetTranslation{teilaufgabe} \arabic{subtask}: #1}%
+      *{\GetTranslation{teilaufgabe} \arabic{subtask}\@subtaskseparator\ \ifstrempty{#2}{}{\textrm{(#2)}}\hfill\ifstrempty{#1}{}{/#1~\GetTranslation{punkte}}}%
+    % \addcontentsline{toc}{subsection}{\GetTranslation{teilaufgabe} \arabic{subtask}: #1}%
 }
 
 \newenvironment{sidenote}[1]%
@@ -156,5 +206,14 @@
   {%
     \end{mdframed}%
   }%
+
+\AtEndDocument{
+  \makeatletter
+  \immediate\write\@mainaux{\string\gdef\string\PTableASaved{\PTableA}}%
+  \immediate\write\@mainaux{\string\gdef\string\PTableBSaved{\PTableB}}%
+  \immediate\write\@mainaux{\string\gdef\string\PTHeadSaved{\PTHead}}%
+  \immediate\write\@mainaux{\string\gdef\string\totalpointsSaved{\arabic{totalpoints}}}%
+  \makeatother
+}
 \makeatother
 \endinput

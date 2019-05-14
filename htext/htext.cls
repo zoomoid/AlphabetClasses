@@ -198,12 +198,12 @@
 }
 
 \setlength{\unitlength}{15mm}
-\newcommand{\blob}{\rule{2\unitlength}{.4\unitlength}}
+\newcommand{\blob}{\rule{1\unitlength}{.4\unitlength}}
 \rfoot{
   \vskip 0.5cm
-  \begin{picture}(0,0)
+  \begin{picture}(-0.5,0)
     \put(0,0){\blob}
-    \put(0.2,0.1){\color{white}{\textsf{\textbf{\thepage}}}}
+    \put(0.4,0.1){\color{white}{\textsf{\textbf{\thepage}}}}
   \end{picture}
 }
 
