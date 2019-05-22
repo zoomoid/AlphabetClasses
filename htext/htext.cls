@@ -42,12 +42,13 @@
 \ProcessOptions \relax
 \LoadClass[a4paper]{article}
 \makeatletter
-\RequirePackage[left=2cm,right=2cm,top=2cm,bottom=2cm,includeheadfoot]{geometry}
+\RequirePackage[left=2cm,right=2cm,top=2cm,bottom=2cm,includefoot]{geometry}
 \let\footruleskip\undefined
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[english,ngerman]{babel}
 \RequirePackage{xcolor,titlesec,enumitem,graphicx,float,xifthen,translations,csquotes,etoolbox,fancyhdr,kvoptions}
 \RequirePackage[linktocpage=true]{hyperref}
+\RequirePackage{afterpage}
 \RequirePackage{mathpazo,helvet}
 
 \DeclareBoolOption[false]{alex}
@@ -236,7 +237,9 @@
 }
 
 \renewcommand\maketitle{%
-  % \thispagestyle{fancy}%
+  \thispagestyle{empty}%
+  \lhead{}
+  \rhead{}
   \begin{center}%
   {%
     \Huge\@headingstyling\@title\par\normalsize%
@@ -260,6 +263,17 @@
   \renewcommand{\headrulewidth}{0.4pt}%
   \setcounter{footnote}{0}%
   \pagestyle{fancy}%
+  % \lhead{
+  %   \def\arraystretch{1}
+  %   \tiny%
+  %   {%
+  %     \begin{tabular}[t]{@{}l}%
+  %       \@author%
+  %     \end{tabular}%
+  %   }
+  % }
+  \rhead{\@title | \@subtitle}
+  % \afterpage{\newgeometry{left=2cm,right=2cm,top=4cm,bottom=2cm,includehead}}
 }
 \let\oappendix\appendix
 \renewcommand{\appendix}{\renewcommand{\thesection}{\Alph{section}}\oappendix}

@@ -10,10 +10,10 @@
 \makeatletter
 \newcommand{\atask}{\textsc{bTask}\ }
 % Original Task and Subtask counter
-\newcounter{task}
-\setcounter{task}{0}
-\newcounter{subtask}[task]
-\setcounter{subtask}{0}
+% \newcounter{task}
+% \setcounter{task}{0}
+% \newcounter{subtask}[task]
+% \setcounter{subtask}{0}
 % \counterwithin{table}{aufgabe}
 % \counterwithin{figure}{aufgabe}
 % Translations for English and German support
@@ -166,7 +166,7 @@
     % \refstepcounter{section}%
     \ifstrempty{#1}{\def\points{0}}{\def\points{#1}}
     \stepcounter{exercisenumber}
-    \setcounter{subtask}{0}
+    \setcounter{subexercisenumber}{0}
     \@startsection{aufgabe}%
       {1}%
       {\z@}%
@@ -186,7 +186,7 @@
     % \addcontentsline{toc}{section}{\GetTranslation{aufgabe} \thetask: #1}%
 }
 \newcommand{\subexercise}[2][]{%
-    \refstepcounter{subtask}%
+    \refstepcounter{subexercisenumber}%
     \refstepcounter{subsection}%
     \@startsection{teilaufgabe}%
       {2}%
@@ -194,7 +194,7 @@
       {\@marginBeforeSubtask}%
       {\@marginAfterTask}%
       {\@subtaskstyle}%
-      *{\GetTranslation{teilaufgabe} \arabic{subtask}\@subtaskseparator\ \ifstrempty{#2}{}{\textrm{(#2)}}\hfill\ifstrempty{#1}{}{/#1~\GetTranslation{punkte}}}%
+      *{\GetTranslation{teilaufgabe} \arabic{subexercisenumber}\@subtaskseparator\ \ifstrempty{#2}{}{\textrm{(#2)}}\hfill\ifstrempty{#1}{}{/#1~\GetTranslation{punkte}}}%
     % \addcontentsline{toc}{subsection}{\GetTranslation{teilaufgabe} \arabic{subtask}: #1}%
 }
 
