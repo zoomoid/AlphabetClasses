@@ -40,7 +40,7 @@
 \ProvidesClass{htext}[2019/05/10 H Text Package]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions \relax
-\LoadClass[a4paper,12pt]{article}
+\LoadClass[a4paper]{article}
 \makeatletter
 \RequirePackage[left=2cm,right=2cm,top=2cm,bottom=2cm,includeheadfoot]{geometry}
 \let\footruleskip\undefined
@@ -59,7 +59,6 @@
   prefix=htext@
 }
 \ProcessKeyvalOptions*
-
 \newcommand{\hText}{\textsc{hText} }
 
 \DeclareTranslationFallback{abgabe}{Abgabe}
